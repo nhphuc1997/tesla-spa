@@ -1,6 +1,6 @@
 'use client'
 import { InfoCircleOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
-import { Col, Modal, Row, Typography } from "antd";
+import { Col, Divider, Modal, Row, Typography } from "antd";
 import { useState } from "react";
 
 const TextIntro = () => {
@@ -15,10 +15,14 @@ const TextIntro = () => {
   };
 
   return (
-    <Row className="w-full py-3 border-b-[1px]">
-      <Col span={24} className="flex items-center w-full justify-center md:justify-start">
-        <Typography.Title level={5} className="!mb-0 text-center md:text-left">XE ĐẠT CHUẨN 5 TỐT</Typography.Title>
-        <InfoCircleOutlined className="mx-3" onClick={() => setIsModalOpen(!isModalOpen)} />
+    <Row className="w-full py-3">
+      <Col span={24} className="flex items-center w-full justify-center pb-3">
+        <Divider>
+          <Typography.Title level={5} className="!mb-0 text-center md:text-left">
+            XE ĐẠT CHUẨN 5 TỐT
+            <InfoCircleOutlined className="mx-3" onClick={() => setIsModalOpen(!isModalOpen)} />
+          </Typography.Title>
+        </Divider>
       </Col>
       <Col span={24} className="flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
         {
