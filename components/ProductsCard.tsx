@@ -4,7 +4,7 @@ import { Image, Rate, Typography } from 'antd';
 
 const ProductsCard = () => {
   return (
-    <Row className="h-full w-full border-r-[1px] border-l-[1px] p-2">
+    <Row className="h-full w-full p-2">
       {
         [1, 1, 2, 3, 4, 1].map(item => (
           <Col xs={24} sm={12} md={4} key={item} className="p-1">
