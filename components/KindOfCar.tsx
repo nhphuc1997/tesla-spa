@@ -1,5 +1,8 @@
 'use client'
 import { Col, Divider, Row, Typography } from "antd";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slicker from "./Slicker";
 
 const KindOfCar = () => {
 
@@ -13,7 +16,7 @@ const KindOfCar = () => {
         </Divider>
       </Col>
       <Col span={24} className="w-full">
-        1
+        <Slicker desktopSlidesToScroll={6} desktopSlidesToShow={6} />
       </Col>
     </Row >
   )

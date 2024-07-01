@@ -8,14 +8,12 @@ const ProductsCard = () => {
       {
         [1, 1, 2, 3, 4, 1].map(item => (
           <Col xs={24} sm={12} md={4} key={item} className="p-1">
-            <div className="p-2 rounded-sm border hover:drop-shadow-2xl cursor-pointer">
+            <div className="p-2 rounded-lg border hover:drop-shadow-2xl cursor-pointer">
               <div className="">
-                <Image className="relative rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
-                <InfoCircleOutlined className="absolute top-4 right-4 text-xs text-white cursor-pointer" />
+                <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
               </div>
               <div className="">
-                <div className="flex justify-start items-center">
-                  
+                <div className="flex justify-start items-start flex-col lg:flex-row">
                   <Typography.Paragraph className="!mb-0">
                     <Tag icon={<ImportOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
                       Gemany

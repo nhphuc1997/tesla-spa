@@ -13,7 +13,7 @@ export default function Home() {
     <Layout className="w-full h-full">
       <NavHeader />
       <Content className="px-3 h-full">
-        <Slicker />
+        <Slicker desktopSlidesToScroll={1} desktopSlidesToShow={1} alowMaxHeight={true} />
         <Discovery />
         <KindOfCar />
         <TextIntro />
