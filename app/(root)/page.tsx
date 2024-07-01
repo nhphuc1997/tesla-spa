@@ -1,7 +1,9 @@
 'use client'
+import KindOfCar from "@/components/KindOfCar";
 import NavHeader from "@/components/NavHeader";
 import ProductsCard from "@/components/ProductsCard";
 import Slicker from "@/components/Slicker";
+import Discovery from "@/components/Discovery";
 import TextIntro from "@/components/TextIntro";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
@@ -12,6 +14,8 @@ export default function Home() {
       <NavHeader />
       <Content className="px-3 h-full">
         <Slicker />
+        <Discovery />
+        <KindOfCar />
         <TextIntro />
         <ProductsCard />
       </Content>
