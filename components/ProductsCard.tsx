@@ -15,9 +15,7 @@ const ProductsCard = () => {
               </div>
               <div className="">
                 <div className="flex justify-start items-center">
-                  <Tag className="bg-[rgba(41,41,41,.75)] text-white">
-                    1963
-                  </Tag>
+                  
                   <Typography.Paragraph className="!mb-0">
                     <Tag icon={<ImportOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
                       Gemany

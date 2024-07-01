@@ -12,7 +12,7 @@ const NavHeader = () => {
         </Col>
         <Col span={12}>
           <Typography.Title level={5} className="h-full text-center flex justify-center items-center !mb-0 text-sm md:text-md">
-            SuperCar BlonDie
+            SuperCar
           </Typography.Title>
         </Col>
         <Col span={6} className="flex justify-end items-center">

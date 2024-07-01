@@ -10,6 +10,7 @@ export default function Home() {
     <Layout className="w-full h-full">
       <NavHeader />
       <Content className="px-3 h-full">
+        {/* <Slicker /> */}
         <TextIntro />
         <ProductsCard />
       </Content>

@@ -20,7 +20,7 @@ const TextIntro = () => {
         <Typography.Title level={5} className="!mb-0">XE ĐẠT CHUẨN 5 TỐT</Typography.Title>
         <InfoCircleOutlined className="mx-3" onClick={() => setIsModalOpen(!isModalOpen)} />
       </Col>
-      <Col span={24} className="flex justify-center items-center">
+      <Col span={24} className="flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
         {
           ['Pháp lý an toàn', 'Không cháy nổ', 'Không tai nạn', 'Không ngập nước', 'Kiểm tra 207 điểm'].map(item => (
             <div className="px-3">
