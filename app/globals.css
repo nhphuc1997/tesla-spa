@@ -11,6 +11,14 @@
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -26,6 +34,7 @@ body {
   height: 100%;
   width: 100%;
   background: whitesmoke;
+  -ms-overflow-style: none;
 }
 
 @layer utilities {

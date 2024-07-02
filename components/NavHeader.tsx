@@ -1,9 +1,13 @@
 'use client'
-import { DoubleRightOutlined, MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Row, Space, Typography } from 'antd';
+import { Col, Input, Row, Typography } from 'antd';
+import { useState } from "react";
+import { motion } from "framer-motion"
 
 const NavHeader = () => {
+  const [showSearch, setShowSearch] = useState<boolean>(false)
+
   return (
     <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10">
       <Row className="w-full">
@@ -15,8 +19,24 @@ const NavHeader = () => {
             SuperCar
           </Typography.Title>
         </Col>
-        <Col span={6} className="flex justify-end items-center">
-          <SearchOutlined />
+        <Col span={6} className="w-full flex justify-end items-center ">
+
+          {(() => {
+            if (showSearch === true) {
+              return (
+                <motion.div animate={{ x: -10 }}>
+                  <Input
+                    placeholder="Tìm kiếm"
+                    suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
+                  />
+                </motion.div>
+              )
+            }
+
+            return (
+              <SearchOutlined onClick={() => setShowSearch(!showSearch)} className="cursor-pointer" />
+            )
+          })()}
         </Col>
       </Row>
     </Header>
