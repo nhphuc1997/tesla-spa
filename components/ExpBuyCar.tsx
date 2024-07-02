@@ -14,7 +14,7 @@ const ExpBuyCar = () => {
         </Divider>
       </Col>
 
-      <Col span={24} className="pb-3 w-full flex justify-start items-center">
+      <Col span={24} className="px-3 w-full flex justify-start items-center">
         {
           ['Hiểu về xe', 'Giá xe', 'Kinh nghiệm chọn xe', 'Tư vấn'].map(item =>
             <Tag color="gold">{item}</Tag>
