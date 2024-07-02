@@ -8,6 +8,7 @@ import Slicker from "@/components/Slicker";
 import Discovery from "@/components/Discovery";
 import TextIntro from "@/components/TextIntro";
 import HotNews from "@/components/HotNews";
+import ExpBuyCar from "@/components/ExpBuyCar";
 
 export default function Home() {
   return (
@@ -20,10 +21,11 @@ export default function Home() {
         <TextIntro />
         <ProductsCard />
         <HotNews />
+        <ExpBuyCar />
 
         <Divider className="!m-0" />
         <Footer className="xs:text-left lg:text-center p-3">
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          SuperCar ©{new Date().getFullYear()}
         </Footer>
       </Content>
     </Layout>
