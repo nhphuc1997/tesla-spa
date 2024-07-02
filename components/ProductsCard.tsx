@@ -9,17 +9,12 @@ const ProductsCard = () => {
         {
           [1, 1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 1].map(item => (
             <Col xs={24} sm={12} md={4} key={item} className="p-1">
-              <div className="p-2 rounded-lg border hover:drop-shadow-2xl cursor-pointer">
+              <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl cursor-pointer bg-white">
                 <div className="">
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
                 </div>
                 <div className="">
-                  <div className="flex justify-start items-start flex-col lg:flex-row">
-                    <Typography.Paragraph className="!mb-0">
-                      <Tag icon={<ImportOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
-                        Gemany
-                      </Tag>
-                    </Typography.Paragraph>
+                  <div className="flex justify-start items-start flex-col xl:flex-row">
                     <Typography.Paragraph className="!mb-0">
                       <Tag icon={<TagsOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
                         5,000$
@@ -45,6 +40,10 @@ const ProductsCard = () => {
                         <PushpinOutlined /> DB4 Series V Vantage
                       </Typography.Paragraph>
                     </Tooltip>
+                  </div>
+
+                  <div>
+                    <Button block>Đặt hàng</Button>
                   </div>
 
                 </div>

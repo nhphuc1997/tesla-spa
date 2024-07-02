@@ -11,7 +11,7 @@ const KindOfCar = () => {
       <Col span={24} className="flex items-center w-full justify-center pb-3">
         <Divider orientation="right">
           <Typography.Title level={5} className="!mb-0 text-center md:text-left">
-            THÔNG TIN CÁC DÒNG XE
+            TÌM XE THEO NHU CẦU
           </Typography.Title>
         </Divider>
       </Col>
