@@ -1,12 +1,16 @@
 'use client'
-import { CloseCircleOutlined, MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, DownOutlined, MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Input, Row, Typography } from 'antd';
+import { Col, Dropdown, Input, MenuProps, Row, Space, Typography } from 'antd';
 import { useState } from "react";
-import { motion } from "framer-motion"
+import Link from "next/link";
+
 
 const NavHeader = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false)
+  const items: MenuProps['items'] = [
+    { label: <Link href="">Đăng kí / Đăng nhập</Link>, key: 1 },
+  ];
 
   return (
     <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10">
@@ -19,24 +23,18 @@ const NavHeader = () => {
             SuperCar
           </Typography.Title>
         </Col>
-        <Col span={6} className="w-full flex justify-end items-center ">
+        <Col span={5} className="w-full flex justify-end items-center ">
 
-          {(() => {
-            if (showSearch === true) {
-              return (
-                <motion.div animate={{ x: -10 }}>
-                  <Input
-                    placeholder="Tìm kiếm"
-                    suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
-                  />
-                </motion.div>
-              )
-            }
+          <Input
+            placeholder="Tìm kiếm"
+            suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
+          />
+        </Col>
 
-            return (
-              <SearchOutlined onClick={() => setShowSearch(!showSearch)} className="cursor-pointer" />
-            )
-          })()}
+        <Col span={1} className="w-full flex justify-end items-center ">
+          <Dropdown menu={{ items }} trigger={['click']}>
+            <UserOutlined />
+          </Dropdown>
         </Col>
       </Row>
     </Header>

@@ -15,7 +15,12 @@ export default function Home() {
     <Layout className="w-full h-full">
       <NavHeader />
       <Content className="px-3">
-        <Slicker desktopSlidesToScroll={1} desktopSlidesToShow={1} alowMaxHeight={true} autoPlay={true} />
+        <Slicker
+          desktopSlidesToScroll={1}
+          desktopSlidesToShow={1}
+          alowMaxHeight={true}
+          autoPlay={true}
+        />
         <Discovery />
         <KindOfCar />
         <TextIntro />
