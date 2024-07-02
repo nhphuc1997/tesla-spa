@@ -1,10 +1,9 @@
 'use client'
-import { CloseCircleOutlined, DownOutlined, MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Dropdown, Input, MenuProps, Row, Space, Typography } from 'antd';
+import { Col, Dropdown, Input, MenuProps, Row, Typography } from 'antd';
 import { useState } from "react";
 import Link from "next/link";
-
 
 const NavHeader = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false)
@@ -23,7 +22,7 @@ const NavHeader = () => {
             SuperCar
           </Typography.Title>
         </Col>
-        <Col span={5} className="w-full flex justify-end items-center ">
+        <Col span={5} className="flex justify-end items-center ">
 
           <Input
             placeholder="Tìm kiếm"

@@ -1,6 +1,7 @@
-import { EyeOutlined, ImportOutlined, PushpinOutlined, TagsOutlined } from "@ant-design/icons";
+import { EyeOutlined, PushpinOutlined, TagsOutlined } from "@ant-design/icons";
 import { Col, Row, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from 'antd';
+import { motion } from "framer-motion"
 
 const ProductsCard = () => {
   return (
@@ -8,9 +9,9 @@ const ProductsCard = () => {
       <Row className="w-full p-2">
         {
           [1, 1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 1].map(item => (
-            <Col xs={24} sm={12} md={4} key={item} className="p-1">
+            <Col xs={24} sm={12} md={6} xl={4} key={item} className="p-1">
               <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl cursor-pointer bg-white">
-                <div className="">
+                <div>
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
                 </div>
                 <div className="">
@@ -29,7 +30,7 @@ const ProductsCard = () => {
                       </Typography.Title>
                     </Tooltip>
 
-                    <Typography.Paragraph className="!mb-0">
+                    <Typography.Paragraph className="!mb-0 hidden xl:block">
                       12 <EyeOutlined className="text-xs px-1" />
                     </Typography.Paragraph>
                   </div>
