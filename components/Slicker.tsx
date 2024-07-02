@@ -6,14 +6,19 @@ interface SlickerProps {
   name?: string
   alowMaxHeight?: boolean
   desktopSlidesToShow: number
-  desktopSlidesToScroll: number
+  desktopSlidesToScroll: number,
+  autoPlay?: boolean
 }
 
-const Slicker = ({ desktopSlidesToShow, desktopSlidesToScroll, alowMaxHeight }: SlickerProps) => {
+const Slicker = ({ desktopSlidesToShow, desktopSlidesToScroll, alowMaxHeight, autoPlay }: SlickerProps) => {
+  const _height = alowMaxHeight ? 'h-96' : 'h-32'
+  const _autoPlay = autoPlay ? autoPlay : false
+
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    autoplay: _autoPlay,
+    speed: 2000,
     slidesToShow: desktopSlidesToShow,
     slidesToScroll: desktopSlidesToScroll,
     responsive: [
@@ -34,8 +39,6 @@ const Slicker = ({ desktopSlidesToShow, desktopSlidesToScroll, alowMaxHeight }: 
       }
     ]
   };
-
-  const _height = alowMaxHeight ? 'h-96' : 'h-32'
 
   return (
     <div className="slider-container py-3">
