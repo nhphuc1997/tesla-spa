@@ -16,13 +16,13 @@ const ExpBuyCar = () => {
       <Col span={24} className="pb-3 w-full flex justify-start items-center">
         {
           ['Hiểu về xe', 'Giá xe', 'Kinh nghiệm chọn xe', 'Tư vấn'].map(item =>
-            <Tag color="gold">{item}</Tag>
+            <Tag color="gold" key={item}>{item}</Tag>
           )
         }
       </Col>
 
       {[1, 2, 3, 4, 5, 6].map(item => (
-        <Col span={6} className="hover:shadow-md rounded-lg">
+        <Col key={item} span={6} className="hover:shadow-md rounded-lg">
           <div className="w-full flex justify-start items-start p-1 m-2">
             <div className="w-1/2">
               <Image className="rounded-lg" src={mc1} alt="" />
