@@ -73,7 +73,7 @@ const Order = () => {
               </div>
               <div className="w-1/2 p-3">
                 <div className="flex justify-center items-center flex-col">
-                  <Typography.Title level={4}>
+                  <Typography.Title level={4} className="text-center">
                     Số tiền trả góp hàng tháng ước tính
                   </Typography.Title>
 
@@ -81,7 +81,7 @@ const Order = () => {
                     <Typography.Title level={5} className="text-center">
                       12,0000 VND/Tháng
                     </Typography.Title>
-                    <Typography.Paragraph>
+                    <Typography.Paragraph className="text-center">
                       Trả trước: 800,000,000 VND
                     </Typography.Paragraph>
                   </div>

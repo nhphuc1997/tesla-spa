@@ -11,7 +11,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
-      <Col xs={24} md={14}>
+      <Col xs={24} md={14} className="h-auto">
         <div className="p-3 bg-white rounded-lg h-auto">
           <Carousel arrows className="" >
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
@@ -20,7 +20,7 @@ const NewCar = () => {
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
           </Carousel>
 
-          <div className="flex justify-between items-center py-3">
+          <div className="xs:flex-col md:flex-row justify-between items-center py-3">
             <div className="py-3">
               <Typography.Title level={4}>Màu sơn</Typography.Title>
               <Radio.Group onChange={onChange} value={value}>
@@ -62,7 +62,7 @@ const NewCar = () => {
 
           <Divider />
 
-          <div className="w-full flex justify-end items-center pb-3">
+          <div className="w-full flex justify-center md:justify-end items-center pb-3">
             <Button icon={<FormOutlined />} >Đăng kí lái thử</Button>
             <div className="px-3"></div>
             <Button icon={<FormOutlined />} >Đặt cọc</Button>
@@ -75,7 +75,7 @@ const NewCar = () => {
           <div className="pb-3">
             <Typography.Title level={4} className="text-center !mb-0">Model S</Typography.Title>
             <Typography.Text className="block text-center !pb-0"> Dẫn đầu xu hướng </Typography.Text>
-            <Typography.Title level={3} className="!my-0 text-left">
+            <Typography.Title level={3} className="!my-0 text-center md:text-left">
               <TagsOutlined className="mr-2" />700,000,000 VND
             </Typography.Title>
           </div>
