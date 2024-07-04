@@ -42,3 +42,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.ant-form-item {
+  margin-bottom: 18px !important;
+}

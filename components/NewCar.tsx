@@ -1,6 +1,13 @@
 import { FormOutlined, TagsOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, Descriptions, Divider, Radio, RadioChangeEvent, Row, Tooltip, Typography } from "antd";
+import { Button, Carousel, Col, DatePicker, Descriptions, Divider, Form, FormProps, Input, Radio, RadioChangeEvent, Row, Steps, Tooltip, Typography } from "antd";
 import { useState } from "react";
+
+type FieldType = {
+  fullname?: string;
+  address?: string;
+  dob?: string;
+  identityCard?: string;
+};
 
 const NewCar = () => {
   const [value, setValue] = useState(1);
@@ -8,6 +15,20 @@ const NewCar = () => {
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
+
+  const [current, setCurrent] = useState(0);
+  const onChangeV2 = (value: number) => {
+    setCurrent(value);
+  };
+  const description = 'This is a description.';
+  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
 
   return (
     <Row gutter={16} className="py-3">
@@ -20,7 +41,7 @@ const NewCar = () => {
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
           </Carousel>
 
-          <div className="pb-3">
+          <div className="py-3">
             <Descriptions title="Thông số cơ bản:" bordered column={3} size="small" layout="vertical">
               <Descriptions.Item className="!pb-1" label="Tổng công suất">402mi</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Mô-men xoắn (Nm/vòng/phút)">130mph </Descriptions.Item>
@@ -102,13 +123,77 @@ const NewCar = () => {
               </Radio.Group>
             </div>
           </div>
-
           <Divider />
 
-          <div className="w-full flex justify-center md:justify-end items-center pb-3">
-            <Button icon={<FormOutlined />} >Đăng kí lái thử</Button>
-            <div className="px-3"></div>
-            <Button icon={<FormOutlined />} >Đặt cọc</Button>
+
+          <div className="w-full">
+            <Typography.Title level={5} className="pb-3">Đặt cọc</Typography.Title>
+            <Steps
+              current={current}
+              onChange={onChangeV2}
+              items={[
+                { title: 'Bước 1', description: 'Thông tin cá nhân' },
+                { title: 'Bước 2', description: 'Thông tin thanh toán' },
+                { title: 'Bước 2', description: 'Chuyển khoản' },
+              ]}
+            />
+
+            <div className="steps">
+              {(() => {
+                if (current === 0) return (
+                  <div className="w-3/4 m-auto p-5 border my-6 rounded-md">
+                    <Form
+                      labelCol={{ flex: '100px' }}
+                      labelAlign="left"
+                      name="basic"
+                      onFinish={onFinish}
+                      onFinishFailed={onFinishFailed}
+                      autoComplete="off"
+                    >
+                      <Form.Item
+                        label="Số CCCD"
+                        name="identityCard"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                      >
+                        <Input placeholder="Nguyễn Văn A" />
+                      </Form.Item>
+
+                      <Form.Item
+                        label="Họ và tên"
+                        name="fullname"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                      >
+                        <Input placeholder="Nguyễn Văn A" />
+                      </Form.Item>
+
+                      <Form.Item
+                        label="Ngày sinh"
+                        name="dob"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                      >
+                        <DatePicker className="w-full" />
+                      </Form.Item>
+
+                      <Form.Item
+                        label="Đia chỉ"
+                        name="address"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                      >
+                        <Input placeholder="Ba Đình, Hà Nội" />
+                      </Form.Item>
+
+
+
+                      {/* <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                          Submit
+                        </Button>
+                      </Form.Item> */}
+                    </Form>
+                  </div>
+                )
+              })()}
+            </div>
           </div>
         </div>
       </Col>
