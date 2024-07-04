@@ -44,7 +44,7 @@ const Slicker = ({ desktopSlidesToShow, desktopSlidesToScroll, alowMaxHeight, au
     <div className="slider-container py-3">
       <Slider {...settings}>
         {[1, 2, 3, 4, 5, 6, 7].map(item => (
-          <div className={`${_height} w-32 px-3`}>
+          <div className={`${_height} w-32 px-3`} key={item}>
             <div className="flex justify-center bg-black items-center text-white h-full rounded-lg">{item}</div>
           </div>
         ))}

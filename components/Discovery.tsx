@@ -15,7 +15,7 @@ const Discovery = () => {
       <Col span={24} className="flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
         {
           ['Mitsubishi', 'Toyota', 'Vinfast', 'Audi', 'BMW'].map(item => (
-            <div className="px-16 md:px-3">
+            <div className="px-16 md:px-3" key={item}>
               <SafetyCertificateOutlined className="px-1" />
               <Typography.Text>{item}</Typography.Text>
             </div>

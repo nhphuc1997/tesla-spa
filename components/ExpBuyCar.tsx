@@ -17,16 +17,16 @@ const ExpBuyCar = () => {
       <Col span={24} className="px-3 w-full flex justify-start items-center">
         {
           ['Hiểu về xe', 'Giá xe', 'Kinh nghiệm chọn xe', 'Tư vấn'].map(item =>
-            <Tag color="gold">{item}</Tag>
+            <Tag color="gold" key={item}>{item}</Tag>
           )
         }
       </Col>
 
-      {[1, 2,3,4,5,6,7,8].map(item => (
-        <Col xs={12} md={6} className="hover:shadow-md rounded-lg" key={item}>
-          <div className="w-full flex justify-start items-start p-3 flex-col md:flex-row">
-            <div className="w-full md:w-1/2 md:pr-2">
-              <Image className="flex justify-center items-center rounded-lg" src={mc1} alt="" />
+      {[1, 2, 3, 4, 5, 6].map(item => (
+        <Col key={item} span={6} className="hover:shadow-md rounded-lg">
+          <div className="w-full flex justify-start items-start p-1 m-2">
+            <div className="w-1/2">
+              <Image className="rounded-lg" src={mc1} alt="" />
             </div>
             <div className="w-full md:w-1/2">
               <Typography.Title level={5} className="!mb-0 truncate">

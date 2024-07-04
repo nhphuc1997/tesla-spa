@@ -8,8 +8,8 @@ const ProductsCard = () => {
     <>
       <Row className="w-full p-2">
         {
-          [1, 1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 1].map(item => (
-            <Col xs={24} sm={12} md={6} xl={4} key={item} className="p-1">
+          [1, 2,3,4,5,6,7,8].map(item => (
+            <Col xs={24} sm={12} md={4} key={item} className="p-1">
               <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl cursor-pointer bg-white">
                 <div>
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
