@@ -20,66 +20,6 @@ const NewCar = () => {
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
           </Carousel>
 
-          <div className="xs:flex-col md:flex-row justify-between items-center py-3">
-            <div className="py-3">
-              <Typography.Title level={4}>Màu sơn</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1} className="p-3 bg-slate-600 rounded-lg mr-3" />
-                <Radio value={2} className="p-3 bg-slate-700 rounded-lg mr-3" />
-                <Radio value={3} className="p-3 bg-slate-800 rounded-lg mr-3" />
-                <Radio value={4} className="p-3 bg bg-slate-900 rounded-lg mr-3" />
-              </Radio.Group>
-            </div>
-
-            <div className="py-3">
-              <Typography.Title level={4}>Wheels</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={5} className={`p-3  rounded-lg ${value === 5 ? 'bg-slate-200' : ''}`}>
-                  <Tooltip title="18'' Photon Wheels Included All-Season Tires Range (EPA est.) : 341mi.">
-                    18''' Photon Wheels
-                  </Tooltip>
-                </Radio>
-                <Radio value={6} className={`p-3  rounded-lg ${value === 6 ? 'bg-slate-200' : ''}`}>
-                  <Tooltip title="19'' Nova Wheels $1,000 All-Season Tires Range (est.) : 305mi">
-                    19''' Nova Wheels
-                  </Tooltip>
-                </Radio>
-              </Radio.Group>
-            </div>
-
-            <div className="py-3">
-              <Typography.Title level={4}>Nội thất</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={7} className={`p-3  rounded-lg ${value === 7 ? 'bg-slate-200' : ''}`}>
-                  Trắng
-                </Radio>
-                <Radio value={8} className={`p-3  rounded-lg ${value === 8 ? 'bg-slate-200' : ''}`}>
-                  Đen
-                </Radio>
-              </Radio.Group>
-            </div>
-          </div>
-
-          <Divider />
-
-          <div className="w-full flex justify-center md:justify-end items-center pb-3">
-            <Button icon={<FormOutlined />} >Đăng kí lái thử</Button>
-            <div className="px-3"></div>
-            <Button icon={<FormOutlined />} >Đặt cọc</Button>
-          </div>
-        </div>
-      </Col>
-
-      <Col xs={24} md={10}>
-        <div className="p-3 bg-white rounded-lg">
-          <div className="pb-3">
-            <Typography.Title level={4} className="text-center !mb-0">Model S</Typography.Title>
-            <Typography.Text className="block text-center !pb-0"> Dẫn đầu xu hướng </Typography.Text>
-            <Typography.Title level={3} className="!my-0 text-center md:text-left">
-              <TagsOutlined className="mr-2" />700,000,000 VND
-            </Typography.Title>
-          </div>
-
           <div className="pb-3">
             <Descriptions title="Thông số cơ bản:" bordered column={3} size="small" layout="vertical">
               <Descriptions.Item className="!pb-1" label="Tổng công suất">402mi</Descriptions.Item>
@@ -109,6 +49,66 @@ const NewCar = () => {
               <Descriptions.Item className="!pb-1" label="Hệ thống truyền động">AWD</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Chế độ lái	">Eco/Normal/Sport</Descriptions.Item>
             </Descriptions>
+          </div>
+        </div>
+      </Col>
+
+      <Col xs={24} md={10}>
+        <div className="p-3 bg-white rounded-lg">
+          <div className="pb-3">
+            <Typography.Title level={4} className="text-center !mb-0">Model S</Typography.Title>
+            <Typography.Text className="block text-center !pb-0"> Dẫn đầu xu hướng </Typography.Text>
+            <Typography.Title level={3} className="!my-0 text-center md:text-left">
+              <TagsOutlined className="mr-2" />700,000,000 VND
+            </Typography.Title>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center py-3">
+            <div className="py-3">
+              <Typography.Title level={5}>Màu sơn</Typography.Title>
+              <Radio.Group onChange={onChange} value={value}>
+                <Radio value={1} className="p-3 bg-slate-600 rounded-lg mr-3" />
+                <Radio value={2} className="p-3 bg-slate-700 rounded-lg mr-3" />
+                <Radio value={3} className="p-3 bg-slate-800 rounded-lg mr-3" />
+                <Radio value={4} className="p-3 bg bg-slate-900 rounded-lg mr-3" />
+              </Radio.Group>
+            </div>
+
+            <div className="py-3">
+              <Typography.Title level={5}>Wheels</Typography.Title>
+              <Radio.Group onChange={onChange} value={value}>
+                <Radio value={5} className={`p-3  rounded-lg ${value === 5 ? 'bg-slate-200' : ''}`}>
+                  <Tooltip title="18'' Photon Wheels Included All-Season Tires Range (EPA est.) : 341mi.">
+                    18''' Photon Wheels
+                  </Tooltip>
+                </Radio>
+                <Radio value={6} className={`p-3  rounded-lg ${value === 6 ? 'bg-slate-200' : ''}`}>
+                  <Tooltip title="19'' Nova Wheels $1,000 All-Season Tires Range (est.) : 305mi">
+                    19''' Nova Wheels
+                  </Tooltip>
+                </Radio>
+              </Radio.Group>
+            </div>
+
+            <div className="py-3">
+              <Typography.Title level={5}>Nội thất</Typography.Title>
+              <Radio.Group onChange={onChange} value={value}>
+                <Radio value={7} className={`p-3  rounded-lg ${value === 7 ? 'bg-slate-200' : ''}`}>
+                  Trắng
+                </Radio>
+                <Radio value={8} className={`p-3  rounded-lg ${value === 8 ? 'bg-slate-200' : ''}`}>
+                  Đen
+                </Radio>
+              </Radio.Group>
+            </div>
+          </div>
+
+          <Divider />
+
+          <div className="w-full flex justify-center md:justify-end items-center pb-3">
+            <Button icon={<FormOutlined />} >Đăng kí lái thử</Button>
+            <div className="px-3"></div>
+            <Button icon={<FormOutlined />} >Đặt cọc</Button>
           </div>
         </div>
       </Col>
