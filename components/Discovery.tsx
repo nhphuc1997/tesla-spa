@@ -1,5 +1,5 @@
 'use client'
-import {  SafetyCertificateOutlined } from "@ant-design/icons";
+import { SafetyCertificateOutlined } from "@ant-design/icons";
 import { Col, Divider, Row, Typography } from "antd";
 
 const Discovery = () => {
@@ -12,7 +12,7 @@ const Discovery = () => {
           </Typography.Title>
         </Divider>
       </Col>
-      <Col span={24} className="flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
+      <Col span={24} className="!flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
         {
           ['Mitsubishi', 'Toyota', 'Vinfast', 'Audi', 'BMW'].map(item => (
             <div className="px-16 md:px-3" key={item}>

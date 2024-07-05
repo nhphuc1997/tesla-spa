@@ -1,19 +1,16 @@
 'use client'
-import { CloseCircleOutlined, LoginOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import { LoginOutlined, MenuOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Image, Button, Avatar, notification } from 'antd';
+import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Button, Avatar, notification } from 'antd';
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { SignedIn, SignedOut, SignInButton, useAuth, useClerk, UserButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const NavHeader = () => {
-  const router = useRouter()
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isSignedIn, user } = useUser();
   const { signOut, openSignIn } = useClerk();
   const [api, contextHolder] = notification.useNotification();
 
@@ -74,7 +71,6 @@ const NavHeader = () => {
 
 
   useEffect(() => {
-    console.log('isSignedIn', isSignedIn);
     if (isSignedIn === true) {
       api.success({ message: null, description: 'Đăng nhập thành công' })
     }
@@ -85,7 +81,7 @@ const NavHeader = () => {
   }, [isSignedIn])
 
   return (
-    <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10 h-16">
+    <Header className="px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
       <Row className="w-full">
         <Col span={6}>

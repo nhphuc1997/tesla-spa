@@ -1,11 +1,11 @@
 "use client";
-import KindOfCar from "@/components/KindOfCar";
-import ProductsCard from "@/components/ProductsCard";
+import ProductsCard from "@/components/cars/ProductsCard";
 import Slicker from "@/components/Slicker";
 import Discovery from "@/components/Discovery";
 import TextIntro from "@/components/TextIntro";
 import HotNews from "@/components/HotNews";
-import ExpBuyCar from "@/components/ExpBuyCar";
+import ExpBuyCar from "@/components/cars/ExpBuyCar";
+import KindOfCar from "@/components/cars/KindOfCar";
 
 export default function Home() {
   return (

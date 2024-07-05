@@ -3,9 +3,9 @@ import { Breadcrumb, Col, InputNumber, Row, Select, Typography } from "antd";
 import Link from "next/link";
 import { Segmented } from "antd";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
-import OldCar from "@/components/OldCar";
-import NewCar from "@/components/NewCar";
 import { useState } from "react";
+import OldCar from "@/components/cars/OldCar";
+import NewCar from "@/components/cars/NewCar";
 
 const Order = () => {
   const [segment, setSegment] = useState<String>('NEW_CAR')

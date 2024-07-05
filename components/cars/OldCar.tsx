@@ -1,7 +1,7 @@
 import { CarOutlined, CheckOutlined, DoubleRightOutlined, InfoCircleOutlined, PercentageOutlined, TagsOutlined } from "@ant-design/icons";
 import { Button, Carousel, Col, Divider, InputNumber, Modal, notification, Row, Select, Tag, Typography } from "antd";
 import { useState } from "react";
-import Payment from "./payment/Payment";
+import Payment from "../payment/Payment";
 
 const OldCar = () => {
   const [api, contextHolder] = notification.useNotification();

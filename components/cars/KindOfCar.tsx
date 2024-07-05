@@ -2,7 +2,7 @@
 import { Col, Divider, Row, Typography } from "antd";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slicker from "./Slicker";
+import Slicker from "../Slicker";
 
 const KindOfCar = () => {
 

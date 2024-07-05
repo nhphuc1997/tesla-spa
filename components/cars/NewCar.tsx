@@ -1,7 +1,7 @@
 import { PushpinOutlined, SendOutlined, TagsOutlined } from "@ant-design/icons";
 import { Button, Carousel, Col, Descriptions, Divider, Form, Input, Radio, RadioChangeEvent, Row, Tooltip, Typography } from "antd";
 import { useState } from "react";
-import Payment from "./payment/Payment";
+import Payment from "../payment/Payment";
 
 const NewCar = () => {
   const [value, setValue] = useState(1);
