@@ -44,7 +44,7 @@ const ProductsCard = () => {
                   </div>
 
                   <div>
-                    <Button block>Đặt hàng</Button>
+                    <Button block>Xem ngay</Button>
                   </div>
 
                 </div>
