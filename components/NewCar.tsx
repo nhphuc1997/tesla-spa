@@ -1,6 +1,8 @@
-import { FormOutlined, TagsOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, DatePicker, Descriptions, Divider, Form, FormProps, Input, Radio, RadioChangeEvent, Row, Steps, Tooltip, Typography } from "antd";
-import { useState } from "react";
+import { CaretRightOutlined, FormOutlined, TagsOutlined } from "@ant-design/icons";
+import { Button, Carousel, Col, Collapse, CollapseProps, DatePicker, Descriptions, Divider, Form, FormProps, Input, QRCode, Radio, RadioChangeEvent, Row, Steps, theme, Tooltip, Typography } from "antd";
+import { CSSProperties, useState } from "react";
+import { Image } from 'antd';
+
 
 type FieldType = {
   fullname?: string;
@@ -10,6 +12,8 @@ type FieldType = {
 };
 
 const NewCar = () => {
+  const { token } = theme.useToken();
+
   const [value, setValue] = useState(1);
 
   const onChange = (e: RadioChangeEvent) => {
@@ -28,7 +32,6 @@ const NewCar = () => {
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
 
   return (
     <Row gutter={16} className="py-3">
@@ -155,7 +158,7 @@ const NewCar = () => {
                         name="identityCard"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                       >
-                        <Input placeholder="Nguyễn Văn A" />
+                        <Input placeholder="123345567" />
                       </Form.Item>
 
                       <Form.Item
@@ -181,17 +184,58 @@ const NewCar = () => {
                       >
                         <Input placeholder="Ba Đình, Hà Nội" />
                       </Form.Item>
-
-
-
-                      {/* <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                          Submit
-                        </Button>
-                      </Form.Item> */}
                     </Form>
                   </div>
                 )
+
+                if (current === 1) {
+                  return (
+                    <div className="my-3">
+                      <div className="p-3 border rounded-lg">
+                        <Descriptions title="Thông tin khách hàng" column={{ xs: 1, md: 2 }} size="small" layout="horizontal">
+                          <Descriptions.Item className="!pb-1" label="Số CCCD">A25A-FXS</Descriptions.Item>
+                          <Descriptions.Item className="!pb-1" label="Họ và tên">A25A-FXS</Descriptions.Item>
+                          <Descriptions.Item className="!pb-1" label="Ngày sinh">I4, 4 strokes</Descriptions.Item>
+                          <Descriptions.Item className="!pb-1" label="Đia chỉ">2487 cm3</Descriptions.Item>
+                        </Descriptions>
+                      </div>
+
+                      <div className="py-3">
+                        <div className="p-3 border rounded-lg">
+                          <Descriptions title="Thông tin sản phẩm" column={1} size="small" layout="horizontal">
+                            <Descriptions.Item className="!pb-1" label="Sản phẩm">
+                              Modeal S
+                            </Descriptions.Item>
+                            <Descriptions.Item className="!pb-1" label="Giá niêm yết">700,000,000 VND</Descriptions.Item>
+                            <Descriptions.Item className="!pb-1" label="Phụ kiện">
+                              <ul>
+                                <li>Màu sơn (#endregion)</li>
+                                <li>Wheels (18'' Photon Wheels)</li>
+                                <li>Nội thất(#Trắng)</li>
+                              </ul>
+                            </Descriptions.Item>
+                            <Descriptions.Item className="!pb-1 text-right font-bold" label="Thành tiền">
+                              750,000,000 VND
+                            </Descriptions.Item>
+                          </Descriptions>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
+                if (current === 2) {
+                  return (
+                    <div>
+                      <div className="my-3 flex justify-center items-center">
+                        <Typography.Title level={5}>Thông tin chuyển khoản</Typography.Title>
+                      </div>
+                      <div className="my-3 w-full flex justify-center items-center">
+                        <QRCode type="canvas" value="2" />
+                      </div>
+                    </div>
+                  )
+                }
               })()}
             </div>
           </div>
