@@ -7,7 +7,7 @@ import HotNews from "@/components/HotNews";
 import ExpBuyCar from "@/components/cars/ExpBuyCar";
 import KindOfCar from "@/components/cars/KindOfCar";
 
-export default function Home() {
+const HomePage = () => {
   return (
     <>
       <Slicker
@@ -24,3 +24,5 @@ export default function Home() {
     </>
   );
 }
+
+export default HomePage;
