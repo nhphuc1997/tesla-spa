@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "/app/globals.css";
-import { Divider, Layout } from "antd";
+import { Divider, FloatButton, Layout } from "antd";
 import { Footer, Content } from "antd/es/layout/layout";
 import { ClerkProvider } from "@clerk/nextjs";
 import { viVN } from "@clerk/localizations";
