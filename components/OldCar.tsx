@@ -103,9 +103,6 @@ const OldCar = () => {
 
                 <div className="py-1 w-full">
                   <Button className="my-1" block>
-                    Đặt cọc
-                  </Button>
-                  <Button className="my-1" block>
                     Mua ngay
                   </Button>
                 </div>
