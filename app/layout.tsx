@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "/app/globals.css";
-import { Divider, FloatButton, Layout } from "antd";
+import { Divider, Layout } from "antd";
 import NavHeader from "@/components/NavHeader";
 import { Footer, Content } from "antd/es/layout/layout";
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
+import { viVN } from "@clerk/localizations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,18 +18,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ elements: { footer: "hidden" } }} localization={viVN}>
       <html lang="en">
         <body className={inter.className}>
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-
           <Layout className="w-full h-full">
             <NavHeader />
             <Content className="mx-3">
