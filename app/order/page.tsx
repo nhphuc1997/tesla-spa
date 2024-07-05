@@ -7,7 +7,7 @@ import { useState } from "react";
 import OldCar from "@/components/cars/OldCar";
 import NewCar from "@/components/cars/NewCar";
 
-const Order = () => {
+const OrderPage = () => {
   const [segment, setSegment] = useState<String>('NEW_CAR')
 
   return (
@@ -39,4 +39,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default OrderPage;
