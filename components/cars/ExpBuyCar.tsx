@@ -2,8 +2,11 @@ import { Col, Divider, Row, Typography, Tag, Tooltip } from "antd"
 import mc1 from '@/assets/images/mc1.jpg'
 import Image from "next/image"
 import { CalendarOutlined } from "@ant-design/icons"
+import { useRouter } from "next/navigation"
 
 const ExpBuyCar = () => {
+  const router = useRouter()
+
   return (
     <Row className="w-full py-3 cursor-pointer">
       <Col span={24} className="flex items-center w-full justify-center pb-3">
@@ -23,7 +26,7 @@ const ExpBuyCar = () => {
       </Col>
 
       {[1, 2, 3, 4, 5, 6].map(item => (
-        <Col key={item} span={6} className="hover:shadow-md rounded-lg">
+        <Col key={item} span={6} className="hover:shadow-md rounded-lg" onClick={() => router.push('/articles/1')}>
           <div className="w-full flex justify-start items-start p-1 m-2">
             <div className="w-1/2">
               <Image className="rounded-lg" src={mc1} alt="" />

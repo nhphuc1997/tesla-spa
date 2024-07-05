@@ -32,7 +32,9 @@ const OrderPage = () => {
       </Row>
 
       {(() => {
-        if (segment === 'OLD_CAR') return <OldCar />
+        if (segment === 'OLD_CAR') {
+          return <OldCar />
+        }
         return <NewCar />;
       })()}
     </div>

@@ -1,6 +1,8 @@
+"use client";
+
 const ArticlePage = () => {
   return (
-    <div></div>
+    <div>111</div>
   )
 }
 
