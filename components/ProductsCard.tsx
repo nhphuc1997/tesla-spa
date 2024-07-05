@@ -4,14 +4,19 @@ import { Col, Row, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from 'antd';
 import { useRouter } from 'next/navigation'
 
-const ProductsCard = () => {
+interface Props {
+  name?: string,
+  isShowLoadMore?: boolean
+}
+
+const ProductsCard = ({ isShowLoadMore = true }: Props) => {
   const router = useRouter()
 
   return (
     <>
       <Row className="w-full p-2">
         {
-          [1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+          [1, 2, 3, 4,].map(item => (
             <Col xs={24} sm={12} md={4} key={item} className="p-1">
               <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl bg-white">
                 <div>
@@ -48,7 +53,7 @@ const ProductsCard = () => {
                   </div>
 
                   <div>
-                    <Button block>Xem ngay</Button>
+                    <Button block onClick={() => router.push('/order')}>Xem ngay</Button>
                   </div>
 
                 </div>
@@ -58,11 +63,17 @@ const ProductsCard = () => {
         }
       </Row>
 
-      <Row className="py-3">
-        <Col span={24} className="flex justify-center items-center">
-          <Button>Xem thêm</Button>
-        </Col>
-      </Row>
+      {(() => {
+        if (isShowLoadMore) {
+          return (
+            <Row className="py-3">
+              <Col span={24} className="flex justify-center items-center">
+                <Button onClick={() => router.push('/list')}>Xem thêm</Button>
+              </Col>
+            </Row>
+          )
+        }
+      })()}
     </>
   )
 }

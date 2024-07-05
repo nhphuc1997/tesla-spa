@@ -64,16 +64,7 @@ const NavHeader = () => {
           </div>
         </Col>
 
-        <Col span={4} className="hidden md:block">
-          <div className="flex justify-end items-center h-16">
-            <Input
-              placeholder="Tìm kiếm"
-              suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
-            />
-          </div>
-        </Col>
-
-        <Col span={2} className="">
+        <Col span={6} className="">
           <div className="flex justify-end items-center h-16">
             <Dropdown menu={{ items }} trigger={['click']}>
               <UserOutlined />
