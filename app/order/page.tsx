@@ -1,5 +1,5 @@
 "use client";
-import { Breadcrumb, Col, InputNumber, Row, Select, Typography } from "antd";
+import { Breadcrumb, Col, Row } from "antd";
 import Link from "next/link";
 import { Segmented } from "antd";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
@@ -20,7 +20,7 @@ const Order = () => {
       />
 
       <Row gutter={16} className="pt-3">
-        <Col span={24} className="w-full flex justify-center items-center">
+        <Col span={24} className="w-full !flex justify-center items-center">
           <Segmented
             options={[
               { label: "Xe mới", value: "NEW_CAR", icon: <AppstoreOutlined /> },

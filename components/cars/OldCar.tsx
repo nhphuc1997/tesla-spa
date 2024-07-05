@@ -188,26 +188,26 @@ const OldCar = () => {
               <div className="w-1/2 p-3 border rounded-lg">
                 <Row gutter={16}>
                   <Col span={24} className="py-1">
-                    <InputNumber className="w-full" placeholder="Giá xe" />
+                    <InputNumber className="!w-full" placeholder="Giá xe" />
                   </Col>
                   <Col span={12} className="py-1">
                     <InputNumber
-                      className="w-full"
+                      className="!w-full"
                       placeholder="Khoản vay (% giá trị xe)"
                     />
                   </Col>
                   <Col span={12} className="py-1">
                     <InputNumber
-                      className="w-full"
+                      className="!w-full"
                       placeholder="Khoản vay (VND)"
                     />
                   </Col>
                   <Col span={12} className="py-1">
-                    <InputNumber className="w-full" placeholder="Lãi suất" />
+                    <InputNumber className="!w-full" placeholder="Lãi suất" />
                   </Col>
                   <Col span={12} className="py-1">
                     <Select
-                      className="w-full"
+                      className="!w-full"
                       showSearch
                       placeholder="Thời gian vay"
                       options={[
