@@ -1,4 +1,4 @@
-import { CaretRightOutlined, FormOutlined, TagsOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, FormOutlined, PushpinOutlined, SendOutlined, TagsOutlined } from "@ant-design/icons";
 import { Button, Carousel, Col, Collapse, CollapseProps, DatePicker, Descriptions, Divider, Form, FormProps, Input, QRCode, Radio, RadioChangeEvent, Row, Steps, theme, Tooltip, Typography } from "antd";
 import { CSSProperties, useState } from "react";
 import { Image } from 'antd';
@@ -87,50 +87,60 @@ const NewCar = () => {
             </Typography.Title>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center py-3">
-            <div className="py-3">
-              <Typography.Title level={5}>Màu sơn</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1} className="p-3 bg-slate-600 rounded-lg mr-3" />
-                <Radio value={2} className="p-3 bg-slate-700 rounded-lg mr-3" />
-                <Radio value={3} className="p-3 bg-slate-800 rounded-lg mr-3" />
-                <Radio value={4} className="p-3 bg bg-slate-900 rounded-lg mr-3" />
-              </Radio.Group>
-            </div>
-
-            <div className="py-3">
-              <Typography.Title level={5}>Wheels</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={5} className={`p-3  rounded-lg ${value === 5 ? 'bg-slate-200' : ''}`}>
-                  <Tooltip title="18'' Photon Wheels Included All-Season Tires Range (EPA est.) : 341mi.">
-                    18''' Photon Wheels
-                  </Tooltip>
-                </Radio>
-                <Radio value={6} className={`p-3  rounded-lg ${value === 6 ? 'bg-slate-200' : ''}`}>
-                  <Tooltip title="19'' Nova Wheels $1,000 All-Season Tires Range (est.) : 305mi">
-                    19''' Nova Wheels
-                  </Tooltip>
-                </Radio>
-              </Radio.Group>
-            </div>
-
-            <div className="py-3">
-              <Typography.Title level={5}>Nội thất</Typography.Title>
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={7} className={`p-3  rounded-lg ${value === 7 ? 'bg-slate-200' : ''}`}>
-                  Trắng
-                </Radio>
-                <Radio value={8} className={`p-3  rounded-lg ${value === 8 ? 'bg-slate-200' : ''}`}>
-                  Đen
-                </Radio>
-              </Radio.Group>
-            </div>
-          </div>
           <Divider />
 
+          <div className="w-full">
+            <Typography.Title level={5} className="!mb-0 !pb-0">
+              <PushpinOutlined className="mr-2" />
+              Phụ kiện
+            </Typography.Title>
+            <div className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center py-3">
+              <div className="py-3">
+                <Typography.Title level={5}>Màu sơn</Typography.Title>
+                <Radio.Group onChange={onChange} value={value}>
+                  <Radio value={1} className="p-3 bg-slate-600 rounded-lg mr-3" />
+                  <Radio value={2} className="p-3 bg-slate-700 rounded-lg mr-3" />
+                  <Radio value={3} className="p-3 bg-slate-800 rounded-lg mr-3" />
+                  <Radio value={4} className="p-3 bg bg-slate-900 rounded-lg mr-3" />
+                </Radio.Group>
+              </div>
+
+              <div className="py-3">
+                <Typography.Title level={5}>Wheels</Typography.Title>
+                <Radio.Group onChange={onChange} value={value}>
+                  <Radio value={5} className={`p-3  rounded-lg ${value === 5 ? 'bg-slate-200' : ''}`}>
+                    <Tooltip title="18'' Photon Wheels Included All-Season Tires Range (EPA est.) : 341mi.">
+                      18''' Photon Wheels
+                    </Tooltip>
+                  </Radio>
+                  <Radio value={6} className={`p-3  rounded-lg ${value === 6 ? 'bg-slate-200' : ''}`}>
+                    <Tooltip title="19'' Nova Wheels $1,000 All-Season Tires Range (est.) : 305mi">
+                      19''' Nova Wheels
+                    </Tooltip>
+                  </Radio>
+                </Radio.Group>
+              </div>
+
+              <div className="py-3">
+                <Typography.Title level={5}>Nội thất</Typography.Title>
+                <Radio.Group onChange={onChange} value={value}>
+                  <Radio value={7} className={`p-3  rounded-lg ${value === 7 ? 'bg-slate-200' : ''}`}>
+                    Trắng
+                  </Radio>
+                  <Radio value={8} className={`p-3  rounded-lg ${value === 8 ? 'bg-slate-200' : ''}`}>
+                    Đen
+                  </Radio>
+                </Radio.Group>
+              </div>
+            </div>
+          </div>
+
+          <Divider />
 
           <div className="w-full">
-            <Typography.Title level={5} className="pb-3">Đặt cọc</Typography.Title>
+            <Typography.Title level={5} className="pb-3">
+              <PushpinOutlined className="mr-2" />Đặt cọc
+            </Typography.Title>
             <Steps
               current={current}
               onChange={onChangeV2}
@@ -237,6 +247,34 @@ const NewCar = () => {
                   )
                 }
               })()}
+            </div>
+          </div>
+
+          <Divider />
+
+          <div className="w-full">
+            <Typography.Title level={5} className="pb-3">
+              <PushpinOutlined className="mr-2" /> Đăng kí lái thử
+            </Typography.Title>
+
+            <div className="w-full md:w-3/4 mx-auto">
+              <div className="p-3 border rounded-lg">
+                <Form layout="vertical" name="wrap" colon={false}>
+                  <Form.Item label="Email" name="email" rules={[{ required: true }]}>
+                    <Input placeholder="user@gmail.com" />
+                  </Form.Item>
+
+                  <Form.Item label="Số diện thoại" name="Số điện thoại" rules={[{ required: true }]}>
+                    <Input placeholder="0123456789" />
+                  </Form.Item>
+
+                  <Form.Item label="">
+                    <Button block htmlType="submit" icon={<SendOutlined />} iconPosition="end">
+                      Đăng kí
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </div>
             </div>
           </div>
         </div>
