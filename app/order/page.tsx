@@ -23,8 +23,8 @@ const Order = () => {
         <Col span={24} className="w-full flex justify-center items-center">
           <Segmented
             options={[
-              { label: "Xe cũ", value: "OLD_CAR", icon: <BarsOutlined /> },
               { label: "Xe mới", value: "NEW_CAR", icon: <AppstoreOutlined /> },
+              { label: "Xe cũ", value: "OLD_CAR", icon: <BarsOutlined /> },
             ]}
             onChange={(value) => setSegment(value)}
           />

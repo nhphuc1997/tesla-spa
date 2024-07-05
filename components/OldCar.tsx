@@ -1,5 +1,7 @@
 import { CarOutlined, CheckOutlined, DoubleRightOutlined, InfoCircleOutlined, PercentageOutlined, TagsOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, Divider, InputNumber, Row, Select, Tag, Typography } from "antd";
+import { Button, Carousel, Col, Divider, InputNumber, Modal, Row, Select, Tag, Typography } from "antd";
+import { useState } from "react";
+import Payment from "./payment/Payment";
 
 const OldCar = () => {
   const data_1 = [
@@ -13,6 +15,20 @@ const OldCar = () => {
     "Không ngập nước hoặc thuỷ kích",
     "CHUẨN ODO",
   ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -102,9 +118,20 @@ const OldCar = () => {
                 </div>
 
                 <div className="py-1 w-full">
-                  <Button className="my-1" block>
+                  <Button className="my-1" block onClick={showModal}>
                     Mua ngay
                   </Button>
+
+                  <Modal
+                    title="Thanh toán"
+                    open={isModalOpen}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    width={720}
+                    footer={[]}
+                  >
+                    <Payment />
+                  </Modal>
                 </div>
                 <Divider />
 
