@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Layout className="w-full h-full">
           <NavHeader />
-          <Content className="px-3">
+          <Content className="mx-3">
             {children}
             <Divider className="!m-0" />
             <Footer className="xs:text-left lg:text-center p-3 bg-white">

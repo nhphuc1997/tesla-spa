@@ -1,7 +1,7 @@
 'use client'
-import { CloseCircleOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, LoginOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Image } from 'antd';
+import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Image, Button } from 'antd';
 import { useState } from "react";
 import Link from "next/link";
 
@@ -55,20 +55,26 @@ const NavHeader = () => {
     <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10 h-16">
       <Row className="w-full">
         <Col span={6}>
-          <MenuOutlined />
+          <div className="flex justify-start items-center h-16">
+            <MenuOutlined />
+          </div>
         </Col>
 
         <Col span={12}>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center h-16">
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menus} />
           </div>
         </Col>
 
         <Col span={6} className="">
           <div className="flex justify-end items-center h-16">
-            <Dropdown menu={{ items }} trigger={['click']}>
-              <UserOutlined />
-            </Dropdown>
+            <Button icon={<LoginOutlined />} iconPosition={"start"}>
+              Đăng nhập
+            </Button>
+
+            {/* <Dropdown menu={{ items }} trigger={['click']}> */}
+
+            {/* </Dropdown> */}
           </div>
         </Col>
       </Row>

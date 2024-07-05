@@ -59,8 +59,8 @@ const List = () => {
       />
 
       <Row gutter={16} className="pt-3">
-        <Col xs={24} md={6} className="">
-          <Affix offsetTop={60}>
+        <Col xs={24} md={6} className="hidden md:block">
+          <Affix offsetTop={60} className="">
             <div className="p-6 bg-white rounded-lg h-auto mt-3">
               <div className="py-3">
                 <Typography.Title level={5}>Tìm kiếm</Typography.Title>
@@ -117,8 +117,10 @@ const List = () => {
           </Affix>
         </Col>
 
-        <Col xs={24} md={18} className="bg-white rounded-lg h-auto md:min-h-dvh mt-3">
-          <ProductsCard isShowLoadMore={false} />
+        <Col xs={24} md={18}>
+          <div className="bg-white rounded-lg h-auto md:min-h-dvh mt-3">
+            <ProductsCard isShowLoadMore={false} />
+          </div>
         </Col>
       </Row>
 
