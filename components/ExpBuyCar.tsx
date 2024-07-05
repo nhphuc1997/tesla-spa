@@ -28,7 +28,7 @@ const ExpBuyCar = () => {
             <div className="w-1/2">
               <Image className="rounded-lg" src={mc1} alt="" />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 px-3">
               <Typography.Title level={5} className="!mb-0 truncate">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry
               </Typography.Title>
