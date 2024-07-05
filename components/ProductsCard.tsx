@@ -1,20 +1,24 @@
+'use client'
 import { EyeOutlined, PushpinOutlined, TagsOutlined } from "@ant-design/icons";
 import { Col, Row, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from 'antd';
-import { motion } from "framer-motion"
+import { useRouter } from 'next/navigation'
 
 const ProductsCard = () => {
+  const router = useRouter()
+
   return (
     <>
       <Row className="w-full p-2">
         {
-          [1, 2,3,4,5,6,7,8].map(item => (
+          [1, 2, 3, 4, 5, 6, 7, 8].map(item => (
             <Col xs={24} sm={12} md={4} key={item} className="p-1">
-              <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl cursor-pointer bg-white">
+              <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl bg-white">
                 <div>
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
                 </div>
-                <div className="">
+
+                <div className="cursor-pointer" onClick={() => router.push('/order')}>
                   <div className="flex justify-start items-start flex-col xl:flex-row">
                     <Typography.Paragraph className="!mb-0">
                       <Tag icon={<TagsOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
