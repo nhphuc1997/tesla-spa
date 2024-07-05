@@ -16,7 +16,7 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
     <>
       <Row className="w-full p-2">
         {
-          [1, 2, 3, 4,].map(item => (
+          [1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14].map(item => (
             <Col xs={24} sm={12} md={4} key={item} className="p-1">
               <div className="shadow-[#50d71e] p-3 rounded-lg border hover:drop-shadow-2xl bg-white">
                 <div>
