@@ -123,7 +123,7 @@ const ListPage = () => {
 
         <Col xs={24} md={18}>
           <div className="bg-white rounded-lg h-auto md:min-h-dvh mt-3">
-            <ProductsCard isShowLoadMore={false} />
+            <ProductsCard itemPerRow={6} isShowLoadMore={false} />
           </div>
         </Col>
       </Row>

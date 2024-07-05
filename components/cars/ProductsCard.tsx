@@ -1,23 +1,24 @@
 'use client'
-import { EyeOutlined, PushpinOutlined, TagsOutlined } from "@ant-design/icons";
+import { ApiOutlined, EyeOutlined, PushpinOutlined, TagsOutlined } from "@ant-design/icons";
 import { Col, Row, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from 'antd';
 import { useRouter } from 'next/navigation'
 
 interface Props {
   name?: string,
-  isShowLoadMore?: boolean
+  isShowLoadMore?: boolean,
+  itemPerRow?: number
 }
 
-const ProductsCard = ({ isShowLoadMore = true }: Props) => {
+const ProductsCard = ({ isShowLoadMore = true, itemPerRow = 4 }: Props) => {
   const router = useRouter()
 
   return (
     <>
       <Row className="w-full p-3">
         {
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(item => (
-            <Col xs={24} sm={12} md={4} key={item} className="p-3 ">
+          [1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+            <Col xs={24} sm={12} md={itemPerRow} key={item} className="p-1">
               <div className="rounded-lg border hover:drop-shadow-2xl p-3 bg-white">
                 <div>
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
@@ -53,7 +54,14 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
                   </div>
 
                   <div>
-                    <Button className="!bg-[rgba(41,41,41,.75)] !text-white" block onClick={() => router.push('/order')}>Xem ngay</Button>
+                    <Button
+                      className="!bg-[rgba(41,41,41,.75)] !text-white"
+                      block
+                      onClick={() => router.push('/order')}
+                      icon={<ApiOutlined />}
+                    >
+                      Xem ngay
+                    </Button>
                   </div>
 
                 </div>

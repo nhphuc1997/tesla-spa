@@ -18,7 +18,7 @@ const HomePage = () => {
       <Discovery />
       <KindOfCar />
       <TextIntro />
-      <ProductsCard />
+      <ProductsCard itemPerRow={4} />
       <HotNews />
       <ExpBuyCar />
     </>
