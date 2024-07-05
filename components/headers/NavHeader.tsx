@@ -74,10 +74,6 @@ const NavHeader = () => {
     if (isSignedIn === true) {
       api.success({ message: null, description: 'Đăng nhập thành công' })
     }
-
-    if (isSignedIn === false) {
-      api.success({ message: null, description: 'Đăng xuất thành công' })
-    }
   }, [isSignedIn])
 
   return (

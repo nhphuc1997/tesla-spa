@@ -13,7 +13,7 @@ const HotNews = () => {
       </Col>
 
       <Image.PreviewGroup>
-        <Col xs={24} sm={8} className="rounded-lg">
+        <Col xs={24} sm={8} className="rounded-lg ">
           <Image className="p-3 h-32 lg:h-64"
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
