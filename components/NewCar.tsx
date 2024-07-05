@@ -1,7 +1,6 @@
-import { CaretRightOutlined, FormOutlined, PushpinOutlined, SendOutlined, TagsOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, Collapse, CollapseProps, DatePicker, Descriptions, Divider, Form, FormProps, Input, QRCode, Radio, RadioChangeEvent, Row, Steps, theme, Tooltip, Typography } from "antd";
-import { CSSProperties, useState } from "react";
-import { Image } from 'antd';
+import { PushpinOutlined, SendOutlined, TagsOutlined } from "@ant-design/icons";
+import { Button, Carousel, Col, DatePicker, Descriptions, Divider, Form, FormProps, Input, QRCode, Radio, RadioChangeEvent, Row, Steps, Tooltip, Typography } from "antd";
+import { useState } from "react";
 
 
 type FieldType = {
@@ -12,8 +11,6 @@ type FieldType = {
 };
 
 const NewCar = () => {
-  const { token } = theme.useToken();
-
   const [value, setValue] = useState(1);
 
   const onChange = (e: RadioChangeEvent) => {
@@ -24,7 +21,6 @@ const NewCar = () => {
   const onChangeV2 = (value: number) => {
     setCurrent(value);
   };
-  const description = 'This is a description.';
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Success:', values);
   };
@@ -35,7 +31,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
-      <Col xs={24} md={14} className="h-auto">
+      <Col xs={24} md={14}>
         <div className="p-3 bg-white rounded-lg h-auto">
           <Carousel arrows className="" >
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
@@ -78,7 +74,7 @@ const NewCar = () => {
       </Col>
 
       <Col xs={24} md={10}>
-        <div className="p-3 bg-white rounded-lg">
+        <div className="p-3 bg-white rounded-lg shadow-sm">
           <div className="pb-3">
             <Typography.Title level={4} className="text-center !mb-0">Model S</Typography.Title>
             <Typography.Text className="block text-center !pb-0"> Dẫn đầu xu hướng </Typography.Text>
