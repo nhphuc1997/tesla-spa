@@ -77,7 +77,7 @@ const NavHeader = () => {
   }, [isSignedIn])
 
   return (
-    <Header className="px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
+    <Header className="!px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
       <Row className="w-full">
         <Col span={6}>

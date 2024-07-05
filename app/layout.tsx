@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ elements: { footer: "hidden" } }} localization={viVN}>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={inter.className} >
           <AntdRegistry>
             <Layout className="w-full h-full">
               <NavHeader />
