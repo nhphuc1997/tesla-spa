@@ -4,6 +4,7 @@ import { Header } from "antd/es/layout/layout";
 import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Button, Avatar, notification } from 'antd';
 import { useEffect, useState } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -14,44 +15,36 @@ const NavHeader = () => {
   const { signOut, openSignIn } = useClerk();
   const [api, contextHolder] = notification.useNotification();
 
-
   const menus: MenuItem[] = [
     {
-      label: 'Honda',
-      key: 'Honda',
+      label: <Link href={'/list?branch=honda'} className="capitalize">Honda</Link>,
+      key: 'honda',
     },
     {
-      label: 'Tesla',
-      key: 'Tesla',
+      label: <Link href={'/list?branch=tesla'} className="capitalize">Tesla</Link>,
+      key: 'tesla',
     },
     {
-      label: 'Lexus',
-      key: 'Lexus',
+      label: <Link href={'/list?branch=honda'} className="capitalize">Lexus</Link>,
+      key: 'lexus',
     },
     {
-      label: 'Vinfast',
-      key: 'Vinfast',
+      label: <Link href={'/list?branch=vinfast'} className="capitalize">Vinfast</Link>,
+      key: 'vinfast',
     },
     {
-      label: 'Mazda',
-      key: 'Mazda',
+      label: <Link href={'/list?branch=mazda'} className="capitalize">mazda</Link>,
+      key: 'mazda',
     },
     {
-      label: 'Mescerdes',
-      key: 'Mescerdes',
+      label: <Link href={'/list?branch=mescerdes'} className="capitalize">mescerdes</Link>,
+      key: 'mescerdes',
     },
     {
-      label: 'Benley',
-      key: 'Benley',
+      label: <Link href={'/list?branch=benley'} className="capitalize">benley</Link>,
+      key: 'benley',
     },
   ];
-
-
-  const [current, setCurrent] = useState('mail');
-  const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
 
   const items: MenuProps['items'] = [
     {
@@ -88,7 +81,7 @@ const NavHeader = () => {
 
         <Col span={12}>
           <div className="flex justify-center items-center h-16">
-            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menus} />
+            <Menu mode="horizontal" items={menus} />
           </div>
         </Col>
 

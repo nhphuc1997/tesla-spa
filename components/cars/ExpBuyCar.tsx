@@ -8,7 +8,7 @@ const ExpBuyCar = () => {
   const router = useRouter()
 
   return (
-    <Row className="w-full py-3 cursor-pointer">
+    <Row gutter={16} className="w-full py-3 cursor-pointer">
       <Col span={24} className="flex items-center w-full justify-center pb-3">
         <Divider orientation="left">
           <Typography.Title level={5} className="!mb-0 text-center md:text-left">
@@ -26,8 +26,8 @@ const ExpBuyCar = () => {
       </Col>
 
       {[1, 2, 3, 4, 5, 6].map(item => (
-        <Col key={item} span={6} className="hover:shadow-md rounded-lg" onClick={() => router.push('/articles/1')}>
-          <div className="w-full flex justify-start items-start p-1 m-2">
+        <Col key={item} span={6} className="hover:bg-white hover:shadow-md rounded-lg" onClick={() => router.push('/articles/1')}>
+          <div className="w-full flex justify-start items-start !p-3">
             <div className="w-1/2">
               <Image className="rounded-lg" src={mc1} alt="" />
             </div>

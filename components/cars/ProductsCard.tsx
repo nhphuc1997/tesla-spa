@@ -14,11 +14,11 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
 
   return (
     <>
-      <Row className="w-full p-3 bg-white">
+      <Row className="w-full p-3">
         {
           [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(item => (
-            <Col xs={24} sm={12} md={4} key={item} className="p-3">
-              <div className="rounded-lg border hover:drop-shadow-2xl p-3">
+            <Col xs={24} sm={12} md={4} key={item} className="p-3 ">
+              <div className="rounded-lg border hover:drop-shadow-2xl p-3 bg-white">
                 <div>
                   <Image className="rounded-lg" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
                 </div>
@@ -26,7 +26,7 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
                 <div className="cursor-pointer" onClick={() => router.push('/order')}>
                   <div className="flex justify-start items-start flex-col xl:flex-row">
                     <Typography.Paragraph className="!mb-0">
-                      <Tag icon={<TagsOutlined />} className="bg-[rgba(41,41,41,.75)] text-white">
+                      <Tag icon={<TagsOutlined />} className="!bg-[rgba(41,41,41,.75)] !text-white">
                         5,000$
                       </Tag>
                     </Typography.Paragraph>
@@ -53,7 +53,7 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
                   </div>
 
                   <div>
-                    <Button block onClick={() => router.push('/order')}>Xem ngay</Button>
+                    <Button className="!bg-[rgba(41,41,41,.75)] !text-white" block onClick={() => router.push('/order')}>Xem ngay</Button>
                   </div>
 
                 </div>
@@ -68,7 +68,7 @@ const ProductsCard = ({ isShowLoadMore = true }: Props) => {
           return (
             <Row className="py-3">
               <Col span={24} className="!flex justify-center items-center">
-                <Button onClick={() => router.push('/list')}>Xem thêm</Button>
+                <Button className="!bg-[rgba(41,41,41,.75)] !text-white" onClick={() => router.push('/list')}>Xem thêm</Button>
               </Col>
             </Row>
           )
