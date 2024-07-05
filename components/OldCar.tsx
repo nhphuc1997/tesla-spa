@@ -86,7 +86,7 @@ const OldCar = () => {
                 </div>
               </div>
             </div>
-            <div className="w-1/2 bg-white">
+            <div className="w-1/2 bg-white rounded-lg">
               <div className="p-3">
                 <div className="py-1 tag-product flex justify-start items-center">
                   <Tag color="success">Xe 5 tốt</Tag>
@@ -182,7 +182,7 @@ const OldCar = () => {
       <Row gutter={16}>
         <Col span={2} />
         <Col span={20}>
-          <div className="bg-white p-3">
+          <div className="bg-white p-3 rounded-lg">
             <Typography.Title level={5}>Tính toán khoản vay</Typography.Title>
             <div className="flex items-center">
               <div className="w-1/2 p-3 border rounded-lg">
