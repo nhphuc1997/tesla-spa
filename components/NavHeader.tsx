@@ -1,9 +1,43 @@
 'use client'
 import { CloseCircleOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Dropdown, Input, MenuProps, Row, Typography } from 'antd';
+import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Image } from 'antd';
 import { useState } from "react";
 import Link from "next/link";
+
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+const menus: MenuItem[] = [
+  {
+    label: 'Honda',
+    key: 'Honda',
+  },
+  {
+    label: 'Tesla',
+    key: 'Tesla',
+  },
+  {
+    label: 'Lexus',
+    key: 'Lexus',
+  },
+  {
+    label: 'Vinfast',
+    key: 'Vinfast',
+  },
+  {
+    label: 'Mazda',
+    key: 'Mazda',
+  },
+  {
+    label: 'Mescerdes',
+    key: 'Mescerdes',
+  },
+  {
+    label: 'Benley',
+    key: 'Benley',
+  },
+];
 
 const NavHeader = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false)
@@ -11,29 +45,40 @@ const NavHeader = () => {
     { label: <Link href="">Đăng kí / Đăng nhập</Link>, key: 1 },
   ];
 
+  const [current, setCurrent] = useState('mail');
+  const onClick: MenuProps['onClick'] = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
+
   return (
-    <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10">
+    <Header className="px-3 sticky top-0 w-full flex items-center bg-white z-10 h-16">
       <Row className="w-full">
-        <Col span={6} className="flex justify-start items-center">
+        <Col span={6}>
           <MenuOutlined />
         </Col>
+
         <Col span={12}>
-          <Typography.Title level={5} className="h-full text-center flex justify-center items-center !mb-0 text-sm md:text-md">
-            SuperCar
-          </Typography.Title>
-        </Col>
-        <Col span={5} className="flex justify-end items-center ">
-
-          <Input
-            placeholder="Tìm kiếm"
-            suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
-          />
+          <div className="flex justify-center items-center">
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menus} />
+          </div>
         </Col>
 
-        <Col span={1} className="w-full flex justify-end items-center ">
-          <Dropdown menu={{ items }} trigger={['click']}>
-            <UserOutlined />
-          </Dropdown>
+        <Col span={4} className="hidden md:block">
+          <div className="flex justify-end items-center h-16">
+            <Input
+              placeholder="Tìm kiếm"
+              suffix={<CloseCircleOutlined className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />}
+            />
+          </div>
+        </Col>
+
+        <Col span={2} className="">
+          <div className="flex justify-end items-center h-16">
+            <Dropdown menu={{ items }} trigger={['click']}>
+              <UserOutlined />
+            </Dropdown>
+          </div>
         </Col>
       </Row>
     </Header>
