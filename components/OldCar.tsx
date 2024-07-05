@@ -1,9 +1,11 @@
 import { CarOutlined, CheckOutlined, DoubleRightOutlined, InfoCircleOutlined, PercentageOutlined, TagsOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, Divider, InputNumber, Modal, Row, Select, Tag, Typography } from "antd";
+import { Button, Carousel, Col, Divider, InputNumber, Modal, notification, Row, Select, Tag, Typography } from "antd";
 import { useState } from "react";
 import Payment from "./payment/Payment";
 
 const OldCar = () => {
+  const [api, contextHolder] = notification.useNotification();
+
   const data_1 = [
     "Hồ sơ pháp lý an toàn",
     "Không tai nạn lớn hoặc nghiêm trọng",
@@ -18,12 +20,21 @@ const OldCar = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openNotification = () => {
+    api.success({
+      message: `Thành công`,
+      description: 'Chúc mừng bạn đã đặt hàng thành công',
+      placement: 'top',
+    });
+  }
+
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
     setIsModalOpen(false);
+    openNotification();
   };
 
   const handleCancel = () => {
@@ -32,13 +43,14 @@ const OldCar = () => {
 
   return (
     <>
+      {contextHolder}
       <Row gutter={16} className="py-3">
         <Col span={2} />
         <Col xs={24} md={20}>
           <div className="w-full flex">
             <div className="w-full md:w-1/2 bg-white">
               <div className="p-3">
-                <Carousel arrows infinite={false}>
+                <Carousel arrows infinite={false} dots={false}>
                   <div className="bg-slate-300 h-96 w-full rounded-lg" />
                   <div className="bg-slate-300 h-96 w-full rounded-lg" />
                   <div className="bg-slate-300 h-96 w-full rounded-lg" />
@@ -128,7 +140,11 @@ const OldCar = () => {
                     onOk={handleOk}
                     onCancel={handleCancel}
                     width={720}
-                    footer={[]}
+                    footer={[
+                      <Button key="submit" onClick={handleOk}>
+                        Hoàn tất
+                      </Button>,
+                    ]}
                   >
                     <Payment />
                   </Modal>
@@ -169,7 +185,7 @@ const OldCar = () => {
           <div className="bg-white p-3">
             <Typography.Title level={5}>Tính toán khoản vay</Typography.Title>
             <div className="flex items-center">
-              <div className="w-1/2 p-3 bg-slate-100 rounded-lg">
+              <div className="w-1/2 p-3 border rounded-lg">
                 <Row gutter={16}>
                   <Col span={24} className="py-1">
                     <InputNumber className="w-full" placeholder="Giá xe" />

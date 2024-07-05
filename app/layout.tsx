@@ -23,7 +23,7 @@ export default function RootLayout({
           <Content className="px-3">
             {children}
             <Divider className="!m-0" />
-            <Footer className="xs:text-left lg:text-center p-3">
+            <Footer className="xs:text-left lg:text-center p-3 bg-white">
               SuperCar ©{new Date().getFullYear()}
             </Footer>
           </Content>

@@ -14,7 +14,7 @@ const NewCar = () => {
     <Row gutter={16} className="py-3">
       <Col xs={24} md={14}>
         <div className="p-3 bg-white rounded-lg h-auto">
-          <Carousel arrows className="" >
+          <Carousel arrows className="" dots={false}>
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
             <div className="w-full bg-slate-500 h-96 rounded-lg" />
@@ -22,7 +22,7 @@ const NewCar = () => {
           </Carousel>
 
           <div className="py-3">
-            <Descriptions title="Thông số cơ bản:" bordered column={3} size="small" layout="vertical">
+            <Descriptions title="+ Thông số cơ bản:" bordered column={3} size="small" layout="vertical">
               <Descriptions.Item className="!pb-1" label="Tổng công suất">402mi</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Mô-men xoắn (Nm/vòng/phút)">130mph </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Tăng tốc (0-100 km/h)">3.1sec</Descriptions.Item>
@@ -30,7 +30,7 @@ const NewCar = () => {
           </div>
 
           <div className="pb-3">
-            <Descriptions title="Kích thước tổng thể (mm):" bordered column={5} size="small" layout="vertical">
+            <Descriptions title="+ Kích thước tổng thể (mm):" bordered column={5} size="small" layout="vertical">
               <Descriptions.Item className="!pb-1" label="Dài">4660</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Rộng">1865 </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Cao">1670</Descriptions.Item>
@@ -39,7 +39,7 @@ const NewCar = () => {
           </div>
 
           <div className="pb-3">
-            <Descriptions title="Động cơ:" bordered column={1} size="small" layout="horizontal">
+            <Descriptions title="+ Động cơ:" bordered column={1} size="small" layout="horizontal">
               <Descriptions.Item className="!pb-1" label="Mã động cơ">A25A-FXS</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Loại">I4, 4 strokes</Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Dung tích">2487 cm3</Descriptions.Item>
