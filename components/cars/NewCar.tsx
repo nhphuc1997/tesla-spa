@@ -71,7 +71,7 @@ const NewCar = () => {
               <PushpinOutlined className="mr-2" />
               Phụ kiện
             </Typography.Title>
-            <div className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center !py-3">
+            <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
                 <Radio.Group onChange={onChange} value={value}>
