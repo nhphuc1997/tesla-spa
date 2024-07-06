@@ -10,12 +10,16 @@ import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 
 const HomePage = () => {
-  const { data } = useQuery({
+  const banner = useQuery({
     queryKey: ["banner"],
     queryFn: async () => await doGet("/banners"),
   });
 
-  console.log(data);
+  const products = useQuery({
+    queryKey: ["products"],
+    queryFn: async () =>
+      await doGet("/products", { limit: 12, page: 1, sort: "id,DESC" }),
+  });
 
   return (
     <>
@@ -24,12 +28,12 @@ const HomePage = () => {
         desktopSlidesToShow={2}
         alowMaxHeight={true}
         autoPlay={false}
-        data={data?.data}
+        data={banner?.data?.data}
       />
       <Discovery />
       <KindOfCar />
       <TextIntro />
-      <ProductsCard itemPerRow={4} />
+      <ProductsCard itemPerRow={4} data={products?.data?.data} />
       <HotNews />
       <ExpBuyCar />
     </>

@@ -57,7 +57,7 @@ const Slicker = ({
     return (
       <div className="slider-container py-3 cursor-pointer">
         <Slider {...settings}>
-          {data.map((item) => (
+          {data?.map((item) => (
             <div className={`${_height} p-3 `} key={item.id}>
               <div
                 onClick={() => router.push(`/list?demand=${item?.value}`)}
@@ -77,7 +77,7 @@ const Slicker = ({
   return (
     <div className="slider-container py-3 cursor-pointer">
       <Slider {...settings}>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div className={`${_height} px-3`} key={item.id}>
             <div
               className="bg-center bg-cover bg-no-repeat bg-black h-full rounded-lg"
