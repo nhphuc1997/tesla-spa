@@ -1,6 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Typography } from "antd";
+import { useRouter } from "next/navigation";
 
 interface SlickerProps {
   name?: string;
@@ -9,6 +11,7 @@ interface SlickerProps {
   desktopSlidesToScroll: number;
   autoPlay?: boolean;
   data?: Array<any>;
+  type?: "image" | "block";
 }
 
 const Slicker = ({
@@ -17,9 +20,12 @@ const Slicker = ({
   alowMaxHeight,
   autoPlay,
   data = [],
+  type = "image",
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
+
+  const router = useRouter();
 
   const settings = {
     dots: false,
@@ -46,6 +52,27 @@ const Slicker = ({
       },
     ],
   };
+
+  if (type === "block") {
+    return (
+      <div className="slider-container py-3 cursor-pointer">
+        <Slider {...settings}>
+          {data.map((item) => (
+            <div className={`${_height} p-3 `} key={item.id}>
+              <div
+                onClick={() => router.push(`/list?demand=${item?.value}`)}
+                className="hover:drop-shadow-md flex justify-center items-center bg-center bg-cover bg-no-repeat bg-[#31473A] h-full rounded-lg"
+              >
+                <Typography.Title level={4} className="!text-[#EDF4F2] !mb-0">
+                  {item.name}
+                </Typography.Title>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    );
+  }
 
   return (
     <div className="slider-container py-3 cursor-pointer">
