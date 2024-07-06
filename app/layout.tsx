@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "/app/globals.css";
-import { Divider, FloatButton, Layout } from "antd";
-import { Footer, Content } from "antd/es/layout/layout";
 import { ClerkProvider } from "@clerk/nextjs";
 import { viVN } from "@clerk/localizations";
-import NavHeader from "@/components/headers/NavHeader";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Wrapper from "@/components/Wrapper";
+import "/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
