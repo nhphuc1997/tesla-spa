@@ -39,7 +39,7 @@ const ProductsCard = ({
 
               <div
                 className="cursor-pointer"
-                onClick={() => router.push("/order")}
+                onClick={() => router.push(`/products/${item.id}`)}
               >
                 <div className="flex justify-start items-start flex-col xl:flex-row">
                   <Typography.Paragraph className="!mb-0">
@@ -81,7 +81,7 @@ const ProductsCard = ({
                   <Button
                     className="!bg-[rgba(41,41,41,.75)] !text-white"
                     block
-                    onClick={() => router.push("/order")}
+                    onClick={() => router.push(`/products/${item.id}`)}
                     icon={<ApiOutlined />}
                   >
                     Xem ngay
