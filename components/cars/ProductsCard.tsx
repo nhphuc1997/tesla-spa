@@ -1,4 +1,5 @@
 "use client";
+import { formatCurrency } from "@/utils/format-currency";
 import {
   ApiOutlined,
   EyeOutlined,
@@ -49,10 +50,7 @@ const ProductsCard = ({
                       icon={<TagsOutlined />}
                       className="!bg-[rgba(41,41,41,.75)] !text-white"
                     >
-                      {`${Number(item.price).toLocaleString("en-Us", {
-                        style: "currency",
-                        currency: "VND",
-                      })}`}
+                      {`${formatCurrency(item.price)}`}
                     </Tag>
                   </Typography.Paragraph>
                 </div>
