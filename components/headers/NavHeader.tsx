@@ -1,14 +1,12 @@
 'use client'
 import { LoginOutlined, MenuOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Col, Dropdown, Input, Menu, MenuProps, Row, Typography, Button, Avatar, notification } from 'antd';
-import { useEffect, useState } from "react";
+import { Col, Dropdown, Menu, MenuProps, Row, Typography, Button, Avatar, notification } from 'antd';
+import { useEffect } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-
 type MenuItem = Required<MenuProps>['items'][number];
-
 
 const NavHeader = () => {
   const { isSignedIn, user } = useUser();

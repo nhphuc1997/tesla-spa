@@ -6,7 +6,9 @@ import { Footer, Content } from "antd/es/layout/layout";
 import { ClerkProvider } from "@clerk/nextjs";
 import { viVN } from "@clerk/localizations";
 import NavHeader from "@/components/headers/NavHeader";
-import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Wrapper from "@/components/Wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,23 +21,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider appearance={{ elements: { footer: "hidden" } }} localization={viVN}>
+    <ClerkProvider
+      appearance={{ elements: { footer: "hidden" } }}
+      localization={viVN}
+    >
       <html lang="en">
-        <body className={inter.className} >
-          <AntdRegistry>
-            <Layout className="w-full">
-              <NavHeader />
-
-              <Content className="mx-3">
-                {children}
-                <Divider className="!m-0" />
-              </Content>
-
-              <Footer className="xs:text-left lg:text-center !bg-white">
-                SuperCar ©{new Date().getFullYear()}
-              </Footer>
-            </Layout>
-          </AntdRegistry>
+        <body className={inter.className}>
+          <Wrapper children={children} />
         </body>
       </html>
     </ClerkProvider>
