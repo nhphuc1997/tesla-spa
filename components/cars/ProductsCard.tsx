@@ -32,8 +32,10 @@ const ProductsCard = ({
             <div className="rounded-lg border hover:drop-shadow-2xl p-3 bg-white">
               <div>
                 <Image
+                  height={200}
+                  fallback=""
                   className="rounded-lg"
-                  src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                  src={item.thumbnail}
                 />
               </div>
 
@@ -56,8 +58,11 @@ const ProductsCard = ({
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <Tooltip title={item.shortDesciption}>
-                    <Typography.Title level={4} className="!my-0 truncate">
+                  <Tooltip title={item.color}>
+                    <Typography.Title
+                      level={5}
+                      className="!my-0 truncate uppercase"
+                    >
                       {item.name}
                     </Typography.Title>
                   </Tooltip>
@@ -70,10 +75,10 @@ const ProductsCard = ({
 
                 <div>
                   <Tooltip title={item.textIntro}>
-                    <Typography.Paragraph className="!mb-0 truncate">
+                    <Typography.Text className="!mb-0 truncate">
                       <PushpinOutlined className="mr-2" />
                       {item.textIntro}
-                    </Typography.Paragraph>
+                    </Typography.Text>
                   </Tooltip>
                 </div>
 

@@ -15,7 +15,7 @@ const KindOfCar = () => {
   console.log(data);
 
   return (
-    <Row className="w-full py-3 cursor-pointer">
+    <Row className="w-full py-3">
       <Col span={24} className="flex items-center w-full justify-center pb-3">
         <Divider orientation="right">
           <Typography.Title
