@@ -32,7 +32,7 @@ const NavHeader = () => {
       if (response.statusCode === 200) {
         const items: MenuItem[] = response.data.map((item: any) => ({
           label: (
-            <Link href={`/list?branch=${item.name}`} className="capitalize">
+            <Link href={`/list?category=${item.name}`} className="capitalize">
               {item.name}
             </Link>
           ),
