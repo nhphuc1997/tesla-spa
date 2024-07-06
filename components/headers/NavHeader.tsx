@@ -12,10 +12,10 @@ import {
   Avatar,
   notification,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 
 type MenuItem = Required<MenuProps>["items"][number];
