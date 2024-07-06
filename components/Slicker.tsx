@@ -8,6 +8,7 @@ interface SlickerProps {
   desktopSlidesToShow: number;
   desktopSlidesToScroll: number;
   autoPlay?: boolean;
+  data?: Array<any>;
 }
 
 const Slicker = ({
@@ -15,6 +16,7 @@ const Slicker = ({
   desktopSlidesToScroll,
   alowMaxHeight,
   autoPlay,
+  data = [],
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
@@ -23,7 +25,7 @@ const Slicker = ({
     dots: false,
     infinite: true,
     autoplay: _autoPlay,
-    speed: 2000,
+    speed: 3000,
     slidesToShow: desktopSlidesToShow,
     slidesToScroll: desktopSlidesToScroll,
     responsive: [
@@ -48,10 +50,11 @@ const Slicker = ({
   return (
     <div className="slider-container py-3">
       <Slider {...settings}>
-        {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-          <div className={`${_height} px-3`} key={item}>
+        {data.map((item) => (
+          <div className={`${_height} px-3`} key={item.id}>
             <div
-              className={`bg-center	bg-cover bg-no-repeat bg-black h-full bg-[url('https://res.cloudinary.com/dc7irvi43/image/upload/v1720286820/mes8_dvikww.jpg')]`}
+              className="bg-center bg-cover bg-no-repeat bg-black h-full rounded-lg"
+              style={{ backgroundImage: `url("${item.url}")` }}
             />
           </div>
         ))}
