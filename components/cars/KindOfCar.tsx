@@ -28,8 +28,8 @@ const KindOfCar = () => {
       </Col>
       <Col span={24} className="w-full">
         <Slicker
-          desktopSlidesToScroll={4}
-          desktopSlidesToShow={4}
+          desktopSlidesToScroll={1}
+          desktopSlidesToShow={6}
           data={data?.data}
           autoPlay={true}
           type="block"
