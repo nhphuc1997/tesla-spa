@@ -23,7 +23,7 @@ const HomePage = () => {
         desktopSlidesToScroll={2}
         desktopSlidesToShow={2}
         alowMaxHeight={true}
-        autoPlay={true}
+        autoPlay={false}
         data={data?.data}
       />
       <Discovery />

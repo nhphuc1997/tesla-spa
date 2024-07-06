@@ -48,7 +48,7 @@ const Slicker = ({
   };
 
   return (
-    <div className="slider-container py-3">
+    <div className="slider-container py-3 cursor-pointer">
       <Slider {...settings}>
         {data.map((item) => (
           <div className={`${_height} px-3`} key={item.id}>
