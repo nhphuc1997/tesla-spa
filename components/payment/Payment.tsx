@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/utils/format-currency";
 import {
+  CheckCircleOutlined,
   DoubleLeftOutlined,
   DoubleRightOutlined,
   LoginOutlined,
@@ -227,20 +228,22 @@ const Payment = ({
                   );
                 }
               })()}
-              <div className="w-full flex justify-end items-center">
-                {current < 0 && (
-                  <Button
-                    shape="circle"
-                    icon={<DoubleLeftOutlined />}
-                    onClick={moveNextStep}
-                  />
+              <div className="w-full">
+                {current === 2 && (
+                  <div className="flex justify-center items-center">
+                    <Button icon={<CheckCircleOutlined />} block>
+                      Hoàn thành
+                    </Button>
+                  </div>
                 )}
                 <div className="px-3" />
                 {current < 2 && (
-                  <Button
-                    shape="circle"
-                    icon={<DoubleRightOutlined onClick={moveNextStep} />}
-                  />
+                  <div className="flex justify-end items-center">
+                    <Button
+                      shape="circle"
+                      icon={<DoubleRightOutlined onClick={moveNextStep} />}
+                    />
+                  </div>
                 )}
               </div>
             </div>
