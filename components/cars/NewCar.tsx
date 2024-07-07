@@ -53,15 +53,15 @@ const NewCar = () => {
   });
 
   const colorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(opsColorPicked?.price);
+    setBonusPrice(e.target.value.price);
   };
 
   const wheelPick = (e: RadioChangeEvent) => {
-    setBonusPrice(opsWheelPicked?.price);
+    setBonusPrice(e.target.value.price);
   };
 
   const interatorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(opsInteratorPicked?.price);
+    setBonusPrice(e.target.value.price);
   };
 
   return (
@@ -207,12 +207,7 @@ const NewCar = () => {
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
                 <Radio.Group onChange={colorPick}>
                   {data?.category?.data?.optionColor.map((color: any) => (
-                    <Radio
-                      key={color.id}
-                      className="!py-1"
-                      value={color?.price}
-                      onClick={() => setOpsColorPicked(color)}
-                    >
+                    <Radio key={color.id} className="!py-1" value={color}>
                       {color?.description}
                     </Radio>
                   ))}
@@ -223,12 +218,7 @@ const NewCar = () => {
                 <Typography.Title level={5}>Wheels</Typography.Title>
                 <Radio.Group onChange={wheelPick}>
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
-                    <Radio
-                      key={wheel.id}
-                      className="!py-1"
-                      value={wheel?.price}
-                      onClick={() => setOpsWheelPicked(wheel)}
-                    >
+                    <Radio key={wheel.id} className="!py-1" value={wheel}>
                       {wheel?.description}
                     </Radio>
                   ))}
@@ -238,18 +228,11 @@ const NewCar = () => {
               <div className="py-3">
                 <Typography.Title level={5}>Nội thất</Typography.Title>
                 <Radio.Group onChange={interatorPick}>
-                  {data?.category?.data?.optionInterator.map(
-                    (interator: any) => (
-                      <Radio
-                        key={interator.id}
-                        className="!py-1"
-                        value={interator?.price}
-                        onClick={() => setOpsInteratorPicked(interator)}
-                      >
-                        {interator?.description}
-                      </Radio>
-                    )
-                  )}
+                  {data?.category?.data?.optionInterator.map((intera: any) => (
+                    <Radio key={intera.id} className="!py-1" value={intera}>
+                      {intera?.description}
+                    </Radio>
+                  ))}
                 </Radio.Group>
               </div>
             </div>
