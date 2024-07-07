@@ -26,11 +26,7 @@ import Slicker from "../Slicker";
 const NewCar = () => {
   const params = useParams();
 
-  const [value, setValue] = useState(1);
-  const [categoryId, setCategoryId] = useState(null);
-  const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
-  };
+  const [bonusPrice, setBonusPrice] = useState(0);
 
   const { data }: any = useQuery({
     queryKey: ["detail-product"],
@@ -53,8 +49,17 @@ const NewCar = () => {
     },
   });
 
-  console.log(data?.products, "products");
-  console.log(data?.category, "category");
+  const colorPick = (e: RadioChangeEvent) => {
+    setBonusPrice(e.target.value);
+  };
+
+  const wheelPick = (e: RadioChangeEvent) => {
+    setBonusPrice(e.target.value);
+  };
+
+  const interatorPick = (e: RadioChangeEvent) => {
+    setBonusPrice(e.target.value);
+  };
 
   return (
     <Row gutter={16} className="py-3">
@@ -181,7 +186,9 @@ const NewCar = () => {
               className="!my-0 text-center md:text-left"
             >
               <TagsOutlined className="mr-2" />
-              {formatCurrency(data?.products?.data?.price)}
+              {formatCurrency(
+                Number(data?.products?.data?.price) + Number(bonusPrice)
+              )}
             </Typography.Title>
           </div>
 
@@ -195,7 +202,7 @@ const NewCar = () => {
             <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group>
+                <Radio.Group onChange={colorPick}>
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio className="!py-1" value={color?.price}>
                       {color?.description}
@@ -206,7 +213,7 @@ const NewCar = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Wheels</Typography.Title>
-                <Radio.Group onChange={onChange} value={value}>
+                <Radio.Group onChange={wheelPick}>
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio className="!py-1" value={wheel?.price}>
                       {wheel?.description}
@@ -217,7 +224,7 @@ const NewCar = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Nội thất</Typography.Title>
-                <Radio.Group onChange={onChange} value={value}>
+                <Radio.Group onChange={interatorPick}>
                   {data?.category?.data?.optionInterator.map(
                     (interator: any) => (
                       <Radio className="!py-1" value={interator?.price}>
