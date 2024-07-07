@@ -28,6 +28,8 @@ const ListPage = () => {
   const [searchTearm, setSearchTearm] = useState("");
   const [category, setCategory] = useState("");
   const [colorGroupFilter, setColorGroupFilter] = useState("");
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [minPrice, setMinPrice] = useState(0);
 
   const { data } = useQuery({
     queryKey: ["category"],
@@ -40,9 +42,17 @@ const ListPage = () => {
   });
 
   const products = useQuery({
-    queryKey: ["products", { searchTearm, category, colorGroupFilter }],
+    queryKey: [
+      "products",
+      { searchTearm, category, colorGroupFilter, maxPrice, minPrice },
+    ],
     queryFn: async () => {
-      if (searchCategory === "" && category === "" && colorGroupFilter === "") {
+      if (
+        searchCategory === "" &&
+        category === "" &&
+        colorGroupFilter === "" &&
+        (maxPrice === 0 || minPrice === 0)
+      ) {
         return doGet("/products");
       }
 
@@ -54,6 +64,9 @@ const ListPage = () => {
         filter = `s={ "category.name": { "$eq": "${category}" } }`;
       }
       if (colorGroupFilter !== "") {
+        filter = `s={ "colorGroup.id": { "$eq": "${colorGroupFilter}" } }`;
+      }
+      if (maxPrice !== 0 || minPrice !== 0) {
         filter = `s={ "colorGroup.id": { "$eq": "${colorGroupFilter}" } }`;
       }
 
@@ -72,12 +85,9 @@ const ListPage = () => {
     console.log(date, dateString);
   };
 
-  const onChangePrice = (value: number | number[]) => {
-    console.log("onChange: ", value);
-  };
-
-  const onChangePriceComplete = (value: number | number[]) => {
-    console.log("onChangeComplete: ", value);
+  const onChangePriceComplete = (value: any) => {
+    setMaxPrice(value[1]);
+    setMinPrice(value[0]);
   };
 
   const handleChangePickBranchCar = (value: string) => {
@@ -119,14 +129,14 @@ const ListPage = () => {
                 />
               </div>
 
-              <div className="py-3">
+              {/* <div className="py-3">
                 <Typography.Title level={5}>Năm sản xuất</Typography.Title>
                 <DatePicker
                   className="w-full"
                   onChange={onChangeSelectYear}
                   picker="year"
                 />
-              </div>
+              </div> */}
 
               <div className="py-3">
                 <Typography.Title level={5}>Màu sắc</Typography.Title>
@@ -148,7 +158,6 @@ const ListPage = () => {
                   range
                   step={10}
                   defaultValue={[20, 50]}
-                  onChange={onChangePrice}
                   onChangeComplete={onChangePriceComplete}
                 />
               </div>
