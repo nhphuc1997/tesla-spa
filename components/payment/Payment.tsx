@@ -2,12 +2,10 @@ import {
   DoubleLeftOutlined,
   DoubleRightOutlined,
   LoginOutlined,
-  PoweroffOutlined,
 } from "@ant-design/icons";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import {
   Button,
-  DatePicker,
   Descriptions,
   Empty,
   Form,
@@ -20,7 +18,7 @@ import {
 import { useRef, useState } from "react";
 
 type FieldType = {
-  fullname?: string;
+  fullName?: string;
   phoneNumber?: string;
 };
 
@@ -30,7 +28,7 @@ const Payment = () => {
   const buttonRef = useRef<any>(null);
 
   const [current, setCurrent] = useState(0);
-  const [userInfor, setUserInfor] = useState();
+  const [userInfor, setUserInfor] = useState<FieldType>();
 
   const onChangeStep = (value: number) => {
     setCurrent(value);
@@ -44,6 +42,15 @@ const Payment = () => {
 
     setCurrent(current + 1);
     return;
+  };
+
+  const onFinishForm: FormProps<FieldType>["onFinish"] = (values) => {
+    console.log("Success:", values);
+    setCurrent(current + 1);
+    setUserInfor({
+      fullName: values.fullName,
+      phoneNumber: values.phoneNumber,
+    });
   };
 
   return (
@@ -83,7 +90,7 @@ const Payment = () => {
                         labelAlign="left"
                         name="basic"
                         autoComplete="off"
-                        onFinish={() => setCurrent(1)}
+                        onFinish={onFinishForm}
                       >
                         <Form.Item
                           label="Họ tên"
@@ -131,23 +138,14 @@ const Payment = () => {
                           size="small"
                           layout="horizontal"
                         >
-                          <Descriptions.Item className="!pb-1" label="Số CCCD">
-                            A25A-FXS
+                          <Descriptions.Item className="!pb-1" label="Họ tên">
+                            {userInfor?.fullName}
                           </Descriptions.Item>
                           <Descriptions.Item
                             className="!pb-1"
-                            label="Họ và tên"
+                            label="Số điện thoại"
                           >
-                            A25A-FXS
-                          </Descriptions.Item>
-                          <Descriptions.Item
-                            className="!pb-1"
-                            label="Ngày sinh"
-                          >
-                            I4, 4 strokes
-                          </Descriptions.Item>
-                          <Descriptions.Item className="!pb-1" label="Đia chỉ">
-                            2487 cm3
+                            {userInfor?.phoneNumber}
                           </Descriptions.Item>
                         </Descriptions>
                       </div>
