@@ -103,7 +103,7 @@ const ProductsCard = ({
               <Col span={24} className="!flex justify-center items-center">
                 <Button
                   className="!bg-[rgba(41,41,41,.75)] !text-white"
-                  onClick={() => router.push("/list")}
+                  onClick={() => router.push("/products")}
                 >
                   Xem thêm
                 </Button>

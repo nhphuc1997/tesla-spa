@@ -62,7 +62,7 @@ const Slicker = ({
           {data?.map((item) => (
             <div className={`${_height} p-3 `} key={item.id}>
               <div
-                onClick={() => router.push(`/list?demand=${item?.value}`)}
+                onClick={() => router.push(`/products?demand=${item?.value}`)}
                 className="hover:drop-shadow-md flex justify-center items-center bg-center bg-cover bg-no-repeat bg-[#31473A] h-full rounded-lg"
               >
                 <Typography.Title level={4} className="!text-[#EDF4F2] !mb-0">
