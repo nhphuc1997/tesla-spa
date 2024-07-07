@@ -37,6 +37,7 @@ const ProductsCard = ({
                   fallback=""
                   className="rounded-lg"
                   src={item.thumbnail}
+                  alt=""
                 />
               </div>
 

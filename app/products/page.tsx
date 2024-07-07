@@ -151,7 +151,7 @@ const ListPage = () => {
                   value={colorGroupFilter}
                 >
                   {colorGroup?.data?.data.map((item: any) => (
-                    <Radio className="!p-1" value={item?.id}>
+                    <Radio key={item.id} className="!p-1" value={item?.id}>
                       {item?.name}
                     </Radio>
                   ))}

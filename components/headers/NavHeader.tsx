@@ -51,7 +51,7 @@ const NavHeader = () => {
     if (isSignedIn === true) {
       api.success({ message: null, description: "Đăng nhập thành công" });
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, api]);
 
   const items: MenuProps["items"] = [
     {

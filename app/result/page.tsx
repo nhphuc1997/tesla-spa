@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Button, Divider, Result, Typography } from "antd";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { Button, Result, Typography } from "antd";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 
@@ -31,7 +31,7 @@ const ResultPage: React.FC = () => {
           </Typography.Text>
         </div>
       }
-      extra={[<Button onClick={() => router.push("/")}>Trang chủ</Button>]}
+      extra={<Button onClick={() => router.push("/")}>Trang chủ</Button>}
     />
   );
 };

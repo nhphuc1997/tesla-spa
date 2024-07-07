@@ -208,6 +208,7 @@ const NewCar = () => {
                 <Radio.Group onChange={colorPick}>
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio
+                      key={color.id}
                       className="!py-1"
                       value={color?.price}
                       onClick={() => setOpsColorPicked(color)}
@@ -223,6 +224,7 @@ const NewCar = () => {
                 <Radio.Group onChange={wheelPick}>
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio
+                      key={wheel.id}
                       className="!py-1"
                       value={wheel?.price}
                       onClick={() => setOpsWheelPicked(wheel)}
@@ -239,6 +241,7 @@ const NewCar = () => {
                   {data?.category?.data?.optionInterator.map(
                     (interator: any) => (
                       <Radio
+                        key={interator.id}
                         className="!py-1"
                         value={interator?.price}
                         onClick={() => setOpsInteratorPicked(interator)}

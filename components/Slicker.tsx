@@ -96,7 +96,12 @@ const Slicker = ({
               <Image.PreviewGroup>
                 {data?.map((item) => (
                   <div className="px-3" key={item.id}>
-                    <Image className="rounded-lg" height={100} src={item.url} />
+                    <Image
+                      alt=""
+                      className="rounded-lg"
+                      height={100}
+                      src={item.url}
+                    />
                   </div>
                 ))}
               </Image.PreviewGroup>
