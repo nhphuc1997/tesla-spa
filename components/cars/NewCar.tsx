@@ -293,7 +293,12 @@ const NewCar = () => {
                   <Form.Item
                     label="Email"
                     name="email"
-                    rules={[{ required: true }]}
+                    rules={[
+                      {
+                        required: true,
+                        message: "trường này không được để trống",
+                      },
+                    ]}
                   >
                     <Input placeholder="user@gmail.com" />
                   </Form.Item>
@@ -301,7 +306,12 @@ const NewCar = () => {
                   <Form.Item
                     label="Số diện thoại"
                     name="Số điện thoại"
-                    rules={[{ required: true }]}
+                    rules={[
+                      {
+                        required: true,
+                        message: "trường này không được để trống",
+                      },
+                    ]}
                   >
                     <Input placeholder="0123456789" />
                   </Form.Item>
@@ -312,6 +322,7 @@ const NewCar = () => {
                       htmlType="submit"
                       icon={<SendOutlined />}
                       iconPosition="end"
+                      className="!bg-[#e6f4ff] !border-[#e6f4ff] text-black"
                     >
                       Đăng kí
                     </Button>
