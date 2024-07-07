@@ -298,7 +298,7 @@ const Payment = ({
                     />
                   )}
 
-                  <div className="px-3" />
+                  <div className="px-1" />
 
                   {current < 2 && (
                     <Button
