@@ -77,9 +77,7 @@ const NavHeader = () => {
         </Col>
 
         <Col span={12}>
-          <div className="flex justify-center items-center h-16">
-            <Menu mode="horizontal" items={data} />
-          </div>
+          <Menu mode="horizontal" items={data} />
         </Col>
 
         <Col span={6} className="">

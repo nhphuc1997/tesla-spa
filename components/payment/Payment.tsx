@@ -6,7 +6,6 @@ import {
   LoginOutlined,
 } from "@ant-design/icons";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
-import { useQuery } from "@tanstack/react-query";
 import {
   Button,
   Descriptions,
@@ -18,6 +17,7 @@ import {
   Steps,
   Typography,
 } from "antd";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { v4 } from "uuid";
 
@@ -47,6 +47,7 @@ const Payment = ({
 }: Props) => {
   const { isSignedIn, user } = useUser();
   const { openSignIn } = useClerk();
+  const router = useRouter();
 
   const buttonRef = useRef<any>(null);
   const [current, setCurrent] = useState(0);
@@ -77,21 +78,18 @@ const Payment = ({
   const submitOrder = async () => {
     const payload = {
       orderId: v4(),
-      productId: productId,
       userId: user?.id,
       phoneNumber: userInfor?.phoneNumber,
-      products: productId,
+      product: productId,
       optionColor: color?.id,
       optionWheel: wheel?.id,
       optionInterator: interator?.id,
     };
 
-    console.log(payload);
-
-    // const response = await doPost("/orders", {})
-
-    // if (data?.data?.status === 200) {
-    // }
+    const response = await doPost("/orders", payload);
+    if (response?.statusCode === 200) {
+      return router.push(`/result?order_id=${response?.data?.id}`);
+    }
   };
 
   return (
@@ -221,19 +219,19 @@ const Payment = ({
                                 <li>
                                   Màu sắc:
                                   <Typography.Text className="ml-2 font-semibold">
-                                    {color.description}
+                                    {color?.description}
                                   </Typography.Text>
                                 </li>
                                 <li>
                                   Wheel:
                                   <Typography.Text className="ml-2 font-semibold">
-                                    {wheel.description}
+                                    {wheel?.description}
                                   </Typography.Text>
                                 </li>
                                 <li>
                                   Nội thất:
                                   <Typography.Text className="ml-2 font-semibold">
-                                    {interator.description}
+                                    {interator?.description}
                                   </Typography.Text>
                                 </li>
                               </ul>

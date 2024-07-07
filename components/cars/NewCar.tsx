@@ -209,7 +209,7 @@ const NewCar = () => {
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio
                       className="!py-1"
-                      value={color?.id}
+                      value={color?.price}
                       onClick={() => setOpsColorPicked(color)}
                     >
                       {color?.description}
@@ -224,7 +224,7 @@ const NewCar = () => {
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio
                       className="!py-1"
-                      value={wheel?.id}
+                      value={wheel?.price}
                       onClick={() => setOpsWheelPicked(wheel)}
                     >
                       {wheel?.description}
@@ -240,7 +240,7 @@ const NewCar = () => {
                     (interator: any) => (
                       <Radio
                         className="!py-1"
-                        value={interator?.id}
+                        value={interator?.price}
                         onClick={() => setOpsInteratorPicked(interator)}
                       >
                         {interator?.description}
