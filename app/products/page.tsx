@@ -67,7 +67,7 @@ const ListPage = () => {
         filter = `s={ "colorGroup.id": { "$eq": "${colorGroupFilter}" } }`;
       }
       if (maxPrice !== 0 || minPrice !== 0) {
-        filter = `s={ "colorGroup.id": { "$eq": "${colorGroupFilter}" } }`;
+        filter = `s={"$and": [{ "price": { "$gte": "${minPrice}" }}, { "price": { "$lte": "${maxPrice}" }}]}`;
       }
 
       return doGet(`/products?${filter}`);
