@@ -9,6 +9,7 @@ import {
   Radio,
   RadioChangeEvent,
   Row,
+  Tag,
   Typography,
 } from "antd";
 import { useState } from "react";
@@ -191,7 +192,9 @@ const NewCar = () => {
             </Typography.Text>
 
             <Typography.Text className="">
-              Màu sắc: {data?.products?.data.color}
+              Màu sắc:
+              <span className="mx-2"></span>
+              <Tag className="!bg-[#e6f4ff]">{data?.products?.data.color}</Tag>
             </Typography.Text>
 
             <Typography.Title
