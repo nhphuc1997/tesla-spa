@@ -1,11 +1,12 @@
+import { doPost } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import {
   CheckCircleOutlined,
-  DoubleLeftOutlined,
   DoubleRightOutlined,
   LoginOutlined,
 } from "@ant-design/icons";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
 import {
   Button,
   Descriptions,
@@ -65,12 +66,21 @@ const Payment = ({
   };
 
   const onFinishForm: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
     setCurrent(current + 1);
     setUserInfor({
       fullName: values.fullName,
       phoneNumber: values.phoneNumber,
     });
+  };
+
+  const submitOrder = () => {
+    const { data } = useQuery({
+      queryKey: ["order"],
+      queryFn: async () => await doPost("/orders", {}),
+    });
+
+    if (data?.data?.status === 200) {
+    }
   };
 
   return (
@@ -87,12 +97,14 @@ const Payment = ({
           {
             title: "Bước 2",
             description: "Thông tin thanh toán",
-            disabled: current === 0 || !isSignedIn,
+            // disabled: current === 0 || !isSignedIn,
+            disabled: false,
           },
           {
             title: "Bước 2",
             description: "Chuyển khoản",
-            disabled: current === 0 || !isSignedIn,
+            // disabled: current === 0 || !isSignedIn,
+            disabled: false,
           },
         ]}
       />
@@ -224,14 +236,27 @@ const Payment = ({
                       <div className="my-3 w-full flex justify-center items-center">
                         <QRCode type="canvas" value="2" />
                       </div>
+                      <div className="w-full flex justify-center items-center flex-col">
+                        <Typography.Title level={5} className="!m-0 !pb-1">
+                          Ngân Hàng: VCB
+                        </Typography.Title>
+                        <Typography.Title level={5} className="!m-0 !pb-1">
+                          PGD: Đào Tấn
+                        </Typography.Title>
+                      </div>
                     </div>
                   );
                 }
               })()}
               <div className="w-full">
                 {current === 2 && (
-                  <div className="flex justify-center items-center">
-                    <Button icon={<CheckCircleOutlined />} block>
+                  <div className="w-1/2 mx-auto">
+                    <Button
+                      icon={<CheckCircleOutlined />}
+                      block
+                      onClick={() => submitOrder()}
+                      className="!bg-[#e6f4ff] !border-[#e6f4ff] text-black"
+                    >
                       Hoàn thành
                     </Button>
                   </div>
