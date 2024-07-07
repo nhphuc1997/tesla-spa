@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 
 const ListPage = () => {
   const parms = useSearchParams();
-  const searchCategory = parms.get("category");
+  const searchCategory: any = parms.get("category");
 
   const [searchTearm, setSearchTearm] = useState("");
   const [category, setCategory] = useState("");
@@ -48,7 +48,7 @@ const ListPage = () => {
     ],
     queryFn: async () => {
       if (
-        searchCategory === "" &&
+        searchTearm === "" &&
         category === "" &&
         colorGroupFilter === "" &&
         (maxPrice === 0 || minPrice === 0)
@@ -57,7 +57,7 @@ const ListPage = () => {
       }
 
       let filter = "";
-      if (searchCategory !== "") {
+      if (searchTearm !== "") {
         filter = `s={ "name": { "$cont": "${searchTearm}" } }`;
       }
       if (category !== "") {
@@ -93,6 +93,12 @@ const ListPage = () => {
   const handleChangePickBranchCar = (value: string) => {
     setCategory(value);
   };
+
+  useEffect(() => {
+    if (searchCategory && searchCategory !== "") {
+      setCategory(searchCategory);
+    }
+  }, [searchCategory]);
 
   return (
     <div className="py-3 min-h-full">

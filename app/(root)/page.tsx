@@ -30,7 +30,7 @@ const HomePage = () => {
         autoPlay={false}
         data={banner?.data?.data}
       />
-      <Discovery />
+      {/* <Discovery /> */}
       <KindOfCar />
       <TextIntro />
       <ProductsCard itemPerRow={4} data={products?.data?.data} />
