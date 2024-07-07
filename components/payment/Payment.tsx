@@ -1,4 +1,9 @@
-import { LoginOutlined } from "@ant-design/icons";
+import {
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
+  LoginOutlined,
+  PoweroffOutlined,
+} from "@ant-design/icons";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import {
   Button,
@@ -12,7 +17,7 @@ import {
   Steps,
   Typography,
 } from "antd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type FieldType = {
   fullname?: string;
@@ -22,43 +27,45 @@ type FieldType = {
 const Payment = () => {
   const { isSignedIn } = useUser();
   const { openSignIn } = useClerk();
+  const buttonRef = useRef<any>(null);
 
   const [current, setCurrent] = useState(0);
+  const [userInfor, setUserInfor] = useState();
 
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const onChangeV2 = (value: number) => {
+  const onChangeStep = (value: number) => {
     setCurrent(value);
+  };
+
+  const moveNextStep = () => {
+    if (current === 0 && buttonRef && buttonRef?.current) {
+      buttonRef?.current.click();
+      return;
+    }
+
+    setCurrent(current + 1);
+    return;
   };
 
   return (
     <div>
       <Steps
         current={current}
-        onChange={onChangeV2}
+        onChange={onChangeStep}
         items={[
           {
             title: "Bước 1",
             description: "Thông tin cá nhân",
-            disabled: !isSignedIn,
+            disabled: true,
           },
           {
             title: "Bước 2",
             description: "Thông tin thanh toán",
-            disabled: !isSignedIn,
+            disabled: current === 0 || !isSignedIn,
           },
           {
             title: "Bước 2",
             description: "Chuyển khoản",
-            disabled: !isSignedIn,
+            disabled: current === 0 || !isSignedIn,
           },
         ]}
       />
@@ -75,9 +82,8 @@ const Payment = () => {
                         labelCol={{ flex: "100px" }}
                         labelAlign="left"
                         name="basic"
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
                         autoComplete="off"
+                        onFinish={() => setCurrent(1)}
                       >
                         <Form.Item
                           label="Họ tên"
@@ -104,6 +110,13 @@ const Payment = () => {
                         >
                           <Input placeholder="0123428123" />
                         </Form.Item>
+
+                        <Button
+                          ref={buttonRef}
+                          type="primary"
+                          htmlType="submit"
+                          className="!hidden"
+                        />
                       </Form>
                     </div>
                   );
@@ -197,6 +210,22 @@ const Payment = () => {
                   );
                 }
               })()}
+              <div className="w-full flex justify-end items-center">
+                {current < 0 && (
+                  <Button
+                    shape="circle"
+                    icon={<DoubleLeftOutlined />}
+                    onClick={moveNextStep}
+                  />
+                )}
+                <div className="px-3" />
+                {current < 2 && (
+                  <Button
+                    shape="circle"
+                    icon={<DoubleRightOutlined onClick={moveNextStep} />}
+                  />
+                )}
+              </div>
             </div>
           );
         }
