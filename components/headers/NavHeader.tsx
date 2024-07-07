@@ -80,7 +80,11 @@ const NavHeader = () => {
         </Col>
 
         <Col span={12}>
-          <Menu mode="horizontal" items={data} />
+          <Menu
+            className="w-full flex justify-center items-center"
+            mode="horizontal"
+            items={data}
+          />
         </Col>
 
         <Col span={6} className="">
