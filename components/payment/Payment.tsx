@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/utils/format-currency";
 import {
   DoubleLeftOutlined,
   DoubleRightOutlined,
@@ -22,11 +23,29 @@ type FieldType = {
   phoneNumber?: string;
 };
 
-const Payment = () => {
+interface Props {
+  productName: string;
+  productPrice: string;
+  total: string;
+  color: string;
+  wheel: string;
+  interator: string;
+  bonusPrice: number;
+}
+
+const Payment = ({
+  productName,
+  productPrice,
+  total,
+  bonusPrice,
+  color,
+  wheel,
+  interator,
+}: Props) => {
   const { isSignedIn } = useUser();
   const { openSignIn } = useClerk();
-  const buttonRef = useRef<any>(null);
 
+  const buttonRef = useRef<any>(null);
   const [current, setCurrent] = useState(0);
   const [userInfor, setUserInfor] = useState<FieldType>();
 
@@ -98,7 +117,7 @@ const Payment = () => {
                           rules={[
                             {
                               required: true,
-                              message: "Please input your username!",
+                              message: "Thông tin này không được để trống",
                             },
                           ]}
                         >
@@ -111,7 +130,7 @@ const Payment = () => {
                           rules={[
                             {
                               required: true,
-                              message: "Please input your username!",
+                              message: "Thông tin này không được để trống",
                             },
                           ]}
                         >
@@ -162,29 +181,29 @@ const Payment = () => {
                               className="!pb-1"
                               label="Sản phẩm"
                             >
-                              Modeal S
+                              {productName}
                             </Descriptions.Item>
                             <Descriptions.Item
                               className="!pb-1"
                               label="Giá niêm yết"
                             >
-                              700,000,000 VND
+                              {formatCurrency(productPrice)}
                             </Descriptions.Item>
                             <Descriptions.Item
                               className="!pb-1"
                               label="Phụ kiện"
                             >
                               <ul>
-                                <li>Màu sơn (#endregion)</li>
-                                <li>Wheels (18'' Photon Wheels)</li>
-                                <li>Nội thất(#Trắng)</li>
+                                <li>Màu sắc: {color}</li>
+                                <li>Wheel: {wheel}</li>
+                                <li>Nội thất: {interator}</li>
                               </ul>
                             </Descriptions.Item>
                             <Descriptions.Item
                               className="!pb-1 text-right font-bold"
                               label="Thành tiền"
                             >
-                              750,000,000 VND
+                              {total}
                             </Descriptions.Item>
                           </Descriptions>
                         </div>

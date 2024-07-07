@@ -27,6 +27,9 @@ const NewCar = () => {
   const params = useParams();
 
   const [bonusPrice, setBonusPrice] = useState(0);
+  const [opsColorPicked, setOpsColorPicked] = useState<string>("");
+  const [opsWheelPicked, setOpsWheelPicked] = useState<string>("");
+  const [opsInteratorPicked, setOpsInteratorPicked] = useState<string>("");
 
   const { data }: any = useQuery({
     queryKey: ["detail-product"],
@@ -204,7 +207,11 @@ const NewCar = () => {
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
                 <Radio.Group onChange={colorPick}>
                   {data?.category?.data?.optionColor.map((color: any) => (
-                    <Radio className="!py-1" value={color?.price}>
+                    <Radio
+                      className="!py-1"
+                      value={color?.price}
+                      onClick={() => setOpsColorPicked(color?.description)}
+                    >
                       {color?.description}
                     </Radio>
                   ))}
@@ -215,7 +222,11 @@ const NewCar = () => {
                 <Typography.Title level={5}>Wheels</Typography.Title>
                 <Radio.Group onChange={wheelPick}>
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
-                    <Radio className="!py-1" value={wheel?.price}>
+                    <Radio
+                      className="!py-1"
+                      value={wheel?.price}
+                      onClick={() => setOpsWheelPicked(wheel?.description)}
+                    >
                       {wheel?.description}
                     </Radio>
                   ))}
@@ -227,7 +238,13 @@ const NewCar = () => {
                 <Radio.Group onChange={interatorPick}>
                   {data?.category?.data?.optionInterator.map(
                     (interator: any) => (
-                      <Radio className="!py-1" value={interator?.price}>
+                      <Radio
+                        className="!py-1"
+                        value={interator?.price}
+                        onClick={() =>
+                          setOpsInteratorPicked(interator?.description)
+                        }
+                      >
                         {interator?.description}
                       </Radio>
                     )
@@ -244,7 +261,17 @@ const NewCar = () => {
               <PushpinOutlined className="mr-2" />
               Đặt cọc
             </Typography.Title>
-            <Payment />
+            <Payment
+              productName={data?.products?.data.name}
+              productPrice={data?.products?.data.price}
+              total={formatCurrency(
+                Number(data?.products?.data?.price) + Number(bonusPrice)
+              )}
+              bonusPrice={bonusPrice}
+              color={opsColorPicked}
+              wheel={opsWheelPicked}
+              interator={opsInteratorPicked}
+            />
           </div>
 
           <Divider />
