@@ -18,11 +18,16 @@ import {
   Typography,
 } from "antd";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ListPage = () => {
-  const [value, setValue] = useState(1);
+  const parms = useSearchParams();
+  const searchCategory = parms.get("category");
+
   const [searchTearm, setSearchTearm] = useState("");
+  const [category, setCategory] = useState("");
+  const [colorGroupFilter, setColorGroupFilter] = useState("");
 
   const { data } = useQuery({
     queryKey: ["category"],
@@ -35,13 +40,29 @@ const ListPage = () => {
   });
 
   const products = useQuery({
-    queryKey: ["products", searchTearm],
-    queryFn: async () =>
-      doGet(`/products?s={"name": {"$starts": "${searchTearm}"}}`),
+    queryKey: ["products", { searchTearm, category, colorGroupFilter }],
+    queryFn: async () => {
+      if (searchCategory === "" && category === "" && colorGroupFilter === "") {
+        return doGet("/products");
+      }
+
+      let filter = "";
+      if (searchCategory !== "") {
+        filter = `s={ "name": { "$cont": "${searchTearm}" } }`;
+      }
+      if (category !== "") {
+        filter = `s={ "category.name": { "$eq": "${category}" } }`;
+      }
+      if (colorGroupFilter !== "") {
+        filter = `s={ "colorGroup.id": { "$eq": "${colorGroupFilter}" } }`;
+      }
+
+      return doGet(`/products?${filter}`);
+    },
   });
 
   const onChangePickColor = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
+    setColorGroupFilter(e.target.value);
   };
 
   const onChangeSelectYear: DatePickerProps["onChange"] = (
@@ -59,8 +80,8 @@ const ListPage = () => {
     console.log("onChangeComplete: ", value);
   };
 
-  const handleChangePickBranchCar = (value: string[]) => {
-    console.log(`selected ${value}`);
+  const handleChangePickBranchCar = (value: string) => {
+    setCategory(value);
   };
 
   return (
@@ -87,7 +108,7 @@ const ListPage = () => {
               <div className="py-3">
                 <Typography.Title level={5}>Hãng xe</Typography.Title>
                 <Select
-                  mode="multiple"
+                  // mode="multiple"
                   style={{ width: "100%" }}
                   placeholder="Chọn hãng xe"
                   onChange={handleChangePickBranchCar}
@@ -109,7 +130,10 @@ const ListPage = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Màu sắc</Typography.Title>
-                <Radio.Group onChange={onChangePickColor} value={value}>
+                <Radio.Group
+                  onChange={onChangePickColor}
+                  value={colorGroupFilter}
+                >
                   {colorGroup?.data?.data.map((item: any) => (
                     <Radio className="!p-1" value={item?.id}>
                       {item?.name}

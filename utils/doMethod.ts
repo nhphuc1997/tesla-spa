@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: { 'X-Custom-Header': 'foobar' }
 });
 
-export const doGet = async (url: string, params?: Record<string, any>) => {
+export const doGet = async (url: string, params?: any) => {
   const response = await instance.get(url, { params: params })
   return response.data
 }
