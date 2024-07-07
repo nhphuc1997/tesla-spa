@@ -34,8 +34,8 @@ const HomePage = () => {
       <KindOfCar />
       <TextIntro />
       <ProductsCard itemPerRow={4} data={products?.data?.data} />
-      <HotNews />
-      <ExpBuyCar />
+      {/* <HotNews /> */}
+      {/* <ExpBuyCar /> */}
     </>
   );
 };

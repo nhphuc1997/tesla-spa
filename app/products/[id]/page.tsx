@@ -8,7 +8,7 @@ import OldCar from "@/components/cars/OldCar";
 import NewCar from "@/components/cars/NewCar";
 
 const OrderPage = () => {
-  const [segment, setSegment] = useState<String>('NEW_CAR')
+  const [segment, setSegment] = useState<String>("NEW_CAR");
 
   return (
     <div className="py-3">
@@ -24,7 +24,7 @@ const OrderPage = () => {
           <Segmented
             options={[
               { label: "Xe mới", value: "NEW_CAR", icon: <AppstoreOutlined /> },
-              { label: "Xe cũ", value: "OLD_CAR", icon: <BarsOutlined /> },
+              // { label: "Xe cũ", value: "OLD_CAR", icon: <BarsOutlined /> },
             ]}
             onChange={(value) => setSegment(value)}
           />
@@ -32,9 +32,9 @@ const OrderPage = () => {
       </Row>
 
       {(() => {
-        if (segment === 'OLD_CAR') {
-          return <OldCar />
-        }
+        // if (segment === "OLD_CAR") {
+        //   return <OldCar />;
+        // }
         return <NewCar />;
       })()}
     </div>
