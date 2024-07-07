@@ -2,6 +2,7 @@
 import { formatCurrency } from "@/utils/format-currency";
 import {
   ApiOutlined,
+  ArrowDownOutlined,
   EyeOutlined,
   PicCenterOutlined,
   PushpinOutlined,
@@ -83,7 +84,7 @@ const ProductsCard = ({
 
                 <div>
                   <Button
-                    className="!bg-[rgba(41,41,41,.75)] !text-white"
+                    className="!bg-[#e6f4ff] !border-[#e6f4ff]"
                     block
                     onClick={() => router.push(`/products/${item.id}`)}
                     icon={<ApiOutlined />}
@@ -103,11 +104,11 @@ const ProductsCard = ({
             <Row className="py-3">
               <Col span={24} className="!flex justify-center items-center">
                 <Button
-                  className="!bg-[rgba(41,41,41,.75)] !text-white"
+                  shape="circle"
+                  className="!bg-[#e6f4ff] !border-[#e6f4ff]"
                   onClick={() => router.push("/products")}
-                >
-                  Xem thêm
-                </Button>
+                  icon={<ArrowDownOutlined />}
+                />
               </Col>
             </Row>
           );
