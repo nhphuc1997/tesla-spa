@@ -14,7 +14,7 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Payment from "../payment/Payment";
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
@@ -27,35 +27,46 @@ const NewCar = () => {
   const params = useParams();
 
   const [value, setValue] = useState(1);
+  const [categoryId, setCategoryId] = useState(null);
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
 
-  const { data } = useQuery({
+  const { data }: any = useQuery({
     queryKey: ["detail-product"],
-    queryFn: async () => doGet(`/products/${params?.id}`),
-  });
-
-  const category = useQuery({
-    queryKey: ["category"],
     queryFn: async () => {
-      console.log(data?.data?.category.id);
+      const products = await doGet(`/products/${params?.id}`);
+      const categoryId = products?.data?.category?.id;
 
-      doGet(`/categories/${data?.data?.category.id}`);
+      if (categoryId) {
+        const category = await doGet(`/categories/${categoryId}`);
+        return {
+          products: products,
+          category: category,
+        };
+      }
+
+      return {
+        products: products,
+        category: null,
+      };
     },
   });
+
+  console.log(data?.products, "products");
+  console.log(data?.category, "category");
 
   return (
     <Row gutter={16} className="py-3">
       <Col xs={24} md={14}>
-        <div className="p-3 h-auto w-full bg-white">
+        <div className="p-3 h-auto w-full bg-white rounded-lg">
           <div className="mx-3">
             <Slicker
               desktopSlidesToScroll={1}
               desktopSlidesToShow={1}
               alowMaxHeight={true}
               autoPlay={true}
-              data={data?.data.images}
+              data={data?.products?.data.images}
               showChild={true}
             />
           </div>
@@ -71,13 +82,13 @@ const NewCar = () => {
               layout="vertical"
             >
               <Descriptions.Item className="!pb-1" label="Tổng công suất">
-                {data?.data?.productBasicParam.total_capacity}
+                {data?.products?.data?.productBasicParam.total_capacity}
               </Descriptions.Item>
               <Descriptions.Item
                 className="!pb-1"
                 label="Mô-men xoắn (Nm/vòng/phút)"
               >
-                {data?.data?.productBasicParam.acceleration}
+                {data?.products?.data?.productBasicParam.acceleration}
               </Descriptions.Item>
               <Descriptions.Item
                 className="!pb-1"
@@ -97,16 +108,16 @@ const NewCar = () => {
               layout="vertical"
             >
               <Descriptions.Item className="!pb-1" label="Dài">
-                {data?.data?.productBasicSize.length}
+                {data?.products?.data?.productBasicSize.length}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Rộng">
-                {data?.data?.productBasicSize.width}
+                {data?.products?.data?.productBasicSize.width}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Cao">
-                {data?.data?.productBasicSize.height}
+                {data?.products?.data?.productBasicSize.height}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Chiều dài CS">
-                {data?.data?.productBasicSize.widthBasic}
+                {data?.products?.data?.productBasicSize.widthBasic}
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -120,31 +131,31 @@ const NewCar = () => {
               layout="horizontal"
             >
               <Descriptions.Item className="!pb-1" label="Mã động cơ">
-                {data?.data?.productBasicEngine.code}
+                {data?.products?.data?.productBasicEngine.code}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Loại">
-                {data?.data?.productBasicEngine.type}
+                {data?.products?.data?.productBasicEngine.type}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Dung tích">
-                {data?.data?.productBasicEngine.displacementVol}
+                {data?.products?.data?.productBasicEngine.displacementVol}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Công suất cực đại">
-                {data?.data?.productBasicEngine.maxRound}
+                {data?.products?.data?.productBasicEngine.maxRound}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Mô-men xoắn cực đại">
-                {data?.data?.productBasicEngine.maxMoment}
+                {data?.products?.data?.productBasicEngine.maxMoment}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Tiêu chuẩn khí thải">
-                {data?.data?.productBasicEngine.standH2O}
+                {data?.products?.data?.productBasicEngine.standH2O}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Hộp số">
-                {data?.data?.productBasicEngine.code}
+                {data?.products?.data?.productBasicEngine.code}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Hệ thống truyền động">
-                {data?.data?.productBasicEngine.moveSystem}
+                {data?.products?.data?.productBasicEngine.moveSystem}
               </Descriptions.Item>
               <Descriptions.Item className="!pb-1" label="Chế độ lái">
-                {data?.data?.productBasicEngine.driverMode}
+                {data?.products?.data?.productBasicEngine.driverMode}
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -155,14 +166,14 @@ const NewCar = () => {
         <div className="p-3 bg-white rounded-lg shadow-sm">
           <div className="pb-3">
             <Typography.Title level={4} className="text-center !mb-0 uppercase">
-              {data?.data.name}
+              {data?.products?.data.name}
             </Typography.Title>
             <Typography.Text className="block text-center !pb-0">
-              {data?.data?.textIntro}
+              {data?.products?.data?.textIntro}
             </Typography.Text>
 
             <Typography.Text className="">
-              Màu sắc: {data?.data.color}
+              Màu sắc: {data?.products?.data.color}
             </Typography.Text>
 
             <Typography.Title
@@ -170,7 +181,7 @@ const NewCar = () => {
               className="!my-0 text-center md:text-left"
             >
               <TagsOutlined className="mr-2" />
-              {formatCurrency(data?.data?.price)}
+              {formatCurrency(data?.products?.data?.price)}
             </Typography.Title>
           </div>
 
@@ -179,64 +190,41 @@ const NewCar = () => {
           <div className="w-full">
             <Typography.Title level={5} className="!mb-0 !pb-0">
               <PushpinOutlined className="mr-2" />
-              Phụ kiện
+              Phiên bản
             </Typography.Title>
             <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
                 <Radio.Group>
-                  <Radio
-                    value={1}
-                    className="!p-3 bg-slate-600 rounded-lg mr-3"
-                  />
+                  {data?.category?.data?.optionColor.map((color: any) => (
+                    <Radio className="!py-1" value={color?.price}>
+                      {color?.description}
+                    </Radio>
+                  ))}
                 </Radio.Group>
               </div>
 
               <div className="py-3">
                 <Typography.Title level={5}>Wheels</Typography.Title>
                 <Radio.Group onChange={onChange} value={value}>
-                  <Radio
-                    value={5}
-                    className={`!p-3  rounded-lg ${
-                      value === 5 ? "bg-slate-200" : ""
-                    }`}
-                  >
-                    <Tooltip title="18'' Photon Wheels Included All-Season Tires Range (EPA est.) : 341mi.">
-                      18''' Photon Wheels
-                    </Tooltip>
-                  </Radio>
-                  <Radio
-                    value={6}
-                    className={`!p-3  rounded-lg ${
-                      value === 6 ? "bg-slate-200" : ""
-                    }`}
-                  >
-                    <Tooltip title="19'' Nova Wheels $1,000 All-Season Tires Range (est.) : 305mi">
-                      19''' Nova Wheels
-                    </Tooltip>
-                  </Radio>
+                  {data?.category?.data?.optionWheel.map((wheel: any) => (
+                    <Radio className="!py-1" value={wheel?.price}>
+                      {wheel?.description}
+                    </Radio>
+                  ))}
                 </Radio.Group>
               </div>
 
               <div className="py-3">
                 <Typography.Title level={5}>Nội thất</Typography.Title>
                 <Radio.Group onChange={onChange} value={value}>
-                  <Radio
-                    value={7}
-                    className={`!p-3  rounded-lg ${
-                      value === 7 ? "bg-slate-200" : ""
-                    }`}
-                  >
-                    Trắng
-                  </Radio>
-                  <Radio
-                    value={8}
-                    className={`!p-3  rounded-lg ${
-                      value === 8 ? "bg-slate-200" : ""
-                    }`}
-                  >
-                    Đen
-                  </Radio>
+                  {data?.category?.data?.optionInterator.map(
+                    (interator: any) => (
+                      <Radio className="!py-1" value={interator?.price}>
+                        {interator?.description}
+                      </Radio>
+                    )
+                  )}
                 </Radio.Group>
               </div>
             </div>
