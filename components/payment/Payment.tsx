@@ -2,6 +2,7 @@ import { doPost } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import {
   CheckCircleOutlined,
+  DoubleLeftOutlined,
   DoubleRightOutlined,
   LoginOutlined,
 } from "@ant-design/icons";
@@ -106,14 +107,12 @@ const Payment = ({
           {
             title: "Bước 2",
             description: "Thông tin thanh toán",
-            // disabled: current === 0 || !isSignedIn,
-            disabled: false,
+            disabled: current === 0 || !isSignedIn,
           },
           {
             title: "Bước 2",
             description: "Chuyển khoản",
-            // disabled: current === 0 || !isSignedIn,
-            disabled: false,
+            disabled: current === 0 || !isSignedIn,
           },
         ]}
       />
@@ -272,6 +271,7 @@ const Payment = ({
                   );
                 }
               })()}
+
               <div className="w-full">
                 {current === 2 && (
                   <div className="w-1/2 mx-auto">
@@ -285,15 +285,28 @@ const Payment = ({
                     </Button>
                   </div>
                 )}
-                <div className="px-3" />
-                {current < 2 && (
-                  <div className="flex justify-end items-center">
+
+                <div className="flex justify-end items-center">
+                  {current > 0 && (
+                    <Button
+                      shape="circle"
+                      icon={
+                        <DoubleLeftOutlined
+                          onClick={() => setCurrent(current - 1)}
+                        />
+                      }
+                    />
+                  )}
+
+                  <div className="px-3" />
+
+                  {current < 2 && (
                     <Button
                       shape="circle"
                       icon={<DoubleRightOutlined onClick={moveNextStep} />}
                     />
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           );
