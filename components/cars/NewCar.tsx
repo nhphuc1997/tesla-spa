@@ -27,9 +27,9 @@ const NewCar = () => {
   const params = useParams();
 
   const [bonusPrice, setBonusPrice] = useState(0);
-  const [opsColorPicked, setOpsColorPicked] = useState<string>("");
-  const [opsWheelPicked, setOpsWheelPicked] = useState<string>("");
-  const [opsInteratorPicked, setOpsInteratorPicked] = useState<string>("");
+  const [opsColorPicked, setOpsColorPicked] = useState<any>();
+  const [opsWheelPicked, setOpsWheelPicked] = useState<any>();
+  const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
 
   const { data }: any = useQuery({
     queryKey: ["detail-product"],
@@ -53,15 +53,15 @@ const NewCar = () => {
   });
 
   const colorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value);
+    setBonusPrice(opsColorPicked?.price);
   };
 
   const wheelPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value);
+    setBonusPrice(opsWheelPicked?.price);
   };
 
   const interatorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value);
+    setBonusPrice(opsInteratorPicked?.price);
   };
 
   return (
@@ -209,8 +209,8 @@ const NewCar = () => {
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio
                       className="!py-1"
-                      value={color?.price}
-                      onClick={() => setOpsColorPicked(color?.description)}
+                      value={color?.id}
+                      onClick={() => setOpsColorPicked(color)}
                     >
                       {color?.description}
                     </Radio>
@@ -224,8 +224,8 @@ const NewCar = () => {
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio
                       className="!py-1"
-                      value={wheel?.price}
-                      onClick={() => setOpsWheelPicked(wheel?.description)}
+                      value={wheel?.id}
+                      onClick={() => setOpsWheelPicked(wheel)}
                     >
                       {wheel?.description}
                     </Radio>
@@ -240,10 +240,8 @@ const NewCar = () => {
                     (interator: any) => (
                       <Radio
                         className="!py-1"
-                        value={interator?.price}
-                        onClick={() =>
-                          setOpsInteratorPicked(interator?.description)
-                        }
+                        value={interator?.id}
+                        onClick={() => setOpsInteratorPicked(interator)}
                       >
                         {interator?.description}
                       </Radio>
@@ -264,10 +262,10 @@ const NewCar = () => {
             <Payment
               productName={data?.products?.data.name}
               productPrice={data?.products?.data.price}
+              productId={data?.products?.data.id}
               total={formatCurrency(
                 Number(data?.products?.data?.price) + Number(bonusPrice)
               )}
-              bonusPrice={bonusPrice}
               color={opsColorPicked}
               wheel={opsWheelPicked}
               interator={opsInteratorPicked}

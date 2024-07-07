@@ -19,6 +19,7 @@ import {
   Typography,
 } from "antd";
 import { useRef, useState } from "react";
+import { v4 } from "uuid";
 
 type FieldType = {
   fullName?: string;
@@ -28,23 +29,23 @@ type FieldType = {
 interface Props {
   productName: string;
   productPrice: string;
+  productId: string;
   total: string;
-  color: string;
-  wheel: string;
-  interator: string;
-  bonusPrice: number;
+  color: any;
+  wheel: any;
+  interator: any;
 }
 
 const Payment = ({
   productName,
   productPrice,
+  productId,
   total,
-  bonusPrice,
   color,
   wheel,
   interator,
 }: Props) => {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, user } = useUser();
   const { openSignIn } = useClerk();
 
   const buttonRef = useRef<any>(null);
@@ -73,14 +74,24 @@ const Payment = ({
     });
   };
 
-  const submitOrder = () => {
-    const { data } = useQuery({
-      queryKey: ["order"],
-      queryFn: async () => await doPost("/orders", {}),
-    });
+  const submitOrder = async () => {
+    const payload = {
+      orderId: v4(),
+      productId: productId,
+      userId: user?.id,
+      phoneNumber: userInfor?.phoneNumber,
+      products: productId,
+      optionColor: color?.id,
+      optionWheel: wheel?.id,
+      optionInterator: interator?.id,
+    };
 
-    if (data?.data?.status === 200) {
-    }
+    console.log(payload);
+
+    // const response = await doPost("/orders", {})
+
+    // if (data?.data?.status === 200) {
+    // }
   };
 
   return (
@@ -207,9 +218,24 @@ const Payment = ({
                               label="Phụ kiện"
                             >
                               <ul>
-                                <li>Màu sắc: {color}</li>
-                                <li>Wheel: {wheel}</li>
-                                <li>Nội thất: {interator}</li>
+                                <li>
+                                  Màu sắc:
+                                  <Typography.Text className="ml-2 font-semibold">
+                                    {color.description}
+                                  </Typography.Text>
+                                </li>
+                                <li>
+                                  Wheel:
+                                  <Typography.Text className="ml-2 font-semibold">
+                                    {wheel.description}
+                                  </Typography.Text>
+                                </li>
+                                <li>
+                                  Nội thất:
+                                  <Typography.Text className="ml-2 font-semibold">
+                                    {interator.description}
+                                  </Typography.Text>
+                                </li>
                               </ul>
                             </Descriptions.Item>
                             <Descriptions.Item
