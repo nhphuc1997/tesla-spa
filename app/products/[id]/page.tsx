@@ -15,28 +15,10 @@ const OrderPage = () => {
       <Breadcrumb
         items={[
           { title: <Link href="/">Trang chủ</Link> },
-          { title: "Đặt hàng" },
+          { title: "Chi tiết" },
         ]}
       />
-
-      <Row gutter={16} className="pt-3">
-        <Col span={24} className="w-full !flex justify-center items-center">
-          <Segmented
-            options={[
-              { label: "Xe mới", value: "NEW_CAR", icon: <AppstoreOutlined /> },
-              // { label: "Xe cũ", value: "OLD_CAR", icon: <BarsOutlined /> },
-            ]}
-            onChange={(value) => setSegment(value)}
-          />
-        </Col>
-      </Row>
-
-      {(() => {
-        // if (segment === "OLD_CAR") {
-        //   return <OldCar />;
-        // }
-        return <NewCar />;
-      })()}
+      <NewCar />
     </div>
   );
 };

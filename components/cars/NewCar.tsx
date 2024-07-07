@@ -1,17 +1,14 @@
 import { PushpinOutlined, SendOutlined, TagsOutlined } from "@ant-design/icons";
 import {
   Button,
-  Carousel,
   Col,
   Descriptions,
   Divider,
   Form,
-  Image,
   Input,
   Radio,
   RadioChangeEvent,
   Row,
-  Tooltip,
   Typography,
 } from "antd";
 import { useState } from "react";
@@ -21,12 +18,13 @@ import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import Slicker from "../Slicker";
-import { useUser } from "@clerk/nextjs";
 
 const NewCar = () => {
   const params = useParams();
 
-  const [bonusPrice, setBonusPrice] = useState(0);
+  const [bonusPriceColor, setBonusPriceColor] = useState(0);
+  const [bonusPriceWheel, setBonusPriceWheel] = useState(0);
+  const [bonusPriceInterator, setBonusPriceInterator] = useState(0);
   const [opsColorPicked, setOpsColorPicked] = useState<any>();
   const [opsWheelPicked, setOpsWheelPicked] = useState<any>();
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
@@ -39,6 +37,15 @@ const NewCar = () => {
 
       if (categoryId) {
         const category = await doGet(`/categories/${categoryId}`);
+        setOpsColorPicked(category?.data?.optionColor[0]);
+        setBonusPriceColor(category?.data?.optionColor[0]?.price);
+
+        setOpsWheelPicked(category?.data?.optionWheel[0]);
+        setBonusPriceWheel(category?.data?.optionWheel[0]?.price);
+
+        setOpsInteratorPicked(category?.data?.optionInterator[0]);
+        setBonusPriceInterator(category?.data?.optionInterator[0]?.price);
+
         return {
           products: products,
           category: category,
@@ -53,15 +60,18 @@ const NewCar = () => {
   });
 
   const colorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value.price);
+    setBonusPriceColor(e.target.value.price);
+    setOpsColorPicked(e.target.value);
   };
 
   const wheelPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value.price);
+    setBonusPriceWheel(e.target.value.price);
+    setOpsWheelPicked(e.target.value);
   };
 
   const interatorPick = (e: RadioChangeEvent) => {
-    setBonusPrice(e.target.value.price);
+    setBonusPriceInterator(e.target.value.price);
+    setOpsInteratorPicked(e.target.value);
   };
 
   return (
@@ -171,7 +181,7 @@ const NewCar = () => {
       </Col>
 
       <Col xs={24} md={10}>
-        <div className="p-3 bg-white rounded-lg shadow-sm">
+        <div className="p-6 bg-white rounded-lg shadow-sm">
           <div className="pb-3">
             <Typography.Title level={4} className="text-center !mb-0 uppercase">
               {data?.products?.data.name}
@@ -190,7 +200,10 @@ const NewCar = () => {
             >
               <TagsOutlined className="mr-2" />
               {formatCurrency(
-                Number(data?.products?.data?.price) + Number(bonusPrice)
+                Number(data?.products?.data?.price) +
+                  Number(bonusPriceColor) +
+                  Number(bonusPriceWheel) +
+                  Number(bonusPriceInterator)
               )}
             </Typography.Title>
           </div>
@@ -205,7 +218,7 @@ const NewCar = () => {
             <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group onChange={colorPick}>
+                <Radio.Group onChange={colorPick} value={opsColorPicked}>
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio key={color.id} className="!py-1" value={color}>
                       {color?.description}
@@ -216,7 +229,7 @@ const NewCar = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Wheels</Typography.Title>
-                <Radio.Group onChange={wheelPick}>
+                <Radio.Group onChange={wheelPick} value={opsWheelPicked}>
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio key={wheel.id} className="!py-1" value={wheel}>
                       {wheel?.description}
@@ -227,7 +240,10 @@ const NewCar = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Nội thất</Typography.Title>
-                <Radio.Group onChange={interatorPick}>
+                <Radio.Group
+                  onChange={interatorPick}
+                  value={opsInteratorPicked}
+                >
                   {data?.category?.data?.optionInterator.map((intera: any) => (
                     <Radio key={intera.id} className="!py-1" value={intera}>
                       {intera?.description}
@@ -250,7 +266,10 @@ const NewCar = () => {
               productPrice={data?.products?.data.price}
               productId={data?.products?.data.id}
               total={formatCurrency(
-                Number(data?.products?.data?.price) + Number(bonusPrice)
+                Number(data?.products?.data?.price) +
+                  Number(bonusPriceColor) +
+                  Number(bonusPriceWheel) +
+                  Number(bonusPriceInterator)
               )}
               color={opsColorPicked}
               wheel={opsWheelPicked}
