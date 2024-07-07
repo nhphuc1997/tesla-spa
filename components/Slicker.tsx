@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Typography } from "antd";
+import { Typography, Image } from "antd";
 import { useRouter } from "next/navigation";
 
 interface SlickerProps {
@@ -12,6 +12,7 @@ interface SlickerProps {
   autoPlay?: boolean;
   data?: Array<any>;
   type?: "image" | "block";
+  showChild?: boolean;
 }
 
 const Slicker = ({
@@ -21,6 +22,7 @@ const Slicker = ({
   autoPlay,
   data = [],
   type = "image",
+  showChild = false,
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
@@ -80,12 +82,28 @@ const Slicker = ({
         {data?.map((item) => (
           <div className={`${_height} px-3`} key={item.id}>
             <div
-              className="bg-center bg-cover bg-no-repeat bg-black h-full rounded-lg"
+              className="bg-center bg-cover bg-no-repeat  h-full rounded-lg"
               style={{ backgroundImage: `url("${item.url}")` }}
             />
           </div>
         ))}
       </Slider>
+
+      {(() => {
+        if (showChild) {
+          return (
+            <div className="w-full py-3 flex justify-center items-center">
+              <Image.PreviewGroup>
+                {data?.map((item) => (
+                  <div className="px-3" key={item.id}>
+                    <Image className="rounded-lg" height={100} src={item.url} />
+                  </div>
+                ))}
+              </Image.PreviewGroup>
+            </div>
+          );
+        }
+      })()}
     </div>
   );
 };

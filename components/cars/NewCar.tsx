@@ -6,6 +6,7 @@ import {
   Descriptions,
   Divider,
   Form,
+  Image,
   Input,
   Radio,
   RadioChangeEvent,
@@ -20,31 +21,46 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
+import Slicker from "../Slicker";
 
 const NewCar = () => {
   const params = useParams();
-  const { data } = useQuery({
-    queryKey: ["detail-product"],
-    queryFn: async () => doGet(`/products/${params?.id}`),
-  });
-
-  console.log(data?.data, "data");
 
   const [value, setValue] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
 
+  const { data } = useQuery({
+    queryKey: ["detail-product"],
+    queryFn: async () => doGet(`/products/${params?.id}`),
+  });
+
+  const category = useQuery({
+    queryKey: ["category"],
+    queryFn: async () => {
+      console.log(data?.data?.category.id);
+
+      doGet(`/categories/${data?.data?.category.id}`);
+    },
+  });
+
   return (
     <Row gutter={16} className="py-3">
       <Col xs={24} md={14}>
-        <div className="p-3 bg-white rounded-lg h-auto">
-          <Carousel arrows className="" dots={false}>
-            <div className="w-full bg-slate-500 h-96 rounded-lg" />
-            <div className="w-full bg-slate-500 h-96 rounded-lg" />
-            <div className="w-full bg-slate-500 h-96 rounded-lg" />
-            <div className="w-full bg-slate-500 h-96 rounded-lg" />
-          </Carousel>
+        <div className="p-3 h-auto w-full bg-white">
+          <div className="mx-3">
+            <Slicker
+              desktopSlidesToScroll={1}
+              desktopSlidesToShow={1}
+              alowMaxHeight={true}
+              autoPlay={true}
+              data={data?.data.images}
+              showChild={true}
+            />
+          </div>
+
+          <Divider className="!my-1" />
 
           <div className="py-3">
             <Descriptions
@@ -144,6 +160,11 @@ const NewCar = () => {
             <Typography.Text className="block text-center !pb-0">
               {data?.data?.textIntro}
             </Typography.Text>
+
+            <Typography.Text className="">
+              Màu sắc: {data?.data.color}
+            </Typography.Text>
+
             <Typography.Title
               level={3}
               className="!my-0 text-center md:text-left"
@@ -163,22 +184,10 @@ const NewCar = () => {
             <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group onChange={onChange} value={value}>
+                <Radio.Group>
                   <Radio
                     value={1}
                     className="!p-3 bg-slate-600 rounded-lg mr-3"
-                  />
-                  <Radio
-                    value={2}
-                    className="!p-3 bg-slate-700 rounded-lg mr-3"
-                  />
-                  <Radio
-                    value={3}
-                    className="!p-3 bg-slate-800 rounded-lg mr-3"
-                  />
-                  <Radio
-                    value={4}
-                    className="!p-3 bg bg-slate-900 rounded-lg mr-3"
                   />
                 </Radio.Group>
               </div>
