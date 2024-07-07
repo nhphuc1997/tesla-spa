@@ -14,14 +14,14 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Payment from "../payment/Payment";
-import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import Slicker from "../Slicker";
+import { useUser } from "@clerk/nextjs";
 
 const NewCar = () => {
   const params = useParams();
