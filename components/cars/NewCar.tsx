@@ -94,7 +94,7 @@ const NewCar = () => {
 
           <Divider />
 
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-between items-center flex-col lg:flex-row">
             <Descriptions
               title={(
                 <Typography.Title level={5} className="!m-0">Thông số cơ bản</Typography.Title>
@@ -199,12 +199,6 @@ const NewCar = () => {
               {data?.products?.data?.textIntro}
             </Typography.Text>
 
-            <Typography.Text className="">
-              Màu sắc:
-              <span className="mx-2"></span>
-              <Tag className="!bg-[#e6f4ff]">{data?.products?.data.color}</Tag>
-            </Typography.Text>
-
             <Typography.Title
               level={3}
               className="!my-0 text-center md:text-left"
@@ -217,6 +211,31 @@ const NewCar = () => {
                 Number(bonusPriceInterator)
               )}
             </Typography.Title>
+          </div>
+
+          <div>
+            <Descriptions
+              title={(
+                <Typography.Title level={5} className="!m-0">
+                  <PushpinOutlined className="mr-2" />
+                  Mô tả
+                </Typography.Title>
+              )}
+              bordered={false}
+              column={1}
+              size="small"
+              className=""
+            >
+              <Descriptions.Item className="!pb-1" label="Thông tin">
+                {data?.products?.data?.shortDesciption}
+              </Descriptions.Item>
+              <Descriptions.Item
+                className="!pb-1"
+                label="Màu sắc"
+              >
+                {data?.products?.data?.color}
+              </Descriptions.Item>
+            </Descriptions>
           </div>
 
 
