@@ -31,6 +31,7 @@ const HomePage = () => {
         alowMaxHeight={true}
         autoPlay={true}
         data={banner?.data?.data}
+        centerMode={true}
       />
       <TextIntro />
       <ProductsCard itemPerRow={6} data={products?.data?.data} />

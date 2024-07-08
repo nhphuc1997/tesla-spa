@@ -13,6 +13,7 @@ interface SlickerProps {
   data?: Array<any>;
   type?: "image" | "block";
   showChild?: boolean;
+  centerMode?: boolean;
 }
 
 const Slicker = ({
@@ -23,6 +24,7 @@ const Slicker = ({
   data = [],
   type = "image",
   showChild = false,
+  centerMode = false,
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
@@ -34,16 +36,16 @@ const Slicker = ({
     infinite: true,
     autoplay: _autoPlay,
     speed: 3000,
-    centerMode: true,
+    centerMode: centerMode,
     slidesToShow: desktopSlidesToShow,
     slidesToScroll: desktopSlidesToScroll,
     responsive: [
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
       {
