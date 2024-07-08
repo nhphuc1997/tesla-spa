@@ -1,5 +1,9 @@
 "use client";
-import { LoginOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  LoginOutlined,
+  MenuFoldOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import {
   Col,
@@ -17,6 +21,7 @@ import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
+import { useRouter } from "next/navigation";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -24,6 +29,7 @@ const NavHeader = () => {
   const { isSignedIn, user } = useUser();
   const { signOut, openSignIn } = useClerk();
   const [api, contextHolder] = notification.useNotification();
+  const router = useRouter();
 
   const { data } = useQuery({
     queryKey: ["categories"],
@@ -66,6 +72,20 @@ const NavHeader = () => {
         </div>
       ),
       key: "1",
+    },
+    {
+      label: (
+        <div
+          className="w-ful flex justify-center items-center"
+          onClick={() => router.push("/orders-history")}
+        >
+          {/* <Typography.Text>
+            <MenuFoldOutlined className="mr-2" />
+            Lịch sử đặt cọc
+          </Typography.Text> */}
+        </div>
+      ),
+      key: "2",
     },
   ];
 
