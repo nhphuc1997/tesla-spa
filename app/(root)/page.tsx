@@ -19,7 +19,7 @@ const HomePage = () => {
     queryKey: ["products"],
     queryFn: async () => {
       setLoading(false);
-      return await doGet("/products", { limit: 12, page: 1, sort: "id,DESC" });
+      return await doGet("/products", { limit: 12, page: 1, sort: "id" });
     },
   });
 
