@@ -98,10 +98,10 @@ const Slicker = ({
             <div className="w-full py-3 flex justify-center items-center">
               <Image.PreviewGroup>
                 {data?.map((item) => (
-                  <div className="px-3" key={item.id}>
+                  <div className="px-3 hidden lg:block" key={item.id}>
                     <Image
                       alt=""
-                      className="rounded-lg"
+                      className=""
                       height={100}
                       src={item.url}
                     />
