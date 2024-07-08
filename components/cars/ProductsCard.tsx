@@ -57,25 +57,25 @@ const ProductsCard = ({
                   </Typography.Paragraph>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="w-full flex items-center">
                   <Tooltip title={item.color}>
                     <Typography.Title
                       level={5}
-                      className="!my-0 truncate uppercase"
+                      className="!my-0 !truncate w-1/2"
                     >
                       {item.name}
                     </Typography.Title>
                   </Tooltip>
 
-                  <Typography.Paragraph className="!mb-0 hidden xl:block">
+                  <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
                     <PicCenterOutlined className="mr-2" />
                     {item.seat}
                   </Typography.Paragraph>
                 </div>
 
-                <div>
+                <div className="!truncate">
                   <Tooltip title={item.textIntro}>
-                    <Typography.Text className="!mb-0 truncate">
+                    <Typography.Text className="!mb-0 !truncate">
                       <PushpinOutlined className="mr-2" />
                       {item.textIntro}
                     </Typography.Text>
