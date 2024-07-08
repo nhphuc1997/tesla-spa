@@ -110,69 +110,55 @@ const ListPage = () => {
       />
 
       <Row gutter={16} className="pt-3">
-        <Col xs={24} md={6} className="hidden md:block">
-          <Affix offsetTop={60} className="">
-            <div className="p-6 bg-white rounded-lg h-auto mt-3">
-              <div className="py-3">
-                <Typography.Title level={5}>Tìm kiếm</Typography.Title>
-                <Input
-                  placeholder="Tìm kiếm tên xe"
-                  onChange={(e) => setSearchTearm(e.target.value)}
-                />
-              </div>
+        <Col xs={24} md={24} className="">
+          <div className="p-6 bg-white w-full ">
+            <Row gutter={16}>
+              <Col xs={12} md={6}>
+                <div className="">
+                  <Typography.Title level={5}>Tìm kiếm</Typography.Title>
+                  <Input
+                    placeholder="Tìm kiếm tên xe"
+                    onChange={(e) => setSearchTearm(e.target.value)}
+                  />
+                </div>
+              </Col>
 
-              <div className="py-3">
-                <Typography.Title level={5}>Hãng xe</Typography.Title>
-                <Select
-                  // mode="multiple"
-                  style={{ width: "100%" }}
-                  placeholder="Chọn hãng xe"
-                  onChange={handleChangePickBranchCar}
-                  options={data?.data.map((item: any) => ({
-                    label: item.name,
-                    value: item.value,
-                  }))}
-                />
-              </div>
+              <Col xs={12} md={6}>
+                <div className="">
+                  <Typography.Title level={5}>Hãng xe</Typography.Title>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Chọn hãng xe"
+                    onChange={handleChangePickBranchCar}
+                    options={data?.data.map((item: any) => ({
+                      label: item.name,
+                      value: item.value,
+                    }))}
+                  />
+                </div>
+              </Col>
 
-              {/* <div className="py-3">
-                <Typography.Title level={5}>Năm sản xuất</Typography.Title>
-                <DatePicker
-                  className="w-full"
-                  onChange={onChangeSelectYear}
-                  picker="year"
-                />
-              </div> */}
-
-              <div className="py-3">
-                <Typography.Title level={5}>Màu sắc</Typography.Title>
-                <Radio.Group
-                  onChange={onChangePickColor}
-                  value={colorGroupFilter}
-                >
-                  {colorGroup?.data?.data.map((item: any) => (
-                    <Radio key={item.id} className="!p-1" value={item?.id}>
-                      {item?.name}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
-
-              <div className="py-3">
-                <Typography.Title level={5}>Khoảng giá</Typography.Title>
-                <Slider
-                  range
-                  step={10}
-                  defaultValue={[20, 50]}
-                  onChangeComplete={onChangePriceComplete}
-                />
-              </div>
-            </div>
-          </Affix>
+              <Col xs={24} md={12}>
+                <div className="">
+                  <Typography.Title level={5}>Màu sắc</Typography.Title>
+                  <Radio.Group
+                    onChange={onChangePickColor}
+                    value={colorGroupFilter}
+                  >
+                    {colorGroup?.data?.data.map((item: any) => (
+                      <Radio key={item.id} className="!p-1" value={item?.id}>
+                        {item?.name}
+                      </Radio>
+                    ))}
+                  </Radio.Group>
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Col>
 
-        <Col xs={24} md={18}>
-          <div className="bg-white rounded-lg h-auto md:min-h-dvh mt-3">
+        <Col xs={24} md={24}>
+          <div className="bg-white  h-auto md:min-h-dvh mt-3">
             <ProductsCard
               itemPerRow={6}
               isShowLoadMore={false}
