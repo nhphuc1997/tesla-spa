@@ -34,6 +34,7 @@ const Slicker = ({
     infinite: true,
     autoplay: _autoPlay,
     speed: 3000,
+    centerMode: true,
     slidesToShow: desktopSlidesToShow,
     slidesToScroll: desktopSlidesToScroll,
     responsive: [
@@ -63,7 +64,7 @@ const Slicker = ({
             <div className={`${_height} p-3 `} key={item.id}>
               <div
                 onClick={() => router.push(`/products?demand=${item?.value}`)}
-                className="hover:drop-shadow-md flex justify-center items-center bg-center bg-cover bg-no-repeat bg-[#31473A] h-full rounded-lg"
+                className="hover:drop-shadow-md flex justify-center items-center bg-center bg-cover bg-no-repeat bg-[#31473A] h-full"
               >
                 <Typography.Title level={4} className="!text-[#EDF4F2] !mb-0">
                   {item.name}
@@ -82,7 +83,7 @@ const Slicker = ({
         {data?.map((item) => (
           <div className={`${_height} px-3`} key={item.id}>
             <div
-              className="bg-center bg-cover bg-no-repeat  h-full rounded-lg"
+              className="bg-center bg-cover bg-no-repeat  h-full"
               style={{ backgroundImage: `url("${item.url}")` }}
             />
           </div>

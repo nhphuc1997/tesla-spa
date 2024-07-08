@@ -27,8 +27,8 @@ const HomePage = () => {
   return (
     <Spin spinning={loading}>
       <Slicker
-        desktopSlidesToScroll={2}
-        desktopSlidesToShow={2}
+        desktopSlidesToScroll={1}
+        desktopSlidesToShow={3}
         alowMaxHeight={true}
         autoPlay={false}
         data={banner?.data?.data}
