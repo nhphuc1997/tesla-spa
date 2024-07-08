@@ -46,15 +46,20 @@ const ProductsCard = ({
                 className="cursor-pointer"
                 onClick={() => router.push(`/products/${item.id}`)}
               >
-                <div className="flex justify-start items-start flex-col xl:flex-row">
-                  <Typography.Paragraph className="!mb-0">
-                    <Tag
-                      icon={<TagsOutlined />}
-                      className="!bg-[rgba(41,41,41,.75)] !text-white"
-                    >
-                      {`${formatCurrency(item.price)}`}
-                    </Tag>
-                  </Typography.Paragraph>
+                <div className="flex justify-between items-start flex-col xl:flex-row py-2">
+                  <Tag
+                    icon={<TagsOutlined />}
+                    className="!bg-[#e6f4ff] !border-[#e6f4ff]"
+                  >
+                    {`${formatCurrency(item.price)}`}
+                  </Tag>
+
+                  <Tag
+                    icon={<TagsOutlined />}
+                    className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
+                  >
+                    {`${item?.category?.name}`}
+                  </Tag>
                 </div>
 
                 <div className="w-full flex items-center">
@@ -82,9 +87,9 @@ const ProductsCard = ({
                   </Tooltip>
                 </div>
 
-                <div>
+                <div className="py-3">
                   <Button
-                    className="!bg-[#e6f4ff] !border-[#e6f4ff]"
+                    className="!bg-black !border-black !text-white"
                     block
                     onClick={() => router.push(`/products/${item.id}`)}
                     icon={<ApiOutlined />}
