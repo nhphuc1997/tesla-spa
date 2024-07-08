@@ -88,10 +88,14 @@ const ProductsCard = ({
                     </Typography.Title>
 
                     <Tooltip title={item.shortDesciption}>
-                      <Typography.Text className="!mb-0 !truncate">
+                      <Typography.Paragraph className="!mb-0 truncate" ellipsis={{
+                        rows: 3,
+                        expandable: 'collapsible',
+                        expanded: true,
+                      }}>
                         <PushpinOutlined className="mr-2" />
                         {item?.shortDesciption}
-                      </Typography.Text>
+                      </Typography.Paragraph>
                     </Tooltip>
                   </div>
                 </div>
