@@ -1,91 +1,81 @@
-"use client";
+'use client'
+import React, { useState } from 'react';
+import { Col, Pagination, Row, Switch, Table } from 'antd';
+import type { PaginationProps, TableColumnsType } from 'antd';
 
-import React, { useState } from "react";
-import { DownOutlined } from "@ant-design/icons";
-import type { TableColumnsType } from "antd";
-import { Badge, Dropdown, Space, Table } from "antd";
-import { useQuery } from "@tanstack/react-query";
-import { doGet } from "@/utils/doMethod";
+const columns: TableColumnsType = [
+  {
+    title: 'Full Name',
+    width: 100,
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Column 1',
+    dataIndex: 'address',
+    key: '1',
+  },
+  {
+    title: 'Column 2',
+    dataIndex: 'address',
+    key: '2',
+  },
+  {
+    title: 'Column 3',
+    dataIndex: 'address',
+    key: '3',
+  },
+  {
+    title: 'Column 4',
+    dataIndex: 'address',
+    key: '4',
+  },
+  { title: 'Column 8', dataIndex: 'address', key: '8' }
+];
 
-const OrderHistoryPage: React.FC = () => {
-  const [product, setProduct] = useState([{}]);
-  const [opsColor, setOpsColor] = useState([{}]);
-  const [opsWheel, setOpsWheel] = useState([{}]);
-  const [opsInterator, setopsInterator] = useState([{}]);
-
-  const orders = useQuery({
-    queryKey: ["order-history"],
-    queryFn: async () => {
-      const response = await doGet("/orders");
-
-      if (response?.statusCode === 200) {
-        const infor = response?.data;
-
-        setProduct(infor.map((item: any) => item?.product));
-        setOpsColor(infor.map((item: any) => item?.optionColor));
-        setOpsWheel(infor.map((item: any) => item?.optionWheel));
-        setopsInterator(infor.map((item: any) => item?.optionInterator));
-      }
-    },
+const data: any = [];
+for (let i = 0; i < 10; i++) {
+  data.push({
+    key: i,
+    name: `Edward ${i}`,
+    age: 32,
+    address: `London Park no. ${i}`,
   });
+}
 
-  const expandedRowRender = () => {
-    // product
-    const columnsProduct = [
-      { id: "Id sản phẩm", dataIndex: "id", key: "id" },
-      { title: "Hình ảnh", dataIndex: "thumbnail", key: "thumbnail" },
-      { title: "Tên sản phẩm", dataIndex: "name", key: "name" },
-      { title: "Giá tiền", dataIndex: "price", key: "price" },
-      { title: "Loại sản phẩm", dataIndex: "kind", key: "kind" },
-    ];
+const OrdersHistoryPage = () => {
 
-    // optionColor
-    const columnsOptions = [
-      { id: "Id sản phẩm", dataIndex: "id", key: "id" },
-      { title: "Mô tả", dataIndex: "description", key: "description" },
-      { title: "Giá tiền", dataIndex: "price", key: "price" },
-    ];
-
-    return (
-      <>
-        <Table
-          columns={columnsProduct}
-          dataSource={product}
-          pagination={false}
-        />
-        <Table
-          columns={columnsOptions}
-          dataSource={opsColor}
-          pagination={false}
-        />
-        <Table
-          columns={columnsOptions}
-          dataSource={opsWheel}
-          pagination={false}
-        />
-        <Table
-          columns={columnsOptions}
-          dataSource={opsInterator}
-          pagination={false}
-        />
-      </>
-    );
+  const onShowSizeChange: PaginationProps['onShowSizeChange'] = (current, pageSize) => {
+    console.log(current, pageSize);
   };
 
-  const columns: TableColumnsType = [
-    { title: "Đơn hàng số", dataIndex: "name", key: "name" },
-  ];
-
   return (
-    <>
-      <Table
-        columns={columns}
-        expandable={{ expandedRowRender }}
-        dataSource={[{}]}
-        bordered
-      />
-    </>
+    <Row gutter={16}>
+      <Col span={24} className='p-3'>
+        <div className='p-6 bg-white'>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={data}
+            expandable={{
+              expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.address}</p>,
+            }}
+            pagination={false}
+          />
+
+          <div className='py-3'></div>
+
+          <Pagination
+            showSizeChanger
+            onShowSizeChange={onShowSizeChange}
+            defaultCurrent={3}
+            total={100}
+            className='flex justify-center items-center'
+          />
+        </div>
+      </Col>
+    </Row>
   );
 };
 
-export default OrderHistoryPage;
+export default OrdersHistoryPage;

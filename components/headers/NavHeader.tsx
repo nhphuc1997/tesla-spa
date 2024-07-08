@@ -79,10 +79,10 @@ const NavHeader = () => {
           className="w-ful flex justify-center items-center"
           onClick={() => router.push("/orders-history")}
         >
-          {/* <Typography.Text>
+          <Typography.Text>
             <MenuFoldOutlined className="mr-2" />
             Lịch sử đặt cọc
-          </Typography.Text> */}
+          </Typography.Text>
         </div>
       ),
       key: "2",
