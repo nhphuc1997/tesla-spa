@@ -8,7 +8,7 @@ import {
   PushpinOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
-import { Col, Row, Statistic, Tag, Tooltip } from "antd";
+import { Col, FloatButton, Row, Statistic, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from "antd";
 import { useRouter } from "next/navigation";
 
@@ -31,8 +31,8 @@ const ProductsCard = ({
       <Row className="w-full p-3">
         {data?.data?.map((item: any) => (
           <Col xs={24} sm={12} md={itemPerRow} key={item.id} className="p-1 cursor-pointer" onClick={() => router.push(`/products/${item.id}`)}>
-            <div className=" hover:drop-shadow-2xl p-6 bg-white border">
-              <div className="p-6 border">
+            <div className=" hover:drop-shadow-2xl p-4 bg-white hover:border border">
+              <div className="">
                 <div
                   className="h-32 md:h-64 bg-center bg-cover bg-no-repeat  w-full "
                   style={{ backgroundImage: `url("${item?.thumbnail}")` }}
@@ -54,7 +54,7 @@ const ProductsCard = ({
                     </Tag>
                   </div>
 
-                  <div className="py-3">
+                  <div className="py-1">
                     <Button
                       className="!bg-black !border-black !text-white"
                       block
@@ -82,27 +82,21 @@ const ProductsCard = ({
                   </div>
 
                   <div className="flex justify-start flex-col !truncate">
-                    <Tooltip title={item.textIntro}>
-                      <Typography.Title level={5} className="!mb-0 !truncate">
-                        <PushpinOutlined className="mr-2" />
-                        {item.textIntro}
-                      </Typography.Title>
-                    </Tooltip>
+                    <Typography.Title level={5} className="!mb-0 !truncate">
+                      <PushpinOutlined className="mr-2" />
+                      {item.textIntro}
+                    </Typography.Title>
 
-                    <Tooltip title={item.textIntro}>
+                    <Tooltip title={item.shortDesciption}>
                       <Typography.Text className="!mb-0 !truncate">
                         <PushpinOutlined className="mr-2" />
                         {item?.shortDesciption}
                       </Typography.Text>
                     </Tooltip>
                   </div>
-
                 </div>
 
               </div>
-
-
-
             </div>
           </Col>
         ))}
@@ -124,6 +118,9 @@ const ProductsCard = ({
           );
         }
       })()}
+
+      <FloatButton.BackTop />
+
     </>
   );
 };

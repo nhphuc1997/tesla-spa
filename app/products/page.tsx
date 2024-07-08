@@ -110,10 +110,11 @@ const ListPage = () => {
       />
 
       <Row gutter={16} className="pt-3">
+
         <Col xs={24} md={24} className="">
           <div className="p-6 bg-white w-full ">
             <Row gutter={16}>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={3}>
                 <div className="">
                   <Typography.Title level={5}>Tìm kiếm</Typography.Title>
                   <Input
@@ -123,7 +124,37 @@ const ListPage = () => {
                 </div>
               </Col>
 
-              <Col xs={12} md={6}>
+              <Col xs={12} md={3}>
+                <div className="">
+                  <Typography.Title level={5}>Loại xe</Typography.Title>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Chọn loại xe"
+                    onChange={handleChangePickBranchCar}
+                    options={[
+                      { label: 'Xe cũ', value: 'OLD' },
+                      { label: 'Xe mới', value: 'NEW' },
+                    ]}
+                  />
+                </div>
+              </Col>
+
+              <Col xs={12} md={3}>
+                <div className="">
+                  <Typography.Title level={5}>Năm sản xuất</Typography.Title>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Năm sản xuất"
+                    onChange={handleChangePickBranchCar}
+                    options={data?.data.map((item: any) => ({
+                      label: item.name,
+                      value: item.value,
+                    }))}
+                  />
+                </div>
+              </Col>
+
+              <Col xs={12} md={3}>
                 <div className="">
                   <Typography.Title level={5}>Hãng xe</Typography.Title>
                   <Select
@@ -138,7 +169,7 @@ const ListPage = () => {
                 </div>
               </Col>
 
-              <Col xs={24} md={12}>
+              <Col xs={12} md={8}>
                 <div className="">
                   <Typography.Title level={5}>Màu sắc</Typography.Title>
                   <Radio.Group
