@@ -30,7 +30,7 @@ const HomePage = () => {
         desktopSlidesToScroll={1}
         desktopSlidesToShow={3}
         alowMaxHeight={true}
-        autoPlay={false}
+        autoPlay={true}
         data={banner?.data?.data}
       />
       <TextIntro />
