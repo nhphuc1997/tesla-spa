@@ -219,51 +219,60 @@ const NewCar = () => {
             </Typography.Title>
           </div>
 
-          <Divider />
 
-          <div className="w-full">
-            <Typography.Title level={5} className="!mb-0 !pb-0">
-              <PushpinOutlined className="mr-2" />
-              Phiên bản
-            </Typography.Title>
-            <div className="flex flex-col justify-center items-start !py-3">
-              <div className="!py-3">
-                <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group onChange={colorPick} value={opsColorPicked}>
-                  {data?.category?.data?.optionColor.map((color: any) => (
-                    <Radio key={color.id} className="!py-1" value={color}>
-                      {color?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
+          {(() => {
+            if (data?.products?.data.kind === 'NEW') {
+              return (
+                <>
+                  <Divider />
 
-              <div className="py-3">
-                <Typography.Title level={5}>Wheels</Typography.Title>
-                <Radio.Group onChange={wheelPick} value={opsWheelPicked}>
-                  {data?.category?.data?.optionWheel.map((wheel: any) => (
-                    <Radio key={wheel.id} className="!py-1" value={wheel}>
-                      {wheel?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
+                  <div className="w-full">
+                    <Typography.Title level={5} className="!mb-0 !pb-0">
+                      <PushpinOutlined className="mr-2" />
+                      Phiên bản
+                    </Typography.Title>
+                    <div className="flex flex-col justify-center items-start !py-3">
+                      <div className="!py-3">
+                        <Typography.Title level={5}>Màu sơn</Typography.Title>
+                        <Radio.Group onChange={colorPick} value={opsColorPicked}>
+                          {data?.category?.data?.optionColor.map((color: any) => (
+                            <Radio key={color.id} className="!py-1" value={color}>
+                              {color?.description}
+                            </Radio>
+                          ))}
+                        </Radio.Group>
+                      </div>
 
-              <div className="py-3">
-                <Typography.Title level={5}>Nội thất</Typography.Title>
-                <Radio.Group
-                  onChange={interatorPick}
-                  value={opsInteratorPicked}
-                >
-                  {data?.category?.data?.optionInterator.map((intera: any) => (
-                    <Radio key={intera.id} className="!py-1" value={intera}>
-                      {intera?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
-            </div>
-          </div>
+                      <div className="py-3">
+                        <Typography.Title level={5}>Wheels</Typography.Title>
+                        <Radio.Group onChange={wheelPick} value={opsWheelPicked}>
+                          {data?.category?.data?.optionWheel.map((wheel: any) => (
+                            <Radio key={wheel.id} className="!py-1" value={wheel}>
+                              {wheel?.description}
+                            </Radio>
+                          ))}
+                        </Radio.Group>
+                      </div>
+
+                      <div className="py-3">
+                        <Typography.Title level={5}>Nội thất</Typography.Title>
+                        <Radio.Group
+                          onChange={interatorPick}
+                          value={opsInteratorPicked}
+                        >
+                          {data?.category?.data?.optionInterator.map((intera: any) => (
+                            <Radio key={intera.id} className="!py-1" value={intera}>
+                              {intera?.description}
+                            </Radio>
+                          ))}
+                        </Radio.Group>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )
+            }
+          })()}
 
           <Divider />
 
