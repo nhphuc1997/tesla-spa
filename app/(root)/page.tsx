@@ -34,7 +34,7 @@ const HomePage = () => {
         data={banner?.data?.data}
       />
       <TextIntro />
-      <ProductsCard itemPerRow={4} data={products?.data?.data} />
+      <ProductsCard itemPerRow={6} data={products?.data?.data} />
     </Spin>
   );
 };

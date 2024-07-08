@@ -31,16 +31,11 @@ const ProductsCard = ({
       <Row className="w-full p-3">
         {data?.data?.map((item: any) => (
           <Col xs={24} sm={12} md={itemPerRow} key={item.id} className="p-1">
-            <div className="rounded-lg border hover:drop-shadow-2xl p-3 bg-white">
-              <div>
-                <Image
-                  height={200}
-                  fallback=""
-                  className="rounded-lg"
-                  src={item.thumbnail}
-                  alt=""
-                />
-              </div>
+            <div className="rounded-lg border hover:drop-shadow-2xl p-6 bg-white">
+              <div
+                className="h-auto md:h-52 bg-center bg-cover bg-no-repeat  w-full rounded-lg"
+                style={{ backgroundImage: `url("${item?.thumbnail}")` }}
+              />
 
               <div
                 className="cursor-pointer"
@@ -65,7 +60,7 @@ const ProductsCard = ({
                 <div className="w-full flex items-center">
                   <Tooltip title={item.color}>
                     <Typography.Title
-                      level={5}
+                      level={4}
                       className="!my-0 !truncate w-1/2"
                     >
                       {item.name}
@@ -78,11 +73,18 @@ const ProductsCard = ({
                   </Typography.Paragraph>
                 </div>
 
-                <div className="!truncate">
+                <div className="flex justify-start flex-col !truncate">
+                  <Tooltip title={item.textIntro}>
+                    <Typography.Title level={5} className="!mb-0 !truncate">
+                      <PushpinOutlined className="mr-2" />
+                      {item.textIntro}
+                    </Typography.Title>
+                  </Tooltip>
+
                   <Tooltip title={item.textIntro}>
                     <Typography.Text className="!mb-0 !truncate">
                       <PushpinOutlined className="mr-2" />
-                      {item.textIntro}
+                      {item?.shortDesciption}
                     </Typography.Text>
                   </Tooltip>
                 </div>

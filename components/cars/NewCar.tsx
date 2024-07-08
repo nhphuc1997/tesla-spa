@@ -113,7 +113,7 @@ const NewCar = () => {
                 className="!pb-1"
                 label="Tăng tốc (0-100 km/h)"
               >
-                3.1sec
+                3.1secs
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -184,9 +184,16 @@ const NewCar = () => {
       <Col xs={24} md={10}>
         <div className="p-6 bg-white rounded-lg shadow-sm">
           <div className="pb-3">
-            <Typography.Title level={4} className="text-center !mb-0 uppercase">
-              {data?.products?.data.name}
-            </Typography.Title>
+            <div>
+              <Typography.Title level={4} className="text-center !mb-0 uppercase">
+                <Tag className="ml-2 !bg-black !text-white">
+                  {data?.products?.data?.category?.name}
+                </Tag>
+                {data?.products?.data.name}
+              </Typography.Title>
+            </div>
+
+
             <Typography.Text className="block text-center !pb-0">
               {data?.products?.data?.textIntro}
             </Typography.Text>
@@ -204,9 +211,9 @@ const NewCar = () => {
               <TagsOutlined className="mr-2" />
               {formatCurrency(
                 Number(data?.products?.data?.price) +
-                  Number(bonusPriceColor) +
-                  Number(bonusPriceWheel) +
-                  Number(bonusPriceInterator)
+                Number(bonusPriceColor) +
+                Number(bonusPriceWheel) +
+                Number(bonusPriceInterator)
               )}
             </Typography.Title>
           </div>
@@ -270,9 +277,9 @@ const NewCar = () => {
               productId={data?.products?.data.id}
               total={formatCurrency(
                 Number(data?.products?.data?.price) +
-                  Number(bonusPriceColor) +
-                  Number(bonusPriceWheel) +
-                  Number(bonusPriceInterator)
+                Number(bonusPriceColor) +
+                Number(bonusPriceWheel) +
+                Number(bonusPriceInterator)
               )}
               color={opsColorPicked}
               wheel={opsWheelPicked}
