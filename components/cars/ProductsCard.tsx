@@ -30,76 +30,79 @@ const ProductsCard = ({
     <>
       <Row className="w-full p-3">
         {data?.data?.map((item: any) => (
-          <Col xs={24} sm={12} md={itemPerRow} key={item.id} className="p-1">
-            <div className="rounded-lg border hover:drop-shadow-2xl p-6 bg-white">
-              <div
-                className="h-auto md:h-52 bg-center bg-cover bg-no-repeat  w-full rounded-lg"
-                style={{ backgroundImage: `url("${item?.thumbnail}")` }}
-              />
-
-              <div
-                className="cursor-pointer"
-                onClick={() => router.push(`/products/${item.id}`)}
-              >
-                <div className="flex justify-between items-start flex-col xl:flex-row py-2">
-                  <Tag
-                    icon={<TagsOutlined />}
-                    className="!bg-[#e6f4ff] !border-[#e6f4ff]"
-                  >
-                    {`${formatCurrency(item.price)}`}
-                  </Tag>
-
-                  <Tag
-                    icon={<TagsOutlined />}
-                    className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
-                  >
-                    {`${item?.category?.name}`}
-                  </Tag>
-                </div>
-
-                <div className="w-full flex items-center">
-                  <Tooltip title={item.color}>
-                    <Typography.Title
-                      level={4}
-                      className="!my-0 !truncate w-1/2"
+          <Col xs={24} sm={12} md={itemPerRow} key={item.id} className="p-1 cursor-pointer" onClick={() => router.push(`/products/${item.id}`)}>
+            <div className=" hover:drop-shadow-2xl p-6 bg-white border">
+              <div className="p-6 border">
+                <div
+                  className="h-32 md:h-64 bg-center bg-cover bg-no-repeat  w-full "
+                  style={{ backgroundImage: `url("${item?.thumbnail}")` }}
+                />
+                <div className="cursor-pointer">
+                  <div className="flex justify-between items-start flex-col xl:flex-row py-2">
+                    <Tag
+                      icon={<TagsOutlined />}
+                      className="!bg-[#e6f4ff] !border-[#e6f4ff]"
                     >
-                      {item.name}
-                    </Typography.Title>
-                  </Tooltip>
+                      {`${formatCurrency(item.price)}`}
+                    </Tag>
 
-                  <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
-                    <PicCenterOutlined className="mr-2" />
-                    {item.seat}
-                  </Typography.Paragraph>
+                    <Tag
+                      icon={<TagsOutlined />}
+                      className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
+                    >
+                      {`${item?.category?.name}`}
+                    </Tag>
+                  </div>
+
+                  <div className="py-3">
+                    <Button
+                      className="!bg-black !border-black !text-white"
+                      block
+                      onClick={() => router.push(`/products/${item.id}`)}
+                      icon={<ApiOutlined />}
+                    >
+                      Chi tiết
+                    </Button>
+                  </div>
+
+                  <div className="w-full flex items-center">
+                    <Tooltip title={item.color}>
+                      <Typography.Title
+                        level={4}
+                        className="!my-0 !truncate w-1/2"
+                      >
+                        {item.name}
+                      </Typography.Title>
+                    </Tooltip>
+
+                    <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
+                      <PicCenterOutlined className="mr-2 font-semibold" />
+                      Số ghé ngồi <Typography.Text className="ml-2 font-semibold">{item.seat}</Typography.Text>
+                    </Typography.Paragraph>
+                  </div>
+
+                  <div className="flex justify-start flex-col !truncate">
+                    <Tooltip title={item.textIntro}>
+                      <Typography.Title level={5} className="!mb-0 !truncate">
+                        <PushpinOutlined className="mr-2" />
+                        {item.textIntro}
+                      </Typography.Title>
+                    </Tooltip>
+
+                    <Tooltip title={item.textIntro}>
+                      <Typography.Text className="!mb-0 !truncate">
+                        <PushpinOutlined className="mr-2" />
+                        {item?.shortDesciption}
+                      </Typography.Text>
+                    </Tooltip>
+                  </div>
+
                 </div>
 
-                <div className="flex justify-start flex-col !truncate">
-                  <Tooltip title={item.textIntro}>
-                    <Typography.Title level={5} className="!mb-0 !truncate">
-                      <PushpinOutlined className="mr-2" />
-                      {item.textIntro}
-                    </Typography.Title>
-                  </Tooltip>
-
-                  <Tooltip title={item.textIntro}>
-                    <Typography.Text className="!mb-0 !truncate">
-                      <PushpinOutlined className="mr-2" />
-                      {item?.shortDesciption}
-                    </Typography.Text>
-                  </Tooltip>
-                </div>
-
-                <div className="py-3">
-                  <Button
-                    className="!bg-black !border-black !text-white"
-                    block
-                    onClick={() => router.push(`/products/${item.id}`)}
-                    icon={<ApiOutlined />}
-                  >
-                    Xem ngay
-                  </Button>
-                </div>
               </div>
+
+
+
             </div>
           </Col>
         ))}
