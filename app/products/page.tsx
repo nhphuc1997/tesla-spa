@@ -139,7 +139,7 @@ const ListPage = () => {
                 </div>
               </Col>
 
-              <Col xs={12} md={3}>
+              {/* <Col xs={12} md={3}>
                 <div className="">
                   <Typography.Title level={5}>Năm sản xuất</Typography.Title>
                   <Select
@@ -152,7 +152,7 @@ const ListPage = () => {
                     }))}
                   />
                 </div>
-              </Col>
+              </Col> */}
 
               <Col xs={12} md={3}>
                 <div className="">
