@@ -77,7 +77,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
-      <Col xs={24} md={14}>
+      <Col xs={24} md={12}>
         <div className="p-3 h-auto w-full bg-white rounded-lg">
           <div className="mx-3">
             <Slicker
@@ -181,7 +181,7 @@ const NewCar = () => {
         </div>
       </Col>
 
-      <Col xs={24} md={10}>
+      <Col xs={24} md={12}>
         <div className="p-6 bg-white rounded-lg shadow-sm">
           <div className="pb-3">
             <div>

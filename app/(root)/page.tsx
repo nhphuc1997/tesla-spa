@@ -2,7 +2,6 @@
 import ProductsCard from "@/components/cars/ProductsCard";
 import Slicker from "@/components/Slicker";
 import TextIntro from "@/components/TextIntro";
-import KindOfCar from "@/components/cars/KindOfCar";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import { useState } from "react";
