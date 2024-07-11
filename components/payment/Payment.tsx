@@ -81,10 +81,10 @@ const Payment = ({
       orderId: v4(),
       userId: user?.id,
       phoneNumber: userInfor?.phoneNumber,
-      product: productId,
-      optionColor: color?.id,
-      optionWheel: wheel?.id,
-      optionInterator: interator?.id,
+      productId: productId,
+      optionColorId: color?.id,
+      optionWheelId: wheel?.id,
+      optionInteratorId: interator?.id,
     };
 
     const response = await doPost("/orders", payload);

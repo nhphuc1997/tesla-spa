@@ -84,8 +84,6 @@ const NewCar = () => {
     setOpsInteratorPicked(e.target.value);
   };
 
-  console.log(data?.products?.data.images);
-
   return (
     <Row gutter={16} className="py-3">
       <Col xs={24} md={12}>
