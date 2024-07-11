@@ -34,7 +34,7 @@ const HomePage = () => {
         centerMode={true}
       />
       <TextIntro />
-      <ProductsCard itemPerRow={6} data={products?.data?.data} />
+      <ProductsCard itemPerRow={8} data={products?.data?.data} />
     </Spin>
   );
 };

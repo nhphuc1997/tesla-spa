@@ -19,20 +19,10 @@ const TextIntro = () => {
       <Col span={24} className="flex items-center w-full justify-center pb-3">
         <Divider>
           <Typography.Title level={5} className="!mb-0 text-center md:text-left">
-            XE ĐẠT CHUẨN 5 TỐT
+            BEST CHOICE
             <InfoCircleOutlined className="mx-3" onClick={() => setIsModalOpen(!isModalOpen)} />
           </Typography.Title>
         </Divider>
-      </Col>
-      <Col span={24} className="!flex items-start justify-start flex-col md:justify-center md:flex-row md:items-center">
-        {
-          ['Pháp lý an toàn', 'Không cháy nổ', 'Không tai nạn', 'Không ngập nước', 'Kiểm tra 207 điểm'].map(item => (
-            <div className="px-16 md:px-3" key={item}>
-              <SafetyCertificateOutlined className="px-1" />
-              <Typography.Text>{item}</Typography.Text>
-            </div>
-          ))
-        }
       </Col>
 
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer="">

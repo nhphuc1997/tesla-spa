@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Typography, Image } from "antd";
 import { useRouter } from "next/navigation";
+import { S3_URL } from "@/utils";
 
 interface SlickerProps {
   name?: string;
@@ -28,7 +29,6 @@ const Slicker = ({
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
-  const _s3Url = `https://super-car-web.s3.ap-southeast-1.amazonaws.com`;
 
   const router = useRouter();
 
@@ -87,7 +87,7 @@ const Slicker = ({
           <div className={`${_height} px-3`} key={item.id}>
             <div
               className="bg-center bg-cover bg-no-repeat h-full"
-              style={{ backgroundImage: `url("${_s3Url}/${item.s3Key}")` }}
+              style={{ backgroundImage: `url("${S3_URL}/${item.s3Key}")` }}
             />
           </div>
         ))}

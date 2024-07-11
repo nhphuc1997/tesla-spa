@@ -1,4 +1,5 @@
 "use client";
+import { S3_URL } from "@/utils";
 import { formatCurrency } from "@/utils/format-currency";
 import {
   ApiOutlined,
@@ -30,12 +31,19 @@ const ProductsCard = ({
     <>
       <Row className="w-full p-3">
         {data?.data?.map((item: any) => (
-          <Col xs={24} sm={12} md={itemPerRow} key={item.id} className="p-1 cursor-pointer" onClick={() => router.push(`/products/${item.id}`)}>
+          <Col
+            xs={24}
+            sm={12}
+            md={itemPerRow}
+            key={item.id}
+            className="p-1 cursor-pointer"
+            onClick={() => router.push(`/products/${item.id}`)}
+          >
             <div className=" hover:drop-shadow-2xl p-4 bg-white hover:border border">
               <div className="">
                 <div
-                  className="h-32 md:h-64 bg-center bg-cover bg-no-repeat  w-full "
-                  style={{ backgroundImage: `url("${item?.thumbnail}")` }}
+                  className="h-32 md:h-96 bg-center bg-cover bg-no-repeat  w-full "
+                  style={{ backgroundImage: `url("${S3_URL}/${item?.s3Key}")` }}
                 />
                 <div className="cursor-pointer">
                   <div className="flex justify-between items-start flex-col xl:flex-row py-2">
@@ -54,17 +62,6 @@ const ProductsCard = ({
                     </Tag>
                   </div>
 
-                  <div className="py-1">
-                    <Button
-                      className="!bg-black !border-black !text-white"
-                      block
-                      onClick={() => router.push(`/products/${item.id}`)}
-                      icon={<ApiOutlined />}
-                    >
-                      Chi tiết
-                    </Button>
-                  </div>
-
                   <div className="w-full flex items-center">
                     <Tooltip title={item.color}>
                       <Typography.Title
@@ -77,29 +74,13 @@ const ProductsCard = ({
 
                     <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
                       <PicCenterOutlined className="mr-2 font-semibold" />
-                      Số ghé ngồi <Typography.Text className="ml-2 font-semibold">{item.seat}</Typography.Text>
+                      SEAT{" "}
+                      <Typography.Text className="ml-2 font-semibold">
+                        {item.seat}
+                      </Typography.Text>
                     </Typography.Paragraph>
                   </div>
-
-                  <div className="flex justify-start flex-col !truncate">
-                    <Typography.Title level={5} className="!mb-0 !truncate">
-                      <PushpinOutlined className="mr-2" />
-                      {item.textIntro}
-                    </Typography.Title>
-
-                    <Tooltip title={item.shortDesciption}>
-                      <Typography.Paragraph className="!mb-0 truncate" ellipsis={{
-                        rows: 3,
-                        expandable: 'collapsible',
-                        expanded: true,
-                      }}>
-                        <PushpinOutlined className="mr-2" />
-                        {item?.shortDesciption}
-                      </Typography.Paragraph>
-                    </Tooltip>
-                  </div>
                 </div>
-
               </div>
             </div>
           </Col>
@@ -124,7 +105,6 @@ const ProductsCard = ({
       })()}
 
       <FloatButton.BackTop />
-
     </>
   );
 };
