@@ -5,7 +5,7 @@ export const formatCurrency = (price: string | number) => {
     "en-Us",
     {
       style: "currency",
-      currency: "VND",
+      currency: "USD",
     }
   )
 }

@@ -28,6 +28,7 @@ const Slicker = ({
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
   const _autoPlay = autoPlay ? autoPlay : false;
+  const _s3Url = `https://super-car-web.s3.ap-southeast-1.amazonaws.com`;
 
   const router = useRouter();
 
@@ -85,8 +86,8 @@ const Slicker = ({
         {data?.map((item) => (
           <div className={`${_height} px-3`} key={item.id}>
             <div
-              className="bg-center bg-cover bg-no-repeat  h-full"
-              style={{ backgroundImage: `url("${item.url}")` }}
+              className="bg-center bg-cover bg-no-repeat h-full"
+              style={{ backgroundImage: `url("${_s3Url}/${item.s3Key}")` }}
             />
           </div>
         ))}
@@ -99,12 +100,7 @@ const Slicker = ({
               <Image.PreviewGroup>
                 {data?.map((item) => (
                   <div className="px-3 hidden lg:block" key={item.id}>
-                    <Image
-                      alt=""
-                      className=""
-                      height={100}
-                      src={item.url}
-                    />
+                    <Image alt="" className="" height={100} src={item.url} />
                   </div>
                 ))}
               </Image.PreviewGroup>
