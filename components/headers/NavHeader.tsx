@@ -93,7 +93,7 @@ const NavHeader = () => {
     <Header className="!px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
       <Row className="w-full">
-        <Col span={6}>
+        <Col span={6} onClick={() => router.push("/")} className="cursor-pointer">
           <div className="flex justify-start items-center h-16">
             <MenuOutlined />
           </div>

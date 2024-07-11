@@ -21,7 +21,7 @@ export default function Wrapper({
             <Divider className="!m-0" />
           </Content>
 
-          <Footer className="xs:text-left lg:text-center">
+          <Footer className="xs:text-left lg:text-center !bg-white">
             SuperCar ©{new Date().getFullYear()}
           </Footer>
         </Layout>
