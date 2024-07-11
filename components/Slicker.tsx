@@ -100,7 +100,12 @@ const Slicker = ({
               <Image.PreviewGroup>
                 {data?.map((item) => (
                   <div className="px-3 hidden lg:block" key={item.id}>
-                    <Image alt="" className="" height={100} src={item.url} />
+                    <Image
+                      alt=""
+                      className=""
+                      height={100}
+                      src={`${S3_URL}/${item.s3Key}`}
+                    />
                   </div>
                 ))}
               </Image.PreviewGroup>

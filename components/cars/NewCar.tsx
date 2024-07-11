@@ -1,4 +1,9 @@
-import { PushpinOutlined, SendOutlined, TagsOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import {
+  PushpinOutlined,
+  SendOutlined,
+  TagsOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Col,
@@ -32,7 +37,7 @@ const NewCar = () => {
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
 
-  const submitTestDriver = useRef<any>()
+  const submitTestDriver = useRef<any>();
 
   const { data }: any = useQuery({
     queryKey: ["detail-product"],
@@ -79,6 +84,8 @@ const NewCar = () => {
     setOpsInteratorPicked(e.target.value);
   };
 
+  console.log(data?.products?.data.images);
+
   return (
     <Row gutter={16} className="py-3">
       <Col xs={24} md={12}>
@@ -98,9 +105,11 @@ const NewCar = () => {
 
           <div className="w-full flex justify-between items-center flex-col lg:flex-row">
             <Descriptions
-              title={(
-                <Typography.Title level={5} className="!m-0">Thông số cơ bản</Typography.Title>
-              )}
+              title={
+                <Typography.Title level={5} className="!m-0">
+                  Thông số cơ bản
+                </Typography.Title>
+              }
               bordered={false}
               column={1}
               size="small"
@@ -124,9 +133,11 @@ const NewCar = () => {
             </Descriptions>
 
             <Descriptions
-              title={(
-                <Typography.Title level={5} className="!m-0">Kích thước tổng thể (mm)</Typography.Title>
-              )}
+              title={
+                <Typography.Title level={5} className="!m-0">
+                  Kích thước tổng thể (mm)
+                </Typography.Title>
+              }
               column={1}
               size="small"
             >
@@ -139,15 +150,16 @@ const NewCar = () => {
               <Descriptions.Item className="!pb-1" label="Cao">
                 {data?.products?.data?.productBasicSize.height}
               </Descriptions.Item>
-
             </Descriptions>
           </div>
 
           <div className="py-3">
             <Descriptions
-              title={(
-                <Typography.Title level={5} className="!m-0">Động cơ</Typography.Title>
-              )}
+              title={
+                <Typography.Title level={5} className="!m-0">
+                  Động cơ
+                </Typography.Title>
+              }
               column={2}
               size="small"
               layout="horizontal"
@@ -188,14 +200,16 @@ const NewCar = () => {
         <div className="p-6 bg-white  shadow-sm">
           <div className="pb-3">
             <div>
-              <Typography.Title level={4} className="text-center !mb-0 uppercase">
+              <Typography.Title
+                level={4}
+                className="text-center !mb-0 uppercase"
+              >
                 <Tag className="ml-2 !bg-black !text-white">
                   {data?.products?.data?.category?.name}
                 </Tag>
                 {data?.products?.data.name}
               </Typography.Title>
             </div>
-
 
             <Typography.Text className="block text-center !pb-0">
               {data?.products?.data?.textIntro}
@@ -208,25 +222,28 @@ const NewCar = () => {
               <TagsOutlined className="mr-2" />
               {formatCurrency(
                 Number(data?.products?.data?.price) +
-                Number(bonusPriceColor) +
-                Number(bonusPriceWheel) +
-                Number(bonusPriceInterator)
+                  Number(bonusPriceColor) +
+                  Number(bonusPriceWheel) +
+                  Number(bonusPriceInterator)
               )}
             </Typography.Title>
           </div>
 
           <div>
             <Descriptions
-              title={(
+              title={
                 <Typography.Title level={5} className="!m-0">
                   <PushpinOutlined className="mr-2" />
                   Mô tả
-                  <Button icon={<UsergroupAddOutlined />} className="mx-3 !bg-[#e6f4ff] !border-[#e6f4ff] text-black" onClick={() => setOpen(true)}>
+                  <Button
+                    icon={<UsergroupAddOutlined />}
+                    className="mx-3 !bg-[#e6f4ff] !border-[#e6f4ff] text-black"
+                    onClick={() => setOpen(true)}
+                  >
                     Đăng kí lái thử
                   </Button>
                 </Typography.Title>
-
-              )}
+              }
               bordered={false}
               column={1}
               size="small"
@@ -235,15 +252,13 @@ const NewCar = () => {
               <Descriptions.Item className="!pb-1" label="Thông tin">
                 {data?.products?.data?.shortDesciption}
               </Descriptions.Item>
-              <Descriptions.Item
-                className="!pb-1"
-                label="Màu sắc"
-              >
-                <Tag className="!bg-black !text-white">{data?.products?.data?.color}</Tag>
+              <Descriptions.Item className="!pb-1" label="Màu sắc">
+                <Tag className="!bg-black !text-white">
+                  {data?.products?.data?.color}
+                </Tag>
               </Descriptions.Item>
             </Descriptions>
           </div>
-
 
           <Divider />
 
@@ -255,7 +270,11 @@ const NewCar = () => {
             <div className="flex flex-col justify-center items-start !py-3">
               <div className="!py-3">
                 <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group onChange={colorPick} value={opsColorPicked} disabled={data?.products?.data.kind !== 'NEW'}>
+                <Radio.Group
+                  onChange={colorPick}
+                  value={opsColorPicked}
+                  disabled={data?.products?.data.kind !== "NEW"}
+                >
                   {data?.category?.data?.optionColor.map((color: any) => (
                     <Radio key={color.id} className="!py-1" value={color}>
                       {color?.description}
@@ -266,7 +285,11 @@ const NewCar = () => {
 
               <div className="py-3">
                 <Typography.Title level={5}>Wheels</Typography.Title>
-                <Radio.Group onChange={wheelPick} value={opsWheelPicked} disabled={data?.products?.data.kind !== 'NEW'}>
+                <Radio.Group
+                  onChange={wheelPick}
+                  value={opsWheelPicked}
+                  disabled={data?.products?.data.kind !== "NEW"}
+                >
                   {data?.category?.data?.optionWheel.map((wheel: any) => (
                     <Radio key={wheel.id} className="!py-1" value={wheel}>
                       {wheel?.description}
@@ -280,7 +303,7 @@ const NewCar = () => {
                 <Radio.Group
                   onChange={interatorPick}
                   value={opsInteratorPicked}
-                  disabled={data?.products?.data.kind !== 'NEW'}
+                  disabled={data?.products?.data.kind !== "NEW"}
                 >
                   {data?.category?.data?.optionInterator.map((intera: any) => (
                     <Radio key={intera.id} className="!py-1" value={intera}>
@@ -305,9 +328,9 @@ const NewCar = () => {
               productId={data?.products?.data.id}
               total={formatCurrency(
                 Number(data?.products?.data?.price) +
-                Number(bonusPriceColor) +
-                Number(bonusPriceWheel) +
-                Number(bonusPriceInterator)
+                  Number(bonusPriceColor) +
+                  Number(bonusPriceWheel) +
+                  Number(bonusPriceInterator)
               )}
               color={opsColorPicked}
               wheel={opsWheelPicked}
@@ -315,8 +338,11 @@ const NewCar = () => {
             />
           </div>
 
-
-          <Modal open={open} onCancel={() => setOpen(false)} onOk={() => submitTestDriver?.current.click()}>
+          <Modal
+            open={open}
+            onCancel={() => setOpen(false)}
+            onOk={() => submitTestDriver?.current.click()}
+          >
             <div className="w-full">
               <Typography.Title level={5} className="pb-3">
                 <PushpinOutlined className="mr-2" /> Đăng kí lái thử
@@ -364,7 +390,6 @@ const NewCar = () => {
               </div>
             </div>
           </Modal>
-
         </div>
       </Col>
     </Row>
