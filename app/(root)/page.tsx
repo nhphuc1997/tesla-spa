@@ -27,13 +27,12 @@ const HomePage = () => {
     <Spin spinning={loading}>
       <Slicker
         desktopSlidesToScroll={1}
-        desktopSlidesToShow={2}
+        desktopSlidesToShow={1}
         alowMaxHeight={true}
-        autoPlay={true}
+        autoPlay={false}
         data={banner?.data?.data}
-        centerMode={true}
+        centerMode={false}
       />
-      <TextIntro />
       <ProductsCard itemPerRow={8} data={products?.data?.data} />
     </Spin>
   );

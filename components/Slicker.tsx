@@ -84,7 +84,7 @@ const Slicker = ({
     <div className="slider-container py-3 cursor-pointer">
       <Slider {...settings}>
         {data?.map((item) => (
-          <div className={`${_height} px-3`} key={item.id}>
+          <div className={`${_height}`} key={item.id}>
             <div
               className="bg-center bg-cover bg-no-repeat h-full"
               style={{ backgroundImage: `url("${S3_URL}/${item.s3Key}")` }}

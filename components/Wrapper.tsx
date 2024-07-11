@@ -13,15 +13,15 @@ export default function Wrapper({
   return (
     <QueryClientProvider client={queryClient}>
       <AntdRegistry>
-        <Layout className="w-full min-h-dvh">
+        <Layout className="w-full min-h-dvh !bg-white">
           <NavHeader />
 
-          <Content className="mx-3">
+          <Content className="mx-3 border-l border-r">
             {children}
             <Divider className="!m-0" />
           </Content>
 
-          <Footer className="xs:text-left lg:text-center !bg-white">
+          <Footer className="xs:text-left lg:text-center">
             SuperCar ©{new Date().getFullYear()}
           </Footer>
         </Layout>

@@ -9,7 +9,7 @@ import {
   PushpinOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
-import { Col, FloatButton, Row, Statistic, Tag, Tooltip } from "antd";
+import { Col, Divider, FloatButton, Row, Statistic, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from "antd";
 import { useRouter } from "next/navigation";
 
@@ -31,59 +31,63 @@ const ProductsCard = ({
     <>
       <Row className="w-full p-3">
         {data?.data?.map((item: any) => (
-          <Col
-            xs={24}
-            sm={12}
-            md={itemPerRow}
-            key={item.id}
-            className="p-1 cursor-pointer"
-            onClick={() => router.push(`/products/${item.id}`)}
-          >
-            <div className=" hover:drop-shadow-2xl p-4 bg-white hover:border border">
-              <div className="">
-                <div
-                  className="h-32 md:h-96 bg-center bg-cover bg-no-repeat  w-full "
-                  style={{ backgroundImage: `url("${S3_URL}/${item?.s3Key}")` }}
-                />
-                <div className="cursor-pointer">
-                  <div className="flex justify-between items-start flex-col xl:flex-row py-2">
-                    <Tag
-                      icon={<TagsOutlined />}
-                      className="!bg-[#e6f4ff] !border-[#e6f4ff]"
-                    >
-                      {`${formatCurrency(item.price)}`}
-                    </Tag>
-
-                    <Tag
-                      icon={<TagsOutlined />}
-                      className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
-                    >
-                      {`${item?.category?.name}`}
-                    </Tag>
-                  </div>
-
-                  <div className="w-full flex items-center">
-                    <Tooltip title={item.color}>
-                      <Typography.Title
-                        level={4}
-                        className="!my-0 !truncate w-1/2"
+          <>
+            <Col
+              xs={24}
+              sm={12}
+              md={itemPerRow}
+              key={item.id}
+              className="p-1 cursor-pointer"
+              onClick={() => router.push(`/products/${item.id}`)}
+            >
+              <div className=" hover:drop-shadow-2xl p-4 bg-white hover:border border">
+                <div className="">
+                  <div
+                    className="h-32 md:h-96 bg-center bg-cover bg-no-repeat  w-full "
+                    style={{
+                      backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
+                    }}
+                  />
+                  <div className="cursor-pointer">
+                    <div className="flex justify-between items-start flex-col xl:flex-row py-2">
+                      <Tag
+                        icon={<TagsOutlined />}
+                        className="!bg-[#e6f4ff] !border-[#e6f4ff]"
                       >
-                        {item.name}
-                      </Typography.Title>
-                    </Tooltip>
+                        {`${formatCurrency(item.price)}`}
+                      </Tag>
 
-                    <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
-                      <PicCenterOutlined className="mr-2 font-semibold" />
-                      SEAT{" "}
-                      <Typography.Text className="ml-2 font-semibold">
-                        {item.seat}
-                      </Typography.Text>
-                    </Typography.Paragraph>
+                      <Tag
+                        icon={<TagsOutlined />}
+                        className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
+                      >
+                        {`${item?.category?.name}`}
+                      </Tag>
+                    </div>
+
+                    <div className="w-full flex items-center">
+                      <Tooltip title={item.color}>
+                        <Typography.Title
+                          level={4}
+                          className="!my-0 !truncate w-1/2"
+                        >
+                          {item.name}
+                        </Typography.Title>
+                      </Tooltip>
+
+                      <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
+                        <PicCenterOutlined className="mr-2 font-semibold" />
+                        SEAT{" "}
+                        <Typography.Text className="ml-2 font-semibold">
+                          {item.seat}
+                        </Typography.Text>
+                      </Typography.Paragraph>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Col>
+            </Col>
+          </>
         ))}
       </Row>
 

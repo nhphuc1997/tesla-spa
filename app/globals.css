@@ -33,7 +33,7 @@
 body {
   height: 100%;
   width: 100%;
-  background: whitesmoke;
+  background: white !important;
   -ms-overflow-style: none;
 }
 
