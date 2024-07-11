@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:3001/tesla-service',
-  baseURL: 'http://13.213.88.50/tesla-service',
+  // baseURL: 'http://localhost:3001/backend',
+  baseURL: 'http://13.213.88.50/backend',
   timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' }
+  headers: { 'X-Custom-Header': '' }
 });
 
 export const doGet = async (url: string, params?: any) => {
