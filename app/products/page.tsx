@@ -1,5 +1,6 @@
 "use client";
 import ProductsCard from "@/components/cars/ProductsCard";
+import Slicker from "@/components/Slicker";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -15,6 +16,7 @@ import {
   Select,
   Slider,
   Space,
+  Spin,
   Typography,
 } from "antd";
 import Link from "next/link";
@@ -30,6 +32,7 @@ const ListPage = () => {
   const [colorGroupFilter, setColorGroupFilter] = useState("");
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { data } = useQuery({
     queryKey: ["category"],
@@ -47,6 +50,7 @@ const ListPage = () => {
       { searchTearm, category, colorGroupFilter, maxPrice, minPrice },
     ],
     queryFn: async () => {
+      setLoading(true);
       if (
         searchTearm === "" &&
         category === "" &&
@@ -70,8 +74,15 @@ const ListPage = () => {
         filter = `s={"$and": [{ "price": { "$gte": "${minPrice}" }}, { "price": { "$lte": "${maxPrice}" }}]}`;
       }
 
-      return doGet(`/products?${filter}`);
+      const result = await doGet(`/products?${filter}`);
+      setLoading(false);
+      return result;
     },
+  });
+
+  const banner = useQuery({
+    queryKey: ["banner"],
+    queryFn: async () => await doGet("/banners"),
   });
 
   const onChangePickColor = (e: RadioChangeEvent) => {
@@ -101,45 +112,47 @@ const ListPage = () => {
   }, [searchCategory]);
 
   return (
-    <div className="py-3 min-h-full">
-      <Breadcrumb
-        items={[
-          { title: <Link href="/">Trang chủ</Link> },
-          { title: "Danh sách" },
-        ]}
+    <Spin spinning={false}>
+      <Slicker
+        desktopSlidesToScroll={1}
+        desktopSlidesToShow={1}
+        alowMaxHeight={true}
+        autoPlay={false}
+        data={banner?.data?.data}
+        centerMode={false}
       />
 
-      <Row gutter={16} className="pt-3">
+      <div className="min-h-full">
+        <Row gutter={16} className="pt-3">
+          <Col xs={24} md={24} className="">
+            <div className="p-3 bg-white w-full border-t ">
+              <Row gutter={16}>
+                <Col xs={12} md={3}>
+                  <div className="">
+                    <Typography.Title level={5}>Tìm kiếm</Typography.Title>
+                    <Input
+                      placeholder="Tìm kiếm tên xe"
+                      onChange={(e) => setSearchTearm(e.target.value)}
+                    />
+                  </div>
+                </Col>
 
-        <Col xs={24} md={24} className="">
-          <div className="p-6 bg-white w-full ">
-            <Row gutter={16}>
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Tìm kiếm</Typography.Title>
-                  <Input
-                    placeholder="Tìm kiếm tên xe"
-                    onChange={(e) => setSearchTearm(e.target.value)}
-                  />
-                </div>
-              </Col>
+                <Col xs={12} md={3}>
+                  <div className="">
+                    <Typography.Title level={5}>Loại xe</Typography.Title>
+                    <Select
+                      style={{ width: "100%" }}
+                      placeholder="Chọn loại xe"
+                      onChange={handleChangePickBranchCar}
+                      options={[
+                        { label: "Xe cũ", value: "OLD" },
+                        { label: "Xe mới", value: "NEW" },
+                      ]}
+                    />
+                  </div>
+                </Col>
 
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Loại xe</Typography.Title>
-                  <Select
-                    style={{ width: "100%" }}
-                    placeholder="Chọn loại xe"
-                    onChange={handleChangePickBranchCar}
-                    options={[
-                      { label: 'Xe cũ', value: 'OLD' },
-                      { label: 'Xe mới', value: 'NEW' },
-                    ]}
-                  />
-                </div>
-              </Col>
-
-              {/* <Col xs={12} md={3}>
+                {/* <Col xs={12} md={3}>
                 <div className="">
                   <Typography.Title level={5}>Năm sản xuất</Typography.Title>
                   <Select
@@ -154,51 +167,52 @@ const ListPage = () => {
                 </div>
               </Col> */}
 
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Hãng xe</Typography.Title>
-                  <Select
-                    style={{ width: "100%" }}
-                    placeholder="Chọn hãng xe"
-                    onChange={handleChangePickBranchCar}
-                    options={data?.data.map((item: any) => ({
-                      label: item.name,
-                      value: item.value,
-                    }))}
-                  />
-                </div>
-              </Col>
+                <Col xs={12} md={3}>
+                  <div className="">
+                    <Typography.Title level={5}>Hãng xe</Typography.Title>
+                    <Select
+                      style={{ width: "100%" }}
+                      placeholder="Chọn hãng xe"
+                      onChange={handleChangePickBranchCar}
+                      options={data?.data.map((item: any) => ({
+                        label: item.name,
+                        value: item.value,
+                      }))}
+                    />
+                  </div>
+                </Col>
 
-              <Col xs={12} md={8}>
-                <div className="">
-                  <Typography.Title level={5}>Màu sắc</Typography.Title>
-                  <Radio.Group
-                    onChange={onChangePickColor}
-                    value={colorGroupFilter}
-                  >
-                    {colorGroup?.data?.data.map((item: any) => (
-                      <Radio key={item.id} className="!p-1" value={item?.id}>
-                        {item?.name}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </Col>
+                <Col xs={12} md={8}>
+                  <div className="">
+                    <Typography.Title level={5}>Màu sắc</Typography.Title>
+                    <Radio.Group
+                      onChange={onChangePickColor}
+                      value={colorGroupFilter}
+                    >
+                      {colorGroup?.data?.data.map((item: any) => (
+                        <Radio key={item.id} className="!p-1" value={item?.id}>
+                          {item?.name}
+                        </Radio>
+                      ))}
+                    </Radio.Group>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </Col>
 
-        <Col xs={24} md={24}>
-          <div className="bg-white  h-auto md:min-h-dvh mt-3">
-            <ProductsCard
-              itemPerRow={6}
-              isShowLoadMore={false}
-              data={products?.data}
-            />
-          </div>
-        </Col>
-      </Row>
-    </div>
+          <Col xs={24} md={24}>
+            <div className="bg-white  h-auto md:min-h-dvh mt-3">
+              <ProductsCard
+                itemPerRow={6}
+                isShowLoadMore={false}
+                data={products?.data}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
+    </Spin>
   );
 };
 

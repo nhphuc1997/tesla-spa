@@ -29,7 +29,7 @@ const ProductsCard = ({
 
   return (
     <>
-      <Row className="w-full p-3">
+      <Row className="w-full">
         {data?.data?.map((item: any) => (
           <>
             <Col
@@ -37,10 +37,10 @@ const ProductsCard = ({
               sm={12}
               md={itemPerRow}
               key={item.id}
-              className="p-1 cursor-pointer"
+              className=" cursor-pointer border-r border-b border-t"
               onClick={() => router.push(`/products/${item.id}`)}
             >
-              <div className=" hover:drop-shadow-2xl p-4 bg-white hover:border border">
+              <div className=" hover:drop-shadow-2xl p-4 bg-white">
                 <div className="">
                   <div
                     className="h-32 md:h-96 bg-center bg-cover bg-no-repeat  w-full "
