@@ -133,27 +133,17 @@ const Payment = ({
                         onFinish={onFinishForm}
                       >
                         <Form.Item
-                          label="Họ tên"
-                          name="fullName"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Thông tin này không được để trống",
-                            },
-                          ]}
+                          label="Full name"
+                          name="full name"
+                          rules={[{ required: true }]}
                         >
                           <Input placeholder="Nguyễn Văn A" />
                         </Form.Item>
 
                         <Form.Item
-                          label="SĐT"
-                          name="phoneNumber"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Thông tin này không được để trống",
-                            },
-                          ]}
+                          label="Phone"
+                          name="phone number"
+                          rules={[{ required: true }]}
                         >
                           <Input placeholder="0123428123" />
                         </Form.Item>
