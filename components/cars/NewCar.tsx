@@ -38,6 +38,7 @@ const NewCar = () => {
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
   const [segment, setSegment] = useState("");
+  const [openModalOrder, setOpenModalOrder] = useState(false);
 
   const submitTestDriver = useRef<any>();
 
@@ -103,11 +104,48 @@ const NewCar = () => {
 
           <Divider />
 
+          <div>
+            <Typography.Title
+              level={4}
+              className=" text-center !mb-0 uppercase"
+            >
+              <Tag className="ml-2 !bg-black !text-white">
+                {data?.products?.data?.category?.name}
+              </Tag>
+              {data?.products?.data.name}
+            </Typography.Title>
+
+            <Typography.Title
+              level={3}
+              className="!my-0 text-center md:text-left"
+            >
+              <TagsOutlined className="mr-2" />
+              {formatCurrency(
+                Number(data?.products?.data?.price) +
+                  Number(bonusPriceColor) +
+                  Number(bonusPriceWheel) +
+                  Number(bonusPriceInterator)
+              )}
+              <Button
+                className="mx-3 !bg-black !text-white"
+                onClick={() => setOpenModalOrder(true)}
+              >
+                PLACE ORDER
+              </Button>
+              <Button
+                className="mx-3 !bg-black !text-white"
+                onClick={() => setOpen(true)}
+              >
+                REGISTER
+              </Button>
+            </Typography.Title>
+          </div>
+
           <div className="flex justify-start items-center py-3">
             <Segmented
               defaultValue="center"
               onChange={(value) => setSegment(value)}
-              options={["Technical", "Mechanical"]}
+              options={["Technical", "Mechanical", "Document"]}
             />
           </div>
 
@@ -171,130 +209,72 @@ const NewCar = () => {
               );
             }
 
-            return (
-              <div className="py-3">
-                <Descriptions
-                  title={
-                    <Typography.Title level={5} className="!m-0">
-                      Động cơ
-                    </Typography.Title>
-                  }
-                  column={3}
-                  size="small"
-                  layout="horizontal"
-                >
-                  <Descriptions.Item className="!pb-1" label="Mã động cơ">
-                    {data?.products?.data?.productBasicEngine.code}
-                  </Descriptions.Item>
-                  <Descriptions.Item className="!pb-1" label="Loại">
-                    {data?.products?.data?.productBasicEngine.type}
-                  </Descriptions.Item>
-                  <Descriptions.Item className="!pb-1" label="Dung tích">
-                    {data?.products?.data?.productBasicEngine.displacementVol}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="!pb-1"
-                    label="Công suất cực đại"
+            if (segment === "Document") {
+              return <div>a</div>;
+            }
+
+            if (segment === "Mechanical") {
+              return (
+                <div className="py-3">
+                  <Descriptions
+                    title={
+                      <Typography.Title level={5} className="!m-0">
+                        Động cơ
+                      </Typography.Title>
+                    }
+                    column={3}
+                    size="small"
+                    layout="horizontal"
                   >
-                    {data?.products?.data?.productBasicEngine.maxRound}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="!pb-1"
-                    label="Mô-men xoắn cực đại"
-                  >
-                    {data?.products?.data?.productBasicEngine.maxMoment}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="!pb-1"
-                    label="Tiêu chuẩn khí thải"
-                  >
-                    {data?.products?.data?.productBasicEngine.standH2O}
-                  </Descriptions.Item>
-                  <Descriptions.Item className="!pb-1" label="Hộp số">
-                    {data?.products?.data?.productBasicEngine.code}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="!pb-1"
-                    label="Hệ thống truyền động"
-                  >
-                    {data?.products?.data?.productBasicEngine.moveSystem}
-                  </Descriptions.Item>
-                  <Descriptions.Item className="!pb-1" label="Chế độ lái">
-                    {data?.products?.data?.productBasicEngine.driverMode}
-                  </Descriptions.Item>
-                </Descriptions>
-              </div>
-            );
+                    <Descriptions.Item className="!pb-1" label="Mã động cơ">
+                      {data?.products?.data?.productBasicEngine.code}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Loại">
+                      {data?.products?.data?.productBasicEngine.type}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Dung tích">
+                      {data?.products?.data?.productBasicEngine.displacementVol}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Công suất cực đại"
+                    >
+                      {data?.products?.data?.productBasicEngine.maxRound}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Mô-men xoắn cực đại"
+                    >
+                      {data?.products?.data?.productBasicEngine.maxMoment}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Tiêu chuẩn khí thải"
+                    >
+                      {data?.products?.data?.productBasicEngine.standH2O}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Hộp số">
+                      {data?.products?.data?.productBasicEngine.code}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Hệ thống truyền động"
+                    >
+                      {data?.products?.data?.productBasicEngine.moveSystem}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Chế độ lái">
+                      {data?.products?.data?.productBasicEngine.driverMode}
+                    </Descriptions.Item>
+                  </Descriptions>
+                </div>
+              );
+            }
           })()}
         </div>
       </Col>
 
       <Col xs={24} md={24}>
-        <div className="p-6 bg-white  shadow-sm">
-          <div className="pb-3">
-            <div>
-              <Typography.Title
-                level={4}
-                className="text-center !mb-0 uppercase"
-              >
-                <Tag className="ml-2 !bg-black !text-white">
-                  {data?.products?.data?.category?.name}
-                </Tag>
-                {data?.products?.data.name}
-              </Typography.Title>
-            </div>
-
-            <Typography.Text className="block text-center !pb-0">
-              {data?.products?.data?.textIntro}
-            </Typography.Text>
-
-            <Typography.Title
-              level={3}
-              className="!my-0 text-center md:text-left"
-            >
-              <TagsOutlined className="mr-2" />
-              {formatCurrency(
-                Number(data?.products?.data?.price) +
-                  Number(bonusPriceColor) +
-                  Number(bonusPriceWheel) +
-                  Number(bonusPriceInterator)
-              )}
-            </Typography.Title>
-          </div>
-
-          <div>
-            <Descriptions
-              title={
-                <Typography.Title level={5} className="!m-0">
-                  <PushpinOutlined className="mr-2" />
-                  Mô tả
-                  <Button
-                    icon={<UsergroupAddOutlined />}
-                    className="mx-3 !bg-[#e6f4ff] !border-[#e6f4ff] text-black"
-                    onClick={() => setOpen(true)}
-                  >
-                    Đăng kí lái thử
-                  </Button>
-                </Typography.Title>
-              }
-              bordered={false}
-              column={1}
-              size="small"
-              className=""
-            >
-              <Descriptions.Item className="!pb-1" label="Thông tin">
-                {data?.products?.data?.shortDesciption}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Màu sắc">
-                <Tag className="!bg-black !text-white">
-                  {data?.products?.data?.color}
-                </Tag>
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
-
-          <Divider />
-
+        <div className="p-6 bg-white ">
           <div className="w-full">
             <Typography.Title level={5} className="!mb-0 !pb-0">
               <PushpinOutlined className="mr-2" />
@@ -347,9 +327,11 @@ const NewCar = () => {
               </div>
             </div>
           </div>
+        </div>
+      </Col>
 
-          <Divider />
-
+      <Modal open={openModalOrder} onCancel={() => setOpenModalOrder(false)}>
+        <div className="p-6 bg-white">
           <div className="w-full">
             <Typography.Title level={5} className="pb-3">
               <PushpinOutlined className="mr-2" />
@@ -370,61 +352,61 @@ const NewCar = () => {
               interator={opsInteratorPicked}
             />
           </div>
-
-          <Modal
-            open={open}
-            onCancel={() => setOpen(false)}
-            onOk={() => submitTestDriver?.current.click()}
-          >
-            <div className="w-full">
-              <Typography.Title level={5} className="pb-3">
-                <PushpinOutlined className="mr-2" /> Đăng kí lái thử
-              </Typography.Title>
-
-              <div className="w-full md:w-3/4 mx-auto">
-                <div className="p-3 border ">
-                  <Form layout="vertical" name="wrap" colon={false}>
-                    <Form.Item
-                      label="Email"
-                      name="email"
-                      rules={[
-                        {
-                          required: true,
-                          message: "trường này không được để trống",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="user@gmail.com" />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Số diện thoại"
-                      name="Số điện thoại"
-                      rules={[
-                        {
-                          required: true,
-                          message: "trường này không được để trống",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="0123456789" />
-                    </Form.Item>
-
-                    <Button
-                      ref={submitTestDriver}
-                      block
-                      htmlType="submit"
-                      icon={<SendOutlined />}
-                      iconPosition="end"
-                      className="!hidden"
-                    />
-                  </Form>
-                </div>
-              </div>
-            </div>
-          </Modal>
         </div>
-      </Col>
+      </Modal>
+
+      <Modal
+        open={open}
+        onCancel={() => setOpen(false)}
+        onOk={() => submitTestDriver?.current.click()}
+      >
+        <div className="w-full">
+          <Typography.Title level={5} className="pb-3">
+            <PushpinOutlined className="mr-2" /> Đăng kí lái thử
+          </Typography.Title>
+
+          <div className="w-full mx-auto">
+            <div className="p-3 ">
+              <Form layout="vertical" name="wrap" colon={false}>
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: "trường này không được để trống",
+                    },
+                  ]}
+                >
+                  <Input placeholder="user@gmail.com" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Số diện thoại"
+                  name="Số điện thoại"
+                  rules={[
+                    {
+                      required: true,
+                      message: "trường này không được để trống",
+                    },
+                  ]}
+                >
+                  <Input placeholder="0123456789" />
+                </Form.Item>
+
+                <Button
+                  ref={submitTestDriver}
+                  block
+                  htmlType="submit"
+                  icon={<SendOutlined />}
+                  iconPosition="end"
+                  className="!hidden"
+                />
+              </Form>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </Row>
   );
 };
