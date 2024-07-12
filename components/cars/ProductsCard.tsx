@@ -40,48 +40,40 @@ const ProductsCard = ({
               className=" cursor-pointer border-r border-b border-t"
               onClick={() => router.push(`/products/${item.id}`)}
             >
-              <div className=" hover:drop-shadow-2xl p-4 bg-white">
+              <div className="p-4">
                 <div className="">
                   <div
-                    className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full "
+                    className=" h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full "
                     style={{
                       backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
                     }}
                   />
-                  <div className="cursor-pointer">
-                    <div className="flex justify-between items-start flex-col xl:flex-row py-2">
-                      <Tag
-                        icon={<TagsOutlined />}
-                        className="!bg-[#e6f4ff] !border-[#e6f4ff]"
-                      >
+                  <div className=" cursor-pointer p-2 mt-[-4rem]">
+                    <div className="w-full flex items-center">
+                      <Tag icon={<TagsOutlined />}>
                         {`${formatCurrency(item.price)}`}
                       </Tag>
 
-                      <Tag
-                        icon={<TagsOutlined />}
-                        className="!bg-[#e6f4ff] !border-[#e6f4ff] capitalize"
-                      >
+                      <Tag icon={<TagsOutlined />}>
                         {`${item?.category?.name}`}
                       </Tag>
                     </div>
 
                     <div className="w-full flex items-center">
-                      <Tooltip title={item.color}>
-                        <Typography.Title
-                          level={4}
-                          className="!my-0 !truncate w-1/2"
-                        >
-                          {item.name}
-                        </Typography.Title>
-                      </Tooltip>
+                      <Typography.Title
+                        level={4}
+                        className="!my-0 !truncate w-1/2 !text-white"
+                      >
+                        {item.name}
+                      </Typography.Title>
 
-                      <Typography.Paragraph className="w-1/2 !mb-0 hidden xl:flex justify-end items-center">
-                        <PicCenterOutlined className="mr-2 font-semibold" />
-                        SEAT{" "}
-                        <Typography.Text className="ml-2 font-semibold">
-                          {item.seat}
-                        </Typography.Text>
-                      </Typography.Paragraph>
+                      <Typography.Title
+                        level={5}
+                        className="w-1/2 !my-0 hidden xl:flex justify-end items-center !text-white"
+                      >
+                        <PicCenterOutlined className="mr-2 font-semibold " />
+                        SEAT {item.seat}
+                      </Typography.Title>
                     </div>
                   </div>
                 </div>
@@ -98,7 +90,6 @@ const ProductsCard = ({
               <Col span={24} className="!flex justify-center items-center">
                 <Button
                   shape="circle"
-                  className="!bg-[#e6f4ff] !border-[#e6f4ff]"
                   onClick={() => router.push("/products")}
                   icon={<ArrowDownOutlined />}
                 />
