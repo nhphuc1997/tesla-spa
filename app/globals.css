@@ -47,7 +47,12 @@ body {
   margin-bottom: 20px !important;
 }
 
-.ant-input, .ant-select-selector, .ant-btn, .ant-picker {
+.ant-input,
+.ant-select-selector,
+.ant-btn,
+.ant-picker,
+.ant-segmented,
+.ant-segmented-item {
   border-radius: unset !important;
 }
 
