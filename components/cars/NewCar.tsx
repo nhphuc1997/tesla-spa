@@ -82,24 +82,21 @@ const NewCar = () => {
       const email = user?.primaryEmailAddress?.emailAddress;
       const phoneNumberFromEmail = user?.primaryPhoneNumber;
       const phoneNumberFromForm = registerDrivenParams?.phoneNumber;
-      return await doPost("/register-driven", {
+      return await doPost("/registry-driven", {
         userId,
         email,
         phoneNumberFromEmail,
         phoneNumberFromForm,
+        productId: params?.id,
       });
     },
-    onSuccess(data, variables, context) {
-      api.open({
-        message: "",
-        description: "Resitry driven successfully",
-      });
+    onSuccess() {
+      api.open({ message: "", description: "Registry driven successfully" });
+      setOpen(false);
     },
-    onError(error, variables, context) {
-      api.open({
-        message: "",
-        description: "Resitry driven failed",
-      });
+    onError() {
+      api.open({ message: "", description: "Registry driven failed" });
+      setOpen(false);
     },
   });
 
@@ -120,6 +117,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
+      {contextHolder}
       <Col xs={24} md={24} className="">
         <div className="p-3 h-auto w-full bg-white ">
           <div className="mx-3">
