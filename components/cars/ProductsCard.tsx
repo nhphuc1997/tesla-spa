@@ -29,7 +29,7 @@ const ProductsCard = ({
 
   return (
     <>
-      <Row className="w-full">
+      <Row className="w-full border-l border-r">
         {data?.data?.map((item: any) => (
           <>
             <Col

@@ -17,7 +17,9 @@ export default function Wrapper({
         <Layout className="w-full !min-h-dvh !bg-white">
           <NavHeader />
 
-          <Content className="mx-3 border-l border-r">{children}</Content>
+          <Content className="mx-3">
+            {children}
+          </Content>
 
           <Divider className="!m-0" />
 

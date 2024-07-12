@@ -59,29 +59,8 @@ const Slicker = ({
     ],
   };
 
-  if (type === "block") {
-    return (
-      <div className="slider-container py-3 cursor-pointer">
-        <Slider {...settings}>
-          {data?.map((item) => (
-            <div className={`${_height} p-3 `} key={item.id}>
-              <div
-                onClick={() => router.push(`/products?demand=${item?.value}`)}
-                className="hover:drop-shadow-md flex justify-center items-center bg-center bg-cover bg-no-repeat bg-[#31473A] h-full"
-              >
-                <Typography.Title level={4} className="!text-[#EDF4F2] !mb-0">
-                  {item.name}
-                </Typography.Title>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
-
   return (
-    <div className="slider-container py-3 cursor-pointer">
+    <div className="slider-container py-1 cursor-pointer">
       <Slider {...settings}>
         {data?.map((item) => (
           <div className={`${_height}`} key={item.id}>

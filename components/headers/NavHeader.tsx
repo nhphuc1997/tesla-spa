@@ -15,44 +15,16 @@ import {
   Button,
   Avatar,
   notification,
-  Flex,
 } from "antd";
 import { useEffect } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
-import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { doGet } from "@/utils/doMethod";
 import { useRouter } from "next/navigation";
-
-type MenuItem = Required<MenuProps>["items"][number];
 
 const NavHeader = () => {
   const { isSignedIn, user } = useUser();
   const { signOut, openSignIn } = useClerk();
   const [api, contextHolder] = notification.useNotification();
   const router = useRouter();
-
-  const { data } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await doGet("/categories");
-      if (response.statusCode === 200) {
-        const items: MenuItem[] = response.data.map((item: any) => ({
-          label: (
-            <Link
-              href={`/products?category=${item.name}`}
-              className="capitalize"
-            >
-              {item.name}
-            </Link>
-          ),
-          key: item.value,
-        }));
-
-        return items;
-      }
-    },
-  });
 
   useEffect(() => {
     if (isSignedIn === true) {
@@ -91,7 +63,7 @@ const NavHeader = () => {
   ];
 
   return (
-    <Header className="!px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
+    <Header className="border-b !px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
       <Row className="w-full">
         <Col
