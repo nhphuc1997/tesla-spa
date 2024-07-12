@@ -100,18 +100,18 @@ const Payment = ({
         onChange={onChangeStep}
         items={[
           {
-            title: "Bước 1",
-            description: "Thông tin cá nhân",
+            title: "Step 1",
+            description: "Personal",
             disabled: true,
           },
           {
-            title: "Bước 2",
-            description: "Thông tin thanh toán",
+            title: "Step 2",
+            description: "Order",
             disabled: current === 0 || !isSignedIn,
           },
           {
-            title: "Bước 2",
-            description: "Chuyển khoản",
+            title: "Step 3",
+            description: "Payment",
             disabled: current === 0 || !isSignedIn,
           },
         ]}
@@ -134,15 +134,15 @@ const Payment = ({
                       >
                         <Form.Item
                           label="Full name"
-                          name="full name"
+                          name="fullName"
                           rules={[{ required: true }]}
                         >
-                          <Input placeholder="Nguyễn Văn A" />
+                          <Input placeholder="John Kenedy" />
                         </Form.Item>
 
                         <Form.Item
                           label="Phone"
-                          name="phone number"
+                          name="phoneNumber"
                           rules={[{ required: true }]}
                         >
                           <Input placeholder="0123428123" />

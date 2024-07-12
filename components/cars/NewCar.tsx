@@ -40,7 +40,7 @@ const NewCar = () => {
   const [segment, setSegment] = useState("Options");
   const [openModalOrder, setOpenModalOrder] = useState(false);
 
-  const submitTestDriver = useRef<any>();
+  const submitTestDriven = useRef<any>();
 
   const { data }: any = useQuery({
     queryKey: ["detail-product"],
@@ -376,7 +376,7 @@ const NewCar = () => {
           <div className="w-full">
             <Typography.Title level={5} className="pb-3">
               <PushpinOutlined className="mr-2" />
-              Đặt cọc
+              Place order
             </Typography.Title>
             <Payment
               productName={data?.products?.data.name}
@@ -398,11 +398,11 @@ const NewCar = () => {
       <Modal
         open={open}
         onCancel={() => setOpen(false)}
-        onOk={() => submitTestDriver?.current.click()}
+        onOk={() => submitTestDriven?.current.click()}
       >
         <div className="w-full">
           <Typography.Title level={5} className="pb-3">
-            <PushpinOutlined className="mr-2" /> Đăng kí lái thử
+            <PushpinOutlined className="mr-2" /> Registry
           </Typography.Title>
 
           <div className="w-full mx-auto">
@@ -411,31 +411,21 @@ const NewCar = () => {
                 <Form.Item
                   label="Email"
                   name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "trường này không được để trống",
-                    },
-                  ]}
+                  rules={[{ required: true }]}
                 >
                   <Input placeholder="user@gmail.com" />
                 </Form.Item>
 
                 <Form.Item
-                  label="Số diện thoại"
-                  name="Số điện thoại"
-                  rules={[
-                    {
-                      required: true,
-                      message: "trường này không được để trống",
-                    },
-                  ]}
+                  label="phoneNumber"
+                  name="phoneNumber"
+                  rules={[{ required: true }]}
                 >
                   <Input placeholder="0123456789" />
                 </Form.Item>
 
                 <Button
-                  ref={submitTestDriver}
+                  ref={submitTestDriven}
                   block
                   htmlType="submit"
                   icon={<SendOutlined />}
