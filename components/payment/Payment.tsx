@@ -124,7 +124,7 @@ const Payment = ({
               {(() => {
                 if (current === 0)
                   return (
-                    <div className="w-3/4 m-auto p-5 border my-6 rounded-md">
+                    <div className="m-auto p-5 my-6 rounded-md">
                       <Form
                         labelCol={{ flex: "100px" }}
                         labelAlign="left"

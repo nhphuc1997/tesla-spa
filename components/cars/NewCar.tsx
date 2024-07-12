@@ -215,7 +215,14 @@ const NewCar = () => {
               }
 
               if (segment === "Document") {
-                return <div>a</div>;
+                return (
+                  <div
+                    className="px-10"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.products?.data?.desciption,
+                    }}
+                  />
+                );
               }
 
               if (segment === "Mechanical") {
@@ -360,8 +367,12 @@ const NewCar = () => {
           </div>
         </div>
       </Col>
-      <Modal open={openModalOrder} onCancel={() => setOpenModalOrder(false)}>
-        <div className="p-6 bg-white">
+      <Modal
+        open={openModalOrder}
+        onCancel={() => setOpenModalOrder(false)}
+        footer={null}
+      >
+        <div className="bg-white">
           <div className="w-full">
             <Typography.Title level={5} className="pb-3">
               <PushpinOutlined className="mr-2" />
