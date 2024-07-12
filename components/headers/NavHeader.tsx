@@ -15,6 +15,7 @@ import {
   Button,
   Avatar,
   notification,
+  Flex,
 } from "antd";
 import { useEffect } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
@@ -93,18 +94,22 @@ const NavHeader = () => {
     <Header className="!px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
       <Row className="w-full">
-        <Col span={6} onClick={() => router.push("/")} className="cursor-pointer">
+        <Col
+          span={6}
+          onClick={() => router.push("/")}
+          className="cursor-pointer"
+        >
           <div className="flex justify-start items-center h-16">
             <MenuOutlined />
           </div>
         </Col>
 
         <Col span={12}>
-          <Menu
-            className="w-full flex justify-center items-center"
-            mode="horizontal"
-            items={data}
-          />
+          <div className="h-16 flex justify-center items-center">
+            <Typography.Title className="!mb-0" level={5}>
+              SUPER CAR
+            </Typography.Title>
+          </div>
         </Col>
 
         <Col span={6} className="">
