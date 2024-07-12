@@ -52,11 +52,12 @@ const HomePage = () => {
   return (
     <Spin spinning={loading}>
       <Menu
-        className="!w-full flex justify-center items-center !border-b-0"
+        className="min-h-[45px] !w-full flex justify-center items-center !border-b-0"
         mode="horizontal"
         items={categories?.data}
       />
-      <div className="border-l border-r">
+
+      <div className="border-l border-r py-1">
         <Slicker
           desktopSlidesToScroll={1}
           desktopSlidesToShow={1}

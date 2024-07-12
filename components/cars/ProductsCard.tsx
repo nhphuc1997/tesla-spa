@@ -32,65 +32,63 @@ const ProductsCard = ({
     <>
       <Row className="w-full">
         {data?.data?.map((item: any, index: number) => (
-          <>
-            <Col
-              xs={24}
-              sm={12}
-              md={itemPerRow}
-              key={item.id}
-              className="cursor-pointer"
-              onClick={() => router.push(`/products/${item.id}`)}
-            >
-              <div
-                className={`p-4 border-t border-b  
+          <Col
+            xs={24}
+            sm={12}
+            md={itemPerRow}
+            key={item.id}
+            className="cursor-pointer"
+            onClick={() => router.push(`/products/${item.id}`)}
+          >
+            <div
+              className={`p-4 border-t border-b  
                   ${
                     ![0, data?.data?.length - 1].includes(index)
                       ? "border-r border-l"
                       : ""
                   }`}
-              >
-                <div className="hover:drop-shadow-lg">
-                  <Tooltip title={item?.shortDesciption}>
-                    <div
-                      className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
-                      style={{
-                        backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
-                      }}
-                    />
-                  </Tooltip>
+            >
+              <div className="hover:drop-shadow-lg">
+                <Tooltip title={item?.shortDesciption}>
+                  <div
+                    className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
+                    style={{
+                      backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
+                    }}
+                  />
+                </Tooltip>
 
-                  <div className="cursor-pointer p-2 mt-[-4rem]">
-                    <div className="w-full flex items-center">
-                      <Tag className="!bg-black !text-white" bordered={false}>
-                        2020
-                      </Tag>
+                <div className="cursor-pointer p-2 mt-[-4rem]">
+                  <div className="w-full flex items-center">
+                    <Tag className="!bg-black !text-white" bordered={false}>
+                      2020
+                    </Tag>
 
-                      <Tag className="!bg-black !text-white" bordered={false}>
-                        {`${item?.category?.name}`}
-                      </Tag>
-                    </div>
+                    <Tag className="!bg-black !text-white" bordered={false}>
+                      {`${item?.category?.name}`}
+                    </Tag>
+                  </div>
 
-                    <div className="w-full flex items-center">
-                      <Typography.Title
-                        level={4}
-                        className="!my-0 !truncate w-1/2 !text-white"
-                      >
-                        {item.name}
-                      </Typography.Title>
+                  <div className="w-full flex items-center">
+                    <Typography.Title
+                      level={4}
+                      className="!my-0 !truncate w-1/2 !text-white"
+                    >
+                      {item.name}
+                    </Typography.Title>
 
-                      <Typography.Title
-                        level={5}
-                        className="w-1/2 !my-0 hidden xl:flex justify-end items-center !text-white"
-                      >
-                        <PicCenterOutlined className="mr-2 font-semibold " />
-                        SEAT {item.seat}
-                      </Typography.Title>
-                    </div>
+                    <Typography.Title
+                      level={5}
+                      className="w-1/2 !my-0 hidden xl:flex justify-end items-center !text-white"
+                    >
+                      <PicCenterOutlined className="mr-2 font-semibold " />
+                      SEAT {item.seat}
+                    </Typography.Title>
                   </div>
                 </div>
               </div>
-            </Col>
-          </>
+            </div>
+          </Col>
         ))}
       </Row>
 

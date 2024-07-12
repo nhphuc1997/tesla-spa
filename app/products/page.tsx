@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Col,
   DatePickerProps,
+  Drawer,
   Input,
   Menu,
   MenuProps,
@@ -33,11 +34,6 @@ const ListPage = () => {
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const { data } = useQuery({
-    queryKey: ["category"],
-    queryFn: async () => doGet("/categories"),
-  });
 
   const categories = useQuery({
     queryKey: ["categories"],
@@ -80,6 +76,7 @@ const ListPage = () => {
         colorGroupFilter === "" &&
         (maxPrice === 0 || minPrice === 0)
       ) {
+        setLoading(false);
         return doGet("/products");
       }
 
@@ -98,112 +95,83 @@ const ListPage = () => {
       }
 
       const result = await doGet(`/products?${filter}`);
-      setLoading(false);
       return result;
     },
   });
 
-  const banner = useQuery({
-    queryKey: ["banner"],
-    queryFn: async () => await doGet("/banners"),
-  });
-
-  const onChangePickColor = (e: RadioChangeEvent) => {
-    setColorGroupFilter(e.target.value);
-  };
-
-  const onChangeSelectYear: DatePickerProps["onChange"] = (
-    date,
-    dateString
-  ) => {
-    console.log(date, dateString);
-  };
-
-  const onChangePriceComplete = (value: any) => {
-    setMaxPrice(value[1]);
-    setMinPrice(value[0]);
-  };
-
-  const handleChangePickBranchCar = (value: string) => {
-    setCategory(value);
-  };
-
-  useEffect(() => {
-    if (searchCategory && searchCategory !== "") {
-      setCategory(searchCategory);
-    }
-  }, [searchCategory]);
-
   return (
-    <Spin spinning={false}>
+    <Spin spinning={loading}>
       <Menu
-        className="!w-full flex justify-center items-center !border-b-0"
+        className="min-h-[45px] !w-full flex justify-center items-center !border-b-0"
         mode="horizontal"
         items={categories?.data}
       />
 
-      <Row gutter={16} className="py-3 px-4">
-        <Col xs={12} md={3}>
-          <div className="">
-            <Typography.Title level={5}>Tìm kiếm</Typography.Title>
-            <Input
-              placeholder="Tìm kiếm tên xe"
-              onChange={(e) => setSearchTearm(e.target.value)}
-            />
-          </div>
-        </Col>
+      <div className="py-1">
+        <Row gutter={16} className="py-3 px-4">
+          <Col xs={12} md={3}>
+            <div className="">
+              <Typography.Title level={5}>Tìm kiếm</Typography.Title>
+              <Input
+                placeholder="Tìm kiếm tên xe"
+                onChange={(e) => setSearchTearm(e.target.value)}
+              />
+            </div>
+          </Col>
 
-        <Col xs={12} md={3}>
-          <div className="">
-            <Typography.Title level={5}>Loại xe</Typography.Title>
-            <Select
-              style={{ width: "100%" }}
-              placeholder="Chọn loại xe"
-              onChange={handleChangePickBranchCar}
-              options={[
-                { label: "Xe cũ", value: "OLD" },
-                { label: "Xe mới", value: "NEW" },
-              ]}
-            />
-          </div>
-        </Col>
+          <Col xs={12} md={3}>
+            <div className="">
+              <Typography.Title level={5}>Loại xe</Typography.Title>
+              <Select
+                style={{ width: "100%" }}
+                placeholder="Chọn loại xe"
+                onChange={(e) => console.log(e)}
+                options={[
+                  { label: "OLD CAR", value: "OLD" },
+                  { label: "NEW CAR", value: "NEW" },
+                ]}
+              />
+            </div>
+          </Col>
 
-        <Col xs={12} md={3}>
-          <div className="">
-            <Typography.Title level={5}>Hãng xe</Typography.Title>
-            <Select
-              style={{ width: "100%" }}
-              placeholder="Chọn hãng xe"
-              onChange={handleChangePickBranchCar}
-              options={data?.data.map((item: any) => ({
-                label: item.name,
-                value: item.value,
-              }))}
-            />
-          </div>
-        </Col>
+          <Col xs={12} md={3}>
+            <div className="">
+              <Typography.Title level={5}>Hãng xe</Typography.Title>
+              <Select
+                style={{ width: "100%" }}
+                placeholder="Chọn hãng xe"
+                onChange={(e) => console.log(e)}
+                options={categories?.data?.map((item: any) => ({
+                  label: item.name,
+                  value: item.value,
+                }))}
+              />
+            </div>
+          </Col>
 
-        <Col xs={12} md={8}>
-          <div className="">
-            <Typography.Title level={5}>Màu sắc</Typography.Title>
-            <Radio.Group onChange={onChangePickColor} value={colorGroupFilter}>
-              {colorGroup?.data?.data.map((item: any) => (
-                <Radio key={item.id} className="!p-1" value={item?.id}>
-                  {item?.name}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </div>
-        </Col>
-      </Row>
+          <Col xs={12} md={8}>
+            <div className="">
+              <Typography.Title level={5}>Màu sắc</Typography.Title>
+              <Radio.Group
+                onChange={(e) => console.log(e)}
+                value={colorGroupFilter}
+              >
+                {colorGroup?.data?.data.map((item: any) => (
+                  <Radio key={item.id} className="!p-1" value={item?.id}>
+                    {item?.name}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </div>
+          </Col>
+        </Row>
 
-      <TextIntro />
-
-      <ProductsCard
-        itemPerRow={8}
-        isShowLoadMore={false}
-        data={products?.data}
-      />
+        <ProductsCard
+          itemPerRow={8}
+          isShowLoadMore={false}
+          data={products?.data}
+        />
+      </div>
     </Spin>
   );
 };
