@@ -37,7 +37,7 @@ const NewCar = () => {
   const [opsWheelPicked, setOpsWheelPicked] = useState<any>();
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
-  const [segment, setSegment] = useState("");
+  const [segment, setSegment] = useState("Options");
   const [openModalOrder, setOpenModalOrder] = useState(false);
 
   const submitTestDriver = useRef<any>();
@@ -89,7 +89,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
-      <Col xs={24} md={24}>
+      <Col xs={24} md={24} className="">
         <div className="p-3 h-auto w-full bg-white ">
           <div className="mx-3">
             <Slicker
@@ -145,55 +145,61 @@ const NewCar = () => {
             <Segmented
               defaultValue="center"
               onChange={(value) => setSegment(value)}
-              options={["Technical", "Mechanical", "Document"]}
+              options={[
+                "Options",
+                "Technical",
+                "Size",
+                "Mechanical",
+                "Document",
+              ]}
             />
           </div>
 
-          {(() => {
-            if (segment === "Technical") {
-              return (
-                <div className="flex justify-between items-center flex-col">
-                  <div className="pb-3">
-                    <Descriptions
-                      title={
-                        <Typography.Title level={5} className="!m-0">
-                          Thông số cơ bản
-                        </Typography.Title>
-                      }
-                      bordered={false}
-                      column={3}
-                      size="small"
-                      className=""
+          <div className="w-full">
+            {(() => {
+              if (segment === "Technical") {
+                return (
+                  <Descriptions
+                    title={
+                      <Typography.Title level={5} className="!m-0">
+                        Thông số cơ bản
+                      </Typography.Title>
+                    }
+                    bordered={true}
+                    column={1}
+                    size="small"
+                    className=""
+                  >
+                    <Descriptions.Item className="!pb-1" label="Tổng công suất">
+                      {data?.products?.data?.productBasicParam.total_capacity}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Mô-men xoắn (Nm/vòng/phút)"
                     >
-                      <Descriptions.Item
-                        className="!pb-1"
-                        label="Tổng công suất"
-                      >
-                        {data?.products?.data?.productBasicParam.total_capacity}
-                      </Descriptions.Item>
-                      <Descriptions.Item
-                        className="!pb-1"
-                        label="Mô-men xoắn (Nm/vòng/phút)"
-                      >
-                        {data?.products?.data?.productBasicParam.moment}
-                      </Descriptions.Item>
-                      <Descriptions.Item
-                        className="!pb-1"
-                        label="Tăng tốc (0-100 km/h)"
-                      >
-                        {data?.products?.data?.productBasicParam.acceleration}
-                      </Descriptions.Item>
-                    </Descriptions>
-                  </div>
+                      {data?.products?.data?.productBasicParam.moment}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      className="!pb-1"
+                      label="Tăng tốc (0-100 km/h)"
+                    >
+                      {data?.products?.data?.productBasicParam.acceleration}
+                    </Descriptions.Item>
+                  </Descriptions>
+                );
+              }
 
+              if (segment === "Size") {
+                return (
                   <Descriptions
                     title={
                       <Typography.Title level={5} className="!m-0">
                         Kích thước tổng thể (mm)
                       </Typography.Title>
                     }
-                    column={3}
+                    column={1}
                     size="small"
+                    bordered={true}
                   >
                     <Descriptions.Item className="!pb-1" label="Dài">
                       {data?.products?.data?.productBasicSize.length}
@@ -205,131 +211,155 @@ const NewCar = () => {
                       {data?.products?.data?.productBasicSize.height}
                     </Descriptions.Item>
                   </Descriptions>
-                </div>
-              );
-            }
+                );
+              }
 
-            if (segment === "Document") {
-              return <div>a</div>;
-            }
+              if (segment === "Document") {
+                return <div>a</div>;
+              }
 
-            if (segment === "Mechanical") {
-              return (
-                <div className="py-3">
-                  <Descriptions
-                    title={
-                      <Typography.Title level={5} className="!m-0">
-                        Động cơ
+              if (segment === "Mechanical") {
+                return (
+                  <div className="py-3">
+                    <Descriptions
+                      title={
+                        <Typography.Title level={5} className="!m-0">
+                          Động cơ
+                        </Typography.Title>
+                      }
+                      column={1}
+                      size="small"
+                      layout="horizontal"
+                      bordered={true}
+                    >
+                      <Descriptions.Item className="!pb-1" label="Mã động cơ">
+                        {data?.products?.data?.productBasicEngine.code}
+                      </Descriptions.Item>
+                      <Descriptions.Item className="!pb-1" label="Loại">
+                        {data?.products?.data?.productBasicEngine.type}
+                      </Descriptions.Item>
+                      <Descriptions.Item className="!pb-1" label="Dung tích">
+                        {
+                          data?.products?.data?.productBasicEngine
+                            .displacementVol
+                        }
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Công suất cực đại"
+                      >
+                        {data?.products?.data?.productBasicEngine.maxRound}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Mô-men xoắn cực đại"
+                      >
+                        {data?.products?.data?.productBasicEngine.maxMoment}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Tiêu chuẩn khí thải"
+                      >
+                        {data?.products?.data?.productBasicEngine.standH2O}
+                      </Descriptions.Item>
+                      <Descriptions.Item className="!pb-1" label="Hộp số">
+                        {data?.products?.data?.productBasicEngine.code}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Hệ thống truyền động"
+                      >
+                        {data?.products?.data?.productBasicEngine.moveSystem}
+                      </Descriptions.Item>
+                      <Descriptions.Item className="!pb-1" label="Chế độ lái">
+                        {data?.products?.data?.productBasicEngine.driverMode}
+                      </Descriptions.Item>
+                    </Descriptions>
+                  </div>
+                );
+              }
+
+              if (segment === "Options") {
+                return (
+                  <div className="px-3 bg-white ">
+                    <div className="w-full">
+                      <Typography.Title level={5} className="!mb-0 !pb-0">
+                        Options
                       </Typography.Title>
-                    }
-                    column={3}
-                    size="small"
-                    layout="horizontal"
-                  >
-                    <Descriptions.Item className="!pb-1" label="Mã động cơ">
-                      {data?.products?.data?.productBasicEngine.code}
-                    </Descriptions.Item>
-                    <Descriptions.Item className="!pb-1" label="Loại">
-                      {data?.products?.data?.productBasicEngine.type}
-                    </Descriptions.Item>
-                    <Descriptions.Item className="!pb-1" label="Dung tích">
-                      {data?.products?.data?.productBasicEngine.displacementVol}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      className="!pb-1"
-                      label="Công suất cực đại"
-                    >
-                      {data?.products?.data?.productBasicEngine.maxRound}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      className="!pb-1"
-                      label="Mô-men xoắn cực đại"
-                    >
-                      {data?.products?.data?.productBasicEngine.maxMoment}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      className="!pb-1"
-                      label="Tiêu chuẩn khí thải"
-                    >
-                      {data?.products?.data?.productBasicEngine.standH2O}
-                    </Descriptions.Item>
-                    <Descriptions.Item className="!pb-1" label="Hộp số">
-                      {data?.products?.data?.productBasicEngine.code}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      className="!pb-1"
-                      label="Hệ thống truyền động"
-                    >
-                      {data?.products?.data?.productBasicEngine.moveSystem}
-                    </Descriptions.Item>
-                    <Descriptions.Item className="!pb-1" label="Chế độ lái">
-                      {data?.products?.data?.productBasicEngine.driverMode}
-                    </Descriptions.Item>
-                  </Descriptions>
-                </div>
-              );
-            }
-          })()}
-        </div>
-      </Col>
+                      <div className="flex flex-col justify-center items-start !py-3">
+                        <div className="!py-3">
+                          <Typography.Title level={5}>Pain</Typography.Title>
+                          <Radio.Group
+                            onChange={colorPick}
+                            value={opsColorPicked}
+                            disabled={data?.products?.data.kind !== "NEW"}
+                          >
+                            {data?.category?.data?.optionColor.map(
+                              (color: any) => (
+                                <Radio
+                                  key={color.id}
+                                  className="!py-1"
+                                  value={color}
+                                >
+                                  {color?.description}
+                                </Radio>
+                              )
+                            )}
+                          </Radio.Group>
+                        </div>
 
-      <Col xs={24} md={24}>
-        <div className="p-6 bg-white ">
-          <div className="w-full">
-            <Typography.Title level={5} className="!mb-0 !pb-0">
-              <PushpinOutlined className="mr-2" />
-              Phiên bản
-            </Typography.Title>
-            <div className="flex flex-col justify-center items-start !py-3">
-              <div className="!py-3">
-                <Typography.Title level={5}>Màu sơn</Typography.Title>
-                <Radio.Group
-                  onChange={colorPick}
-                  value={opsColorPicked}
-                  disabled={data?.products?.data.kind !== "NEW"}
-                >
-                  {data?.category?.data?.optionColor.map((color: any) => (
-                    <Radio key={color.id} className="!py-1" value={color}>
-                      {color?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
+                        <div className="py-3">
+                          <Typography.Title level={5}>Wheels</Typography.Title>
+                          <Radio.Group
+                            onChange={wheelPick}
+                            value={opsWheelPicked}
+                            disabled={data?.products?.data.kind !== "NEW"}
+                          >
+                            {data?.category?.data?.optionWheel.map(
+                              (wheel: any) => (
+                                <Radio
+                                  key={wheel.id}
+                                  className="!py-1"
+                                  value={wheel}
+                                >
+                                  {wheel?.description}
+                                </Radio>
+                              )
+                            )}
+                          </Radio.Group>
+                        </div>
 
-              <div className="py-3">
-                <Typography.Title level={5}>Wheels</Typography.Title>
-                <Radio.Group
-                  onChange={wheelPick}
-                  value={opsWheelPicked}
-                  disabled={data?.products?.data.kind !== "NEW"}
-                >
-                  {data?.category?.data?.optionWheel.map((wheel: any) => (
-                    <Radio key={wheel.id} className="!py-1" value={wheel}>
-                      {wheel?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
-
-              <div className="py-3">
-                <Typography.Title level={5}>Nội thất</Typography.Title>
-                <Radio.Group
-                  onChange={interatorPick}
-                  value={opsInteratorPicked}
-                  disabled={data?.products?.data.kind !== "NEW"}
-                >
-                  {data?.category?.data?.optionInterator.map((intera: any) => (
-                    <Radio key={intera.id} className="!py-1" value={intera}>
-                      {intera?.description}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </div>
-            </div>
+                        <div className="py-3">
+                          <Typography.Title level={5}>
+                            Interior
+                          </Typography.Title>
+                          <Radio.Group
+                            onChange={interatorPick}
+                            value={opsInteratorPicked}
+                            disabled={data?.products?.data.kind !== "NEW"}
+                          >
+                            {data?.category?.data?.optionInterator.map(
+                              (intera: any) => (
+                                <Radio
+                                  key={intera.id}
+                                  className="!py-1"
+                                  value={intera}
+                                >
+                                  {intera?.description}
+                                </Radio>
+                              )
+                            )}
+                          </Radio.Group>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })()}
           </div>
         </div>
       </Col>
-
       <Modal open={openModalOrder} onCancel={() => setOpenModalOrder(false)}>
         <div className="p-6 bg-white">
           <div className="w-full">
@@ -354,7 +384,6 @@ const NewCar = () => {
           </div>
         </div>
       </Modal>
-
       <Modal
         open={open}
         onCancel={() => setOpen(false)}
