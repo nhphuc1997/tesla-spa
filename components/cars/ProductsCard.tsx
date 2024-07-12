@@ -43,7 +43,7 @@ const ProductsCard = ({
               <div className=" hover:drop-shadow-2xl p-4 bg-white">
                 <div className="">
                   <div
-                    className="h-32 md:h-96 bg-center bg-cover bg-no-repeat  w-full "
+                    className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full "
                     style={{
                       backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
                     }}
@@ -94,7 +94,7 @@ const ProductsCard = ({
       {(() => {
         if (isShowLoadMore) {
           return (
-            <Row className="py-3">
+            <Row className="py-3 border-l border-r">
               <Col span={24} className="!flex justify-center items-center">
                 <Button
                   shape="circle"

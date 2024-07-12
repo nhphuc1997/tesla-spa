@@ -1,8 +1,4 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Typography, Image } from "antd";
-import { useRouter } from "next/navigation";
+import { Image, Carousel } from "antd";
 import { S3_URL } from "@/utils";
 
 interface SlickerProps {
@@ -18,50 +14,15 @@ interface SlickerProps {
 }
 
 const Slicker = ({
-  desktopSlidesToShow,
-  desktopSlidesToScroll,
   alowMaxHeight,
-  autoPlay,
   data = [],
-  type = "image",
   showChild = false,
-  centerMode = false,
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
-  const _autoPlay = autoPlay ? autoPlay : false;
-
-  const router = useRouter();
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: _autoPlay,
-    speed: 3000,
-    centerMode: centerMode,
-    slidesToShow: desktopSlidesToShow,
-    slidesToScroll: desktopSlidesToScroll,
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   return (
     <div className="slider-container py-1 cursor-pointer">
-      <Slider {...settings}>
+      <Carousel arrows>
         {data?.map((item) => (
           <div className={`${_height}`} key={item.id}>
             <div
@@ -70,7 +31,7 @@ const Slicker = ({
             />
           </div>
         ))}
-      </Slider>
+      </Carousel>
 
       {(() => {
         if (showChild) {

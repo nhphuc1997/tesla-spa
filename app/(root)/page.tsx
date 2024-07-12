@@ -64,6 +64,7 @@ const HomePage = () => {
         data={banner?.data?.data}
         centerMode={false}
       />
+      <TextIntro />
       <ProductsCard itemPerRow={8} data={products?.data?.data} />
     </Spin>
   );
