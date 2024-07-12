@@ -18,17 +18,21 @@ import {
   Segmented,
   Tag,
   Typography,
+  notification,
 } from "antd";
 import { useRef, useState } from "react";
 import Payment from "../payment/Payment";
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { doGet } from "@/utils/doMethod";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { doGet, doPost } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import Slicker from "../Slicker";
+import { useClerk } from "@clerk/nextjs";
 
 const NewCar = () => {
   const params = useParams();
+  const { user } = useClerk();
+  const [api, contextHolder] = notification.useNotification();
 
   const [bonusPriceColor, setBonusPriceColor] = useState(0);
   const [bonusPriceWheel, setBonusPriceWheel] = useState(0);
@@ -69,6 +73,33 @@ const NewCar = () => {
         products: products,
         category: null,
       };
+    },
+  });
+
+  const registerDrivenMutation = useMutation({
+    mutationFn: async (registerDrivenParams: { phoneNumber: string }) => {
+      const userId = user?.id;
+      const email = user?.primaryEmailAddress?.emailAddress;
+      const phoneNumberFromEmail = user?.primaryPhoneNumber;
+      const phoneNumberFromForm = registerDrivenParams?.phoneNumber;
+      return await doPost("/register-driven", {
+        userId,
+        email,
+        phoneNumberFromEmail,
+        phoneNumberFromForm,
+      });
+    },
+    onSuccess(data, variables, context) {
+      api.open({
+        message: "",
+        description: "Resitry driven successfully",
+      });
+    },
+    onError(error, variables, context) {
+      api.open({
+        message: "",
+        description: "Resitry driven failed",
+      });
     },
   });
 
@@ -136,7 +167,7 @@ const NewCar = () => {
                 className="mx-3 !bg-black !text-white"
                 onClick={() => setOpen(true)}
               >
-                REGISTER
+                REGISTRY
               </Button>
             </Typography.Title>
           </div>
@@ -367,6 +398,7 @@ const NewCar = () => {
           </div>
         </div>
       </Col>
+
       <Modal
         open={openModalOrder}
         onCancel={() => setOpenModalOrder(false)}
@@ -395,6 +427,7 @@ const NewCar = () => {
           </div>
         </div>
       </Modal>
+
       <Modal
         open={open}
         onCancel={() => setOpen(false)}
@@ -407,15 +440,12 @@ const NewCar = () => {
 
           <div className="w-full mx-auto">
             <div className="p-3 ">
-              <Form layout="vertical" name="wrap" colon={false}>
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[{ required: true }]}
-                >
-                  <Input placeholder="user@gmail.com" />
-                </Form.Item>
-
+              <Form
+                layout="vertical"
+                name="wrap"
+                colon={false}
+                onFinish={registerDrivenMutation.mutate}
+              >
                 <Form.Item
                   label="phoneNumber"
                   name="phoneNumber"
