@@ -42,7 +42,7 @@ const ProductsCard = ({
           >
             <div className={`p-3 border`}>
               <div className="hover:drop-shadow-lg">
-                <Tooltip title={item?.shortDesciption}>
+                <Tooltip title={item?.shortDescription}>
                   <div
                     className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
                     style={{

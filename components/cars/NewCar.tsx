@@ -248,7 +248,7 @@ const NewCar = () => {
                   <div
                     className="px-10"
                     dangerouslySetInnerHTML={{
-                      __html: data?.products?.data?.desciption,
+                      __html: data?.products?.data?.description,
                     }}
                   />
                 );
