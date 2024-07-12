@@ -92,7 +92,7 @@ const NavHeader = () => {
                 iconPosition={"start"}
                 onClick={() => openSignIn()}
               >
-                Đăng nhập
+                Sign In
               </Button>
             </SignedOut>
 

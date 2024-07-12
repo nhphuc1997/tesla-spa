@@ -45,20 +45,33 @@ const ProductsCard = ({
                 <div className="hover:drop-shadow-lg">
                   <Tooltip title={item?.shortDesciption}>
                     <div
-                      className=" h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
+                      className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
                       style={{
                         backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
                       }}
                     />
                   </Tooltip>
 
-                  <div className=" cursor-pointer p-2 mt-[-4rem]">
+                  <div className=" cursor-pointer p-2 mt-[-6rem]">
+                    <div className="">
+                      <Typography.Text className="!text-white">
+                        2020
+                      </Typography.Text>
+                    </div>
                     <div className="w-full flex items-center">
-                      <Tag icon={<TagsOutlined />}>
+                      <Tag
+                        icon={<TagsOutlined />}
+                        className="!bg-black !text-white"
+                        bordered={false}
+                      >
                         {`${formatCurrency(item.price)}`}
                       </Tag>
 
-                      <Tag icon={<TagsOutlined />}>
+                      <Tag
+                        icon={<TagsOutlined />}
+                        className="!bg-black !text-white"
+                        bordered={false}
+                      >
                         {`${item?.category?.name}`}
                       </Tag>
                     </div>
