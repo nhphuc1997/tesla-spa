@@ -22,11 +22,11 @@ const ListPage = () => {
   const parms = useSearchParams();
   const searchCategory: any = parms.get("category");
 
-  const [searchTearm, setSearchTearm] = useState("");
-  const [category, setCategory] = useState("");
-  const [carType, setCarType] = useState("");
-  const [year, setYear] = useState<number>(0);
-  const [colorGroupFilter, setColorGroupFilter] = useState("");
+  const [searchTearm, setSearchTearm] = useState<null | string>(null);
+  const [category, setCategory] = useState<null | string>(null);
+  const [carType, setCarType] = useState<null | string>(null);
+  const [year, setYear] = useState<number | any>(0);
+  const [colorGroupFilter, setColorGroupFilter] = useState<null | string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const colorGroup = useQuery({
@@ -47,10 +47,10 @@ const ListPage = () => {
     queryFn: async () => {
       setLoading(true);
       if (
-        searchTearm === "" &&
-        category === "" &&
-        carType === "" &&
-        colorGroupFilter === "" &&
+        !searchTearm &&
+        !category &&
+        !carType &&
+        !colorGroupFilter &&
         year === 0
       ) {
         setLoading(false);
@@ -58,18 +58,18 @@ const ListPage = () => {
       }
 
       const $filter: any = {};
-      if (searchTearm !== "") {
+      if (searchTearm) {
         $filter["name"] = { $cont: searchTearm };
       }
-      if (category !== "") {
+      if (category) {
         $filter["category.name"] = category;
       }
-      if (colorGroupFilter !== "") {
+      if (colorGroupFilter) {
         console.log(colorGroupFilter, "colorGroupFilter");
 
         $filter["colorGroup.id"] = colorGroupFilter;
       }
-      if (carType !== "") {
+      if (carType) {
         $filter["kind"] = carType;
       }
       if (year !== 0) {
@@ -98,6 +98,7 @@ const ListPage = () => {
           <Col xs={12} md={3}>
             <div className="py-1">
               <Select
+                value={carType}
                 style={{ width: "100%" }}
                 placeholder="car's type"
                 onChange={(type) => setCarType(type)}
@@ -112,6 +113,7 @@ const ListPage = () => {
           <Col xs={12} md={3}>
             <div className="py-1">
               <Select
+                value={category}
                 style={{ width: "100%" }}
                 placeholder="car's automaker"
                 onChange={(category) => setCategory(category)}
@@ -126,6 +128,7 @@ const ListPage = () => {
           <Col xs={12} md={3}>
             <div className="py-1">
               <Select
+                value={colorGroupFilter}
                 style={{ width: "100%" }}
                 placeholder="colors"
                 onChange={(type) => setColorGroupFilter(type)}
@@ -140,16 +143,31 @@ const ListPage = () => {
           <Col xs={12} md={3}>
             <div className="py-1">
               <DatePicker
+                value={year}
                 style={{ width: "100%" }}
                 onChange={(e) => setYear(e.year())}
                 picker="year"
               />
             </div>
           </Col>
+        </Row>
 
-          {/* <Col xs={24} md={3}>
-            <Button icon={<DeleteFilled className="" />} />
-          </Col> */}
+        <Row className="pb-3">
+          <Col xs={24} md={2}>
+            <Button
+              block
+              icon={<DeleteFilled />}
+              onClick={() => {
+                setSearchTearm(null);
+                setCategory(null);
+                setCarType(null);
+                setYear(0);
+                setColorGroupFilter(null);
+              }}
+            >
+              Clear filter
+            </Button>
+          </Col>
         </Row>
 
         {(() => {
