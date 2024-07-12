@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:3001/backend',
-  baseURL: 'http://13.213.88.50/backend',
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_API}/${process.env.NEXT_PUBLIC_CONTEXT_API}`,
   timeout: 1000,
   headers: { 'X-Custom-Header': '' }
 });
