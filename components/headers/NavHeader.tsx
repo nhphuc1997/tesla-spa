@@ -1,5 +1,7 @@
 "use client";
 import {
+  ApartmentOutlined,
+  LeftSquareOutlined,
   LoginOutlined,
   MenuFoldOutlined,
   MenuOutlined,
@@ -100,7 +102,7 @@ const NavHeader = () => {
           className="cursor-pointer"
         >
           <div className="flex justify-start items-center h-16">
-            <MenuOutlined />
+            <ApartmentOutlined />
           </div>
         </Col>
 
