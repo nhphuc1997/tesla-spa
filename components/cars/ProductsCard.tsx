@@ -30,7 +30,7 @@ const ProductsCard = ({
 
   return (
     <>
-      <Row className="w-full border-l border-r">
+      <Row className="w-full" gutter={8}>
         {data?.data?.map((item: any) => (
           <>
             <Col
@@ -38,7 +38,7 @@ const ProductsCard = ({
               sm={12}
               md={itemPerRow}
               key={item.id}
-              className=" cursor-pointer border-r border-b border-t"
+              className="cursor-pointer"
               onClick={() => router.push(`/products/${item.id}`)}
             >
               <div className="p-4">
@@ -81,12 +81,12 @@ const ProductsCard = ({
                     </div>
                   </div>
 
-                  <div className="w-full text-center">
+                  {/* <div className="w-full text-center">
                     <Typography.Title level={5} className="!mb-0 py-1">
                       <TagsOutlined className="mr-2" />
                       {`${formatCurrency(item.price)}`}
                     </Typography.Title>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </Col>

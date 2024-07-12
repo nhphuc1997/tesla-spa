@@ -4,22 +4,16 @@ import Slicker from "@/components/Slicker";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
 import {
-  Affix,
-  Breadcrumb,
   Col,
-  DatePicker,
   DatePickerProps,
   Input,
   Radio,
   RadioChangeEvent,
   Row,
   Select,
-  Slider,
-  Space,
   Spin,
   Typography,
 } from "antd";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -113,19 +107,10 @@ const ListPage = () => {
 
   return (
     <Spin spinning={false}>
-      <Slicker
-        desktopSlidesToScroll={1}
-        desktopSlidesToShow={1}
-        alowMaxHeight={true}
-        autoPlay={false}
-        data={banner?.data?.data}
-        centerMode={false}
-      />
-
       <div className="min-h-full">
         <Row gutter={16} className="pt-3">
           <Col xs={24} md={24} className="">
-            <div className="p-3 bg-white w-full border-t ">
+            <div className="p-3 bg-white w-full">
               <Row gutter={16}>
                 <Col xs={12} md={3}>
                   <div className="">
@@ -185,17 +170,13 @@ const ListPage = () => {
               </Row>
             </div>
           </Col>
-
-          <Col xs={24} md={24}>
-            <div className="bg-white  h-auto md:min-h-dvh mt-3">
-              <ProductsCard
-                itemPerRow={6}
-                isShowLoadMore={false}
-                data={products?.data}
-              />
-            </div>
-          </Col>
         </Row>
+
+        <ProductsCard
+          itemPerRow={8}
+          isShowLoadMore={false}
+          data={products?.data}
+        />
       </div>
     </Spin>
   );

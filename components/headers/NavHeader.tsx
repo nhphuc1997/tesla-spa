@@ -77,8 +77,12 @@ const NavHeader = () => {
         </Col>
 
         <Col span={12}>
-          <div className="h-16 flex justify-center items-center">
-            <Typography.Title className="!mb-0" level={5}>
+          <div className="h-16 flex justify-center items-center cursor-pointer">
+            <Typography.Title
+              className="!mb-0"
+              level={5}
+              onClick={() => router.push("/")}
+            >
               SUPER CAR
             </Typography.Title>
           </div>
