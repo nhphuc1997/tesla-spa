@@ -5,10 +5,7 @@ import TextIntro from "@/components/TextIntro";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import { useState } from "react";
-import { Flex, Menu, MenuProps, Spin } from "antd";
-import Link from "next/link";
-
-type MenuItem = Required<MenuProps>["items"][number];
+import { Spin } from "antd";
 
 const HomePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,49 +23,18 @@ const HomePage = () => {
     },
   });
 
-  const categories = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await doGet("/categories");
-      if (response.statusCode === 200) {
-        const items: MenuItem[] = response.data.map((item: any) => ({
-          label: (
-            <Link
-              href={`/products?category=${item.name}`}
-              className="capitalize"
-            >
-              {item.name}
-            </Link>
-          ),
-          key: item.value,
-        }));
-
-        return items;
-      }
-      return [];
-    },
-  });
-
   return (
     <Spin spinning={loading}>
-      <Menu
-        className="min-h-[45px] !w-full flex justify-center items-center !border-b-0"
-        mode="horizontal"
-        items={categories?.data}
+      <Slicker
+        desktopSlidesToScroll={1}
+        desktopSlidesToShow={1}
+        alowMaxHeight={true}
+        autoPlay={false}
+        data={banner?.data?.data}
+        centerMode={false}
       />
-
-      <div className="border-l border-r py-1">
-        <Slicker
-          desktopSlidesToScroll={1}
-          desktopSlidesToShow={1}
-          alowMaxHeight={true}
-          autoPlay={false}
-          data={banner?.data?.data}
-          centerMode={false}
-        />
-        <TextIntro />
-        <ProductsCard itemPerRow={8} data={products?.data?.data} />
-      </div>
+      <TextIntro />
+      <ProductsCard itemPerRow={8} data={products?.data?.data} />
     </Spin>
   );
 };

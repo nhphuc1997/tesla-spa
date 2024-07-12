@@ -19,6 +19,11 @@ import {
 import { useEffect } from "react";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { doGet } from "@/utils/doMethod";
+import Link from "next/link";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 const NavHeader = () => {
   const { isSignedIn, user } = useUser();
@@ -62,6 +67,29 @@ const NavHeader = () => {
     },
   ];
 
+  const categories = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await doGet("/categories");
+      if (response.statusCode === 200) {
+        const items: MenuItem[] = response.data.map((item: any) => ({
+          label: (
+            <Link
+              href={`/products?category=${item.name}`}
+              className="capitalize"
+            >
+              {item.name}
+            </Link>
+          ),
+          key: item.value,
+        }));
+
+        return items;
+      }
+      return [];
+    },
+  });
+
   return (
     <Header className="border-b !px-3 sticky top-0 w-full flex items-center !bg-white z-10 h-16">
       {contextHolder}
@@ -77,15 +105,11 @@ const NavHeader = () => {
         </Col>
 
         <Col span={12}>
-          <div className="h-16 flex justify-center items-center cursor-pointer">
-            <Typography.Title
-              className="!mb-0"
-              level={5}
-              onClick={() => router.push("/")}
-            >
-              SUPER CAR
-            </Typography.Title>
-          </div>
+          <Menu
+            className="min-h-[45px] !w-full flex justify-center items-center !border-b-0"
+            mode="horizontal"
+            items={categories?.data}
+          />
         </Col>
 
         <Col span={6} className="">

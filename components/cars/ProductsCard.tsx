@@ -30,7 +30,7 @@ const ProductsCard = ({
 
   return (
     <>
-      <Row className="w-full">
+      <Row className="w-full" gutter={16}>
         {data?.data?.map((item: any, index: number) => (
           <Col
             xs={24}
@@ -40,14 +40,7 @@ const ProductsCard = ({
             className="cursor-pointer"
             onClick={() => router.push(`/products/${item.id}`)}
           >
-            <div
-              className={`p-4 border-t border-b  
-                  ${
-                    ![0, data?.data?.length - 1].includes(index)
-                      ? "border-r border-l"
-                      : ""
-                  }`}
-            >
+            <div className={`p-3 border`}>
               <div className="hover:drop-shadow-lg">
                 <Tooltip title={item?.shortDesciption}>
                   <div
