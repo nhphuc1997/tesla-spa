@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
   Row,
+  Segmented,
   Tag,
   Typography,
 } from "antd";
@@ -36,6 +37,7 @@ const NewCar = () => {
   const [opsWheelPicked, setOpsWheelPicked] = useState<any>();
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
+  const [segment, setSegment] = useState("");
 
   const submitTestDriver = useRef<any>();
 
@@ -86,7 +88,7 @@ const NewCar = () => {
 
   return (
     <Row gutter={16} className="py-3">
-      <Col xs={24} md={12}>
+      <Col xs={24} md={24}>
         <div className="p-3 h-auto w-full bg-white ">
           <div className="mx-3">
             <Slicker
@@ -101,100 +103,133 @@ const NewCar = () => {
 
           <Divider />
 
-          <div className="w-full flex justify-between items-center flex-col lg:flex-row">
-            <Descriptions
-              title={
-                <Typography.Title level={5} className="!m-0">
-                  Thông số cơ bản
-                </Typography.Title>
-              }
-              bordered={false}
-              column={1}
-              size="small"
-              className=""
-            >
-              <Descriptions.Item className="!pb-1" label="Tổng công suất">
-                {data?.products?.data?.productBasicParam.total_capacity}
-              </Descriptions.Item>
-              <Descriptions.Item
-                className="!pb-1"
-                label="Mô-men xoắn (Nm/vòng/phút)"
-              >
-                {data?.products?.data?.productBasicParam.moment}
-              </Descriptions.Item>
-              <Descriptions.Item
-                className="!pb-1"
-                label="Tăng tốc (0-100 km/h)"
-              >
-                {data?.products?.data?.productBasicParam.acceleration}
-              </Descriptions.Item>
-            </Descriptions>
-
-            <Descriptions
-              title={
-                <Typography.Title level={5} className="!m-0">
-                  Kích thước tổng thể (mm)
-                </Typography.Title>
-              }
-              column={1}
-              size="small"
-            >
-              <Descriptions.Item className="!pb-1" label="Dài">
-                {data?.products?.data?.productBasicSize.length}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Rộng">
-                {data?.products?.data?.productBasicSize.width}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Cao">
-                {data?.products?.data?.productBasicSize.height}
-              </Descriptions.Item>
-            </Descriptions>
+          <div className="flex justify-start items-center py-3">
+            <Segmented
+              defaultValue="center"
+              onChange={(value) => setSegment(value)}
+              options={["Technical", "Mechanical"]}
+            />
           </div>
 
-          <div className="py-3">
-            <Descriptions
-              title={
-                <Typography.Title level={5} className="!m-0">
-                  Động cơ
-                </Typography.Title>
-              }
-              column={2}
-              size="small"
-              layout="horizontal"
-            >
-              <Descriptions.Item className="!pb-1" label="Mã động cơ">
-                {data?.products?.data?.productBasicEngine.code}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Loại">
-                {data?.products?.data?.productBasicEngine.type}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Dung tích">
-                {data?.products?.data?.productBasicEngine.displacementVol}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Công suất cực đại">
-                {data?.products?.data?.productBasicEngine.maxRound}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Mô-men xoắn cực đại">
-                {data?.products?.data?.productBasicEngine.maxMoment}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Tiêu chuẩn khí thải">
-                {data?.products?.data?.productBasicEngine.standH2O}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Hộp số">
-                {data?.products?.data?.productBasicEngine.code}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Hệ thống truyền động">
-                {data?.products?.data?.productBasicEngine.moveSystem}
-              </Descriptions.Item>
-              <Descriptions.Item className="!pb-1" label="Chế độ lái">
-                {data?.products?.data?.productBasicEngine.driverMode}
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
+          {(() => {
+            if (segment === "Technical") {
+              return (
+                <div className="flex justify-between items-center flex-col">
+                  <div className="pb-3">
+                    <Descriptions
+                      title={
+                        <Typography.Title level={5} className="!m-0">
+                          Thông số cơ bản
+                        </Typography.Title>
+                      }
+                      bordered={false}
+                      column={3}
+                      size="small"
+                      className=""
+                    >
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Tổng công suất"
+                      >
+                        {data?.products?.data?.productBasicParam.total_capacity}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Mô-men xoắn (Nm/vòng/phút)"
+                      >
+                        {data?.products?.data?.productBasicParam.moment}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        className="!pb-1"
+                        label="Tăng tốc (0-100 km/h)"
+                      >
+                        {data?.products?.data?.productBasicParam.acceleration}
+                      </Descriptions.Item>
+                    </Descriptions>
+                  </div>
+
+                  <Descriptions
+                    title={
+                      <Typography.Title level={5} className="!m-0">
+                        Kích thước tổng thể (mm)
+                      </Typography.Title>
+                    }
+                    column={3}
+                    size="small"
+                  >
+                    <Descriptions.Item className="!pb-1" label="Dài">
+                      {data?.products?.data?.productBasicSize.length}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Rộng">
+                      {data?.products?.data?.productBasicSize.width}
+                    </Descriptions.Item>
+                    <Descriptions.Item className="!pb-1" label="Cao">
+                      {data?.products?.data?.productBasicSize.height}
+                    </Descriptions.Item>
+                  </Descriptions>
+                </div>
+              );
+            }
+
+            return (
+              <div className="py-3">
+                <Descriptions
+                  title={
+                    <Typography.Title level={5} className="!m-0">
+                      Động cơ
+                    </Typography.Title>
+                  }
+                  column={3}
+                  size="small"
+                  layout="horizontal"
+                >
+                  <Descriptions.Item className="!pb-1" label="Mã động cơ">
+                    {data?.products?.data?.productBasicEngine.code}
+                  </Descriptions.Item>
+                  <Descriptions.Item className="!pb-1" label="Loại">
+                    {data?.products?.data?.productBasicEngine.type}
+                  </Descriptions.Item>
+                  <Descriptions.Item className="!pb-1" label="Dung tích">
+                    {data?.products?.data?.productBasicEngine.displacementVol}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    className="!pb-1"
+                    label="Công suất cực đại"
+                  >
+                    {data?.products?.data?.productBasicEngine.maxRound}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    className="!pb-1"
+                    label="Mô-men xoắn cực đại"
+                  >
+                    {data?.products?.data?.productBasicEngine.maxMoment}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    className="!pb-1"
+                    label="Tiêu chuẩn khí thải"
+                  >
+                    {data?.products?.data?.productBasicEngine.standH2O}
+                  </Descriptions.Item>
+                  <Descriptions.Item className="!pb-1" label="Hộp số">
+                    {data?.products?.data?.productBasicEngine.code}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    className="!pb-1"
+                    label="Hệ thống truyền động"
+                  >
+                    {data?.products?.data?.productBasicEngine.moveSystem}
+                  </Descriptions.Item>
+                  <Descriptions.Item className="!pb-1" label="Chế độ lái">
+                    {data?.products?.data?.productBasicEngine.driverMode}
+                  </Descriptions.Item>
+                </Descriptions>
+              </div>
+            );
+          })()}
         </div>
       </Col>
 
-      <Col xs={24} md={12}>
+      <Col xs={24} md={24}>
         <div className="p-6 bg-white  shadow-sm">
           <div className="pb-3">
             <div>

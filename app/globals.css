@@ -50,3 +50,7 @@ body {
 .ant-input, .ant-select-selector, .ant-btn, .ant-picker {
   border-radius: unset !important;
 }
+
+.ant-descriptions-header {
+  margin-bottom: 8px !important;
+}
