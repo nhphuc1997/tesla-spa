@@ -7,6 +7,7 @@ import {
   Button,
   Col,
   DatePicker,
+  Empty,
   Input,
   Radio,
   Row,
@@ -151,11 +152,19 @@ const ListPage = () => {
           </Col> */}
         </Row>
 
-        <ProductsCard
-          itemPerRow={8}
-          isShowLoadMore={false}
-          data={products?.data}
-        />
+        {(() => {
+          if (products?.data?.data?.length) {
+            return (
+              <ProductsCard
+                itemPerRow={8}
+                isShowLoadMore={false}
+                data={products?.data}
+              />
+            );
+          }
+
+          return <Empty className="py-36" />;
+        })()}
       </div>
     </Spin>
   );
