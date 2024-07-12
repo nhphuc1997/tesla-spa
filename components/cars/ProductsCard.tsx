@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import { Col, Divider, FloatButton, Row, Statistic, Tag, Tooltip } from "antd";
 import { Image, Button, Typography } from "antd";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -41,13 +42,16 @@ const ProductsCard = ({
               onClick={() => router.push(`/products/${item.id}`)}
             >
               <div className="p-4">
-                <div className="">
-                  <div
-                    className=" h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full "
-                    style={{
-                      backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
-                    }}
-                  />
+                <div className="hover:drop-shadow-lg">
+                  <Tooltip title={item?.shortDesciption}>
+                    <div
+                      className=" h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
+                      style={{
+                        backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
+                      }}
+                    />
+                  </Tooltip>
+
                   <div className=" cursor-pointer p-2 mt-[-4rem]">
                     <div className="w-full flex items-center">
                       <Tag icon={<TagsOutlined />}>
