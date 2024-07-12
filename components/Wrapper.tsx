@@ -14,7 +14,7 @@ export default function Wrapper({
   return (
     <QueryClientProvider client={queryClient}>
       <AntdRegistry>
-        <Layout className="w-full min-h-dvh !bg-white">
+        <Layout className="w-full !min-h-dvh !bg-white">
           <NavHeader />
 
           <Content className="mx-3 border-l border-r">{children}</Content>
