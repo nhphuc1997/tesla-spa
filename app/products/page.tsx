@@ -14,7 +14,7 @@ const ListPage = () => {
   const [searchTearm, setSearchTearm] = useState<null | string>(null);
   const [category, setCategory] = useState<null | string>(null);
   const [carType, setCarType] = useState<null | string>(null);
-  const [year, setYear] = useState<number | any>(0);
+  const [yearFilter, setYearFilter] = useState<null | any>(null);
   const [colorGroupFilter, setColorGroupFilter] = useState<null | string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -31,7 +31,7 @@ const ListPage = () => {
   const products = useQuery({
     queryKey: [
       "products",
-      { searchTearm, category, colorGroupFilter, carType, year },
+      { searchTearm, category, colorGroupFilter, carType, year: yearFilter },
     ],
     queryFn: async () => {
       setLoading(true);
@@ -40,7 +40,7 @@ const ListPage = () => {
         !category &&
         !carType &&
         !colorGroupFilter &&
-        year === 0
+        !yearFilter
       ) {
         setLoading(false);
         return doGet("/products");
@@ -59,8 +59,8 @@ const ListPage = () => {
       if (carType) {
         $filter["kind"] = carType;
       }
-      if (year !== 0) {
-        $filter["manufactureYear"] = year;
+      if (yearFilter) {
+        $filter["manufactureYear"] = yearFilter.year();
       }
 
       const result = await doGet(`/products`, { s: JSON.stringify($filter) });
@@ -70,6 +70,8 @@ const ListPage = () => {
   });
 
   useEffect(() => setCategory(query), [query]);
+
+  console.log(yearFilter);
 
   return (
     <Spin spinning={loading}>
@@ -132,9 +134,9 @@ const ListPage = () => {
           <Col xs={12} md={3}>
             <div className="py-1">
               <DatePicker
-                value={year}
+                value={yearFilter}
                 style={{ width: "100%" }}
-                onChange={(e) => setYear(e.year())}
+                onChange={(value: any) => setYearFilter(value)}
                 picker="year"
               />
             </div>
@@ -150,7 +152,7 @@ const ListPage = () => {
                 setSearchTearm(null);
                 setCategory(null);
                 setCarType(null);
-                setYear(0);
+                setYearFilter(null);
                 setColorGroupFilter(null);
               }}
             >

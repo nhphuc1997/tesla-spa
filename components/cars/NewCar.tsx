@@ -40,7 +40,7 @@ const NewCar = () => {
   const [opsColorPicked, setOpsColorPicked] = useState<any>();
   const [opsWheelPicked, setOpsWheelPicked] = useState<any>();
   const [opsInteratorPicked, setOpsInteratorPicked] = useState<any>();
-  const [open, setOpen] = useState<boolean>(false);
+  const [openModalRegistry, setOpenModalRegistry] = useState<boolean>(false);
   const [segment, setSegment] = useState("Options");
   const [openModalOrder, setOpenModalOrder] = useState(false);
 
@@ -92,11 +92,11 @@ const NewCar = () => {
     },
     onSuccess() {
       api.open({ message: "", description: "Registry driven successfully" });
-      setOpen(false);
+      setOpenModalRegistry(false);
     },
     onError() {
       api.open({ message: "", description: "Registry driven failed" });
-      setOpen(false);
+      setOpenModalRegistry(false);
     },
   });
 
@@ -163,7 +163,7 @@ const NewCar = () => {
               </Button>
               <Button
                 className="mx-3 !bg-black !text-white"
-                onClick={() => setOpen(true)}
+                onClick={() => setOpenModalRegistry(true)}
               >
                 REGISTRY
               </Button>
@@ -427,8 +427,8 @@ const NewCar = () => {
       </Modal>
 
       <Modal
-        open={open}
-        onCancel={() => setOpen(false)}
+        open={openModalRegistry}
+        onCancel={() => setOpenModalRegistry(false)}
         onOk={() => submitTestDriven?.current.click()}
       >
         <div className="w-full">
