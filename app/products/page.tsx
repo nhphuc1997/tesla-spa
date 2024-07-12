@@ -3,24 +3,13 @@ import ProductsCard from "@/components/cars/ProductsCard";
 import { doGet } from "@/utils/doMethod";
 import { DeleteFilled } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Empty,
-  Input,
-  Radio,
-  Row,
-  Select,
-  Spin,
-  Typography,
-} from "antd";
+import { Button, Col, DatePicker, Empty, Input, Row, Select, Spin } from "antd";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ListPage = () => {
   const parms = useSearchParams();
-  const searchCategory: any = parms.get("category");
+  const query: any = parms.get("category");
 
   const [searchTearm, setSearchTearm] = useState<null | string>(null);
   const [category, setCategory] = useState<null | string>(null);
@@ -79,6 +68,8 @@ const ListPage = () => {
       return result;
     },
   });
+
+  useEffect(() => setCategory(query), [query]);
 
   return (
     <Spin spinning={loading}>
