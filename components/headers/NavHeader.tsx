@@ -39,7 +39,7 @@ const NavHeader = () => {
           <SignedIn>
             <Typography.Text onClick={() => signOut()}>
               <LoginOutlined className="mr-2" />
-              Đăng xuất
+              Sign Out
             </Typography.Text>
           </SignedIn>
         </div>

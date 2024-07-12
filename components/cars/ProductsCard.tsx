@@ -52,26 +52,13 @@ const ProductsCard = ({
                     />
                   </Tooltip>
 
-                  <div className=" cursor-pointer p-2 mt-[-6rem]">
-                    <div className="">
-                      <Typography.Text className="!text-white">
-                        2020
-                      </Typography.Text>
-                    </div>
+                  <div className="cursor-pointer p-2 mt-[-4rem]">
                     <div className="w-full flex items-center">
-                      <Tag
-                        icon={<TagsOutlined />}
-                        className="!bg-black !text-white"
-                        bordered={false}
-                      >
-                        {`${formatCurrency(item.price)}`}
+                      <Tag className="!bg-black !text-white" bordered={false}>
+                        2020
                       </Tag>
 
-                      <Tag
-                        icon={<TagsOutlined />}
-                        className="!bg-black !text-white"
-                        bordered={false}
-                      >
+                      <Tag className="!bg-black !text-white" bordered={false}>
                         {`${item?.category?.name}`}
                       </Tag>
                     </div>
@@ -92,6 +79,13 @@ const ProductsCard = ({
                         SEAT {item.seat}
                       </Typography.Title>
                     </div>
+                  </div>
+
+                  <div className="w-full text-center">
+                    <Typography.Title level={5} className="!mb-0 py-1">
+                      <TagsOutlined className="mr-2" />
+                      {`${formatCurrency(item.price)}`}
+                    </Typography.Title>
                   </div>
                 </div>
               </div>
