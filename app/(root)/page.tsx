@@ -56,16 +56,18 @@ const HomePage = () => {
         mode="horizontal"
         items={categories?.data}
       />
-      <Slicker
-        desktopSlidesToScroll={1}
-        desktopSlidesToShow={1}
-        alowMaxHeight={true}
-        autoPlay={false}
-        data={banner?.data?.data}
-        centerMode={false}
-      />
-      <TextIntro />
-      <ProductsCard itemPerRow={8} data={products?.data?.data} />
+      <div className="border-l border-r">
+        <Slicker
+          desktopSlidesToScroll={1}
+          desktopSlidesToShow={1}
+          alowMaxHeight={true}
+          autoPlay={false}
+          data={banner?.data?.data}
+          centerMode={false}
+        />
+        <TextIntro />
+        <ProductsCard itemPerRow={8} data={products?.data?.data} />
+      </div>
     </Spin>
   );
 };

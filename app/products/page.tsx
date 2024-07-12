@@ -1,12 +1,15 @@
 "use client";
 import ProductsCard from "@/components/cars/ProductsCard";
 import Slicker from "@/components/Slicker";
+import TextIntro from "@/components/TextIntro";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
 import {
   Col,
   DatePickerProps,
   Input,
+  Menu,
+  MenuProps,
   Radio,
   RadioChangeEvent,
   Row,
@@ -14,8 +17,11 @@ import {
   Spin,
   Typography,
 } from "antd";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 const ListPage = () => {
   const parms = useSearchParams();
@@ -31,6 +37,29 @@ const ListPage = () => {
   const { data } = useQuery({
     queryKey: ["category"],
     queryFn: async () => doGet("/categories"),
+  });
+
+  const categories = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await doGet("/categories");
+      if (response.statusCode === 200) {
+        const items: MenuItem[] = response.data.map((item: any) => ({
+          label: (
+            <Link
+              href={`/products?category=${item.name}`}
+              className="capitalize"
+            >
+              {item.name}
+            </Link>
+          ),
+          key: item.value,
+        }));
+
+        return items;
+      }
+      return [];
+    },
   });
 
   const colorGroup = useQuery({
@@ -107,77 +136,83 @@ const ListPage = () => {
 
   return (
     <Spin spinning={false}>
-      <div className="min-h-full">
-        <Row gutter={16} className="pt-3">
-          <Col xs={24} md={24} className="">
-            <div className="p-3 bg-white w-full">
-              <Row gutter={16}>
-                <Col xs={12} md={3}>
-                  <div className="">
-                    <Typography.Title level={5}>Tìm kiếm</Typography.Title>
-                    <Input
-                      placeholder="Tìm kiếm tên xe"
-                      onChange={(e) => setSearchTearm(e.target.value)}
-                    />
-                  </div>
-                </Col>
+      <Menu
+        className="!w-full flex justify-center items-center !border-b-0"
+        mode="horizontal"
+        items={categories?.data}
+      />
 
-                <Col xs={12} md={3}>
-                  <div className="">
-                    <Typography.Title level={5}>Loại xe</Typography.Title>
-                    <Select
-                      style={{ width: "100%" }}
-                      placeholder="Chọn loại xe"
-                      onChange={handleChangePickBranchCar}
-                      options={[
-                        { label: "Xe cũ", value: "OLD" },
-                        { label: "Xe mới", value: "NEW" },
-                      ]}
-                    />
-                  </div>
-                </Col>
+      <Row gutter={16} className="pt-3">
+        <Col xs={24} md={24} className="">
+          <div className="bg-white w-full">
+            <Row gutter={16}>
+              <Col xs={12} md={3}>
+                <div className="">
+                  <Typography.Title level={5}>Tìm kiếm</Typography.Title>
+                  <Input
+                    placeholder="Tìm kiếm tên xe"
+                    onChange={(e) => setSearchTearm(e.target.value)}
+                  />
+                </div>
+              </Col>
 
-                <Col xs={12} md={3}>
-                  <div className="">
-                    <Typography.Title level={5}>Hãng xe</Typography.Title>
-                    <Select
-                      style={{ width: "100%" }}
-                      placeholder="Chọn hãng xe"
-                      onChange={handleChangePickBranchCar}
-                      options={data?.data.map((item: any) => ({
-                        label: item.name,
-                        value: item.value,
-                      }))}
-                    />
-                  </div>
-                </Col>
+              <Col xs={12} md={3}>
+                <div className="">
+                  <Typography.Title level={5}>Loại xe</Typography.Title>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Chọn loại xe"
+                    onChange={handleChangePickBranchCar}
+                    options={[
+                      { label: "Xe cũ", value: "OLD" },
+                      { label: "Xe mới", value: "NEW" },
+                    ]}
+                  />
+                </div>
+              </Col>
 
-                <Col xs={12} md={8}>
-                  <div className="">
-                    <Typography.Title level={5}>Màu sắc</Typography.Title>
-                    <Radio.Group
-                      onChange={onChangePickColor}
-                      value={colorGroupFilter}
-                    >
-                      {colorGroup?.data?.data.map((item: any) => (
-                        <Radio key={item.id} className="!p-1" value={item?.id}>
-                          {item?.name}
-                        </Radio>
-                      ))}
-                    </Radio.Group>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Col>
-        </Row>
+              <Col xs={12} md={3}>
+                <div className="">
+                  <Typography.Title level={5}>Hãng xe</Typography.Title>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Chọn hãng xe"
+                    onChange={handleChangePickBranchCar}
+                    options={data?.data.map((item: any) => ({
+                      label: item.name,
+                      value: item.value,
+                    }))}
+                  />
+                </div>
+              </Col>
 
-        <ProductsCard
-          itemPerRow={8}
-          isShowLoadMore={false}
-          data={products?.data}
-        />
-      </div>
+              <Col xs={12} md={8}>
+                <div className="">
+                  <Typography.Title level={5}>Màu sắc</Typography.Title>
+                  <Radio.Group
+                    onChange={onChangePickColor}
+                    value={colorGroupFilter}
+                  >
+                    {colorGroup?.data?.data.map((item: any) => (
+                      <Radio key={item.id} className="!p-1" value={item?.id}>
+                        {item?.name}
+                      </Radio>
+                    ))}
+                  </Radio.Group>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+      </Row>
+
+      <TextIntro />
+
+      <ProductsCard
+        itemPerRow={8}
+        isShowLoadMore={false}
+        data={products?.data}
+      />
     </Spin>
   );
 };

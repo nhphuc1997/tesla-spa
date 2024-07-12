@@ -23,15 +23,15 @@ interface Props {
 
 const ProductsCard = ({
   isShowLoadMore = true,
-  itemPerRow = 4,
+  itemPerRow = 12,
   data = [],
 }: Props) => {
   const router = useRouter();
 
   return (
     <>
-      <Row className="w-full" gutter={8}>
-        {data?.data?.map((item: any) => (
+      <Row className="w-full">
+        {data?.data?.map((item: any, index: number) => (
           <>
             <Col
               xs={24}
@@ -41,7 +41,14 @@ const ProductsCard = ({
               className="cursor-pointer"
               onClick={() => router.push(`/products/${item.id}`)}
             >
-              <div className="p-4">
+              <div
+                className={`p-4 border-t border-b  
+                  ${
+                    ![0, data?.data?.length - 1].includes(index)
+                      ? "border-r border-l"
+                      : ""
+                  }`}
+              >
                 <div className="hover:drop-shadow-lg">
                   <Tooltip title={item?.shortDesciption}>
                     <div
@@ -80,13 +87,6 @@ const ProductsCard = ({
                       </Typography.Title>
                     </div>
                   </div>
-
-                  {/* <div className="w-full text-center">
-                    <Typography.Title level={5} className="!mb-0 py-1">
-                      <TagsOutlined className="mr-2" />
-                      {`${formatCurrency(item.price)}`}
-                    </Typography.Title>
-                  </div> */}
                 </div>
               </div>
             </Col>
@@ -97,7 +97,7 @@ const ProductsCard = ({
       {(() => {
         if (isShowLoadMore) {
           return (
-            <Row className="py-3 border-l border-r">
+            <Row className="py-3">
               <Col span={24} className="!flex justify-center items-center">
                 <Button
                   shape="circle"
