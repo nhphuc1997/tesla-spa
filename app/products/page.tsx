@@ -142,66 +142,57 @@ const ListPage = () => {
         items={categories?.data}
       />
 
-      <Row gutter={16} className="pt-3">
-        <Col xs={24} md={24} className="">
-          <div className="bg-white w-full">
-            <Row gutter={16}>
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Tìm kiếm</Typography.Title>
-                  <Input
-                    placeholder="Tìm kiếm tên xe"
-                    onChange={(e) => setSearchTearm(e.target.value)}
-                  />
-                </div>
-              </Col>
+      <Row gutter={16} className="py-3 px-4">
+        <Col xs={12} md={3}>
+          <div className="">
+            <Typography.Title level={5}>Tìm kiếm</Typography.Title>
+            <Input
+              placeholder="Tìm kiếm tên xe"
+              onChange={(e) => setSearchTearm(e.target.value)}
+            />
+          </div>
+        </Col>
 
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Loại xe</Typography.Title>
-                  <Select
-                    style={{ width: "100%" }}
-                    placeholder="Chọn loại xe"
-                    onChange={handleChangePickBranchCar}
-                    options={[
-                      { label: "Xe cũ", value: "OLD" },
-                      { label: "Xe mới", value: "NEW" },
-                    ]}
-                  />
-                </div>
-              </Col>
+        <Col xs={12} md={3}>
+          <div className="">
+            <Typography.Title level={5}>Loại xe</Typography.Title>
+            <Select
+              style={{ width: "100%" }}
+              placeholder="Chọn loại xe"
+              onChange={handleChangePickBranchCar}
+              options={[
+                { label: "Xe cũ", value: "OLD" },
+                { label: "Xe mới", value: "NEW" },
+              ]}
+            />
+          </div>
+        </Col>
 
-              <Col xs={12} md={3}>
-                <div className="">
-                  <Typography.Title level={5}>Hãng xe</Typography.Title>
-                  <Select
-                    style={{ width: "100%" }}
-                    placeholder="Chọn hãng xe"
-                    onChange={handleChangePickBranchCar}
-                    options={data?.data.map((item: any) => ({
-                      label: item.name,
-                      value: item.value,
-                    }))}
-                  />
-                </div>
-              </Col>
+        <Col xs={12} md={3}>
+          <div className="">
+            <Typography.Title level={5}>Hãng xe</Typography.Title>
+            <Select
+              style={{ width: "100%" }}
+              placeholder="Chọn hãng xe"
+              onChange={handleChangePickBranchCar}
+              options={data?.data.map((item: any) => ({
+                label: item.name,
+                value: item.value,
+              }))}
+            />
+          </div>
+        </Col>
 
-              <Col xs={12} md={8}>
-                <div className="">
-                  <Typography.Title level={5}>Màu sắc</Typography.Title>
-                  <Radio.Group
-                    onChange={onChangePickColor}
-                    value={colorGroupFilter}
-                  >
-                    {colorGroup?.data?.data.map((item: any) => (
-                      <Radio key={item.id} className="!p-1" value={item?.id}>
-                        {item?.name}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </div>
-              </Col>
-            </Row>
+        <Col xs={12} md={8}>
+          <div className="">
+            <Typography.Title level={5}>Màu sắc</Typography.Title>
+            <Radio.Group onChange={onChangePickColor} value={colorGroupFilter}>
+              {colorGroup?.data?.data.map((item: any) => (
+                <Radio key={item.id} className="!p-1" value={item?.id}>
+                  {item?.name}
+                </Radio>
+              ))}
+            </Radio.Group>
           </div>
         </Col>
       </Row>
