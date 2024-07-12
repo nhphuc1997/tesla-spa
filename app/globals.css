@@ -46,3 +46,7 @@ body {
 .ant-form-item {
   margin-bottom: 20px !important;
 }
+
+.ant-input, .ant-select-selector, .ant-btn, .ant-picker {
+  border-radius: unset !important;
+}
