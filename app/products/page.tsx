@@ -65,8 +65,6 @@ const ListPage = () => {
         $filter["category.name"] = category;
       }
       if (colorGroupFilter) {
-        console.log(colorGroupFilter, "colorGroupFilter");
-
         $filter["colorGroup.id"] = colorGroupFilter;
       }
       if (carType) {
