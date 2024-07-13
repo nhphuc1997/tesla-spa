@@ -16,12 +16,14 @@ type FieldType = {
 interface Props {
   name?: string,
   setCurrentStep: any,
-  setValueFormStep2: any,
+  valueFormStep1: any,
 }
 
-export default function FormStep2({ setCurrentStep, setValueFormStep2 }: Props) {
-  const onFinishStep2: FormProps<FieldType>['onFinish'] = (values) => {
-    setValueFormStep2(values);
+export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
+  const onFinishStep2: FormProps<FieldType>['onFinish'] = (valueFormStep2) => {
+    console.log(valueFormStep1);
+    console.log(valueFormStep2);
+
     setCurrentStep(2)
   }
 

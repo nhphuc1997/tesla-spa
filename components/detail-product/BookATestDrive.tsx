@@ -7,10 +7,6 @@ import { Result, Typography } from "antd";
 export default function BookATestDrive() {
   const [currentStep, setCurrentStep] = useState(0)
   const [valueFormStep1, setValueFormStep1] = useState(null)
-  const [valueFormStep2, setValueFormStep2] = useState(null)
-
-  console.log(valueFormStep1, 'valueFormStep1');
-  console.log(valueFormStep2, 'valueFormStep2');
 
 
   return (
@@ -25,7 +21,7 @@ export default function BookATestDrive() {
       {currentStep === 1 && (
         <FormStep2
           setCurrentStep={setCurrentStep}
-          setValueFormStep2={setValueFormStep2}
+          valueFormStep1={valueFormStep1}
         />
       )}
 
@@ -35,7 +31,7 @@ export default function BookATestDrive() {
           title={
             <div>
               <Typography.Title>
-                Book a Test Drive successfully
+                Book A Test Drive Successfully
               </Typography.Title>
 
               <Typography.Text>
