@@ -1,14 +1,13 @@
 "use client";
-import NewCar from "@/components/cars/NewCar";
 import Alloys from "@/components/detail-product/Alloys";
-import Description from "@/components/detail-product/Description";
+import Description from "@/components/detail-product/DescriptionPane";
 import ExteriorColor from "@/components/detail-product/ExteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
 import TechnicalData from "@/components/detail-product/TechnicalData";
 import { S3_URL } from "@/utils";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
-import { Carousel, Col, Descriptions, DescriptionsProps, Divider, Image, notification, Row, Segmented, Typography } from "antd";
+import { Carousel, Col, Divider, notification, Row, Segmented, Typography } from "antd";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -18,6 +17,7 @@ const DetailPage = () => {
 
   const [images, setImages] = useState<any>([]);
   const [basicParams, setBasicParams] = useState<any>({});
+  const [segment, setSegment] = useState<string>("Technical");
 
   const products = useQuery({
     queryKey: ['detail-product'], queryFn: async () => {
@@ -63,15 +63,22 @@ const DetailPage = () => {
 
           <div className="py-3">
             <Typography.Title level={5}>Configuration Overview</Typography.Title>
-            <Segmented className="!hidden lg:!block" options={["Technical data", 'Material combination', "Exterior Color", 'Alloys', 'Description']} block />
+            <Segmented
+              onChange={(value) => setSegment(value)}
+              className="!hidden lg:!block"
+              options={["Technical", 'Material', "Exterior", 'Alloys', 'Description']}
+              block
+            />
           </div>
 
           <div className="min-h-24">
-            {/* <TechnicalData basicParams={basicParams} /> */}
-            {/* <MaterialCombination /> */}
-            {/* <ExteriorColor /> */}
-            {/* <Alloys /> */}
-            <Description />
+            {(() => {
+              if (segment === 'Technical') return <TechnicalData basicParams={basicParams} />
+              if (segment === 'Material') return <MaterialCombination />
+              if (segment === 'Exterior') return <ExteriorColor />
+              if (segment === 'Alloys') return <Alloys />
+              if (segment === 'Description') return <Description />
+            })()}
           </div>
         </Col>
 
