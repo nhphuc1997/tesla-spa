@@ -14,7 +14,7 @@ export default function MaterialCombination() {
           <Typography.Paragraph ellipsis={{ rows: 4, expandable: true, symbol: 'more' }}>
             Leather/leatherette combinationr, Seats: Black-Black-Steel Grey, Dashboard: Black-Black, Carpet: Black, Headliner: Rock Grey
           </Typography.Paragraph>
-          <Button disabled className="w-1/2 !bg-black !text-white">Include in configuration</Button>
+          <Button disabled className="w-1/2" ghost>Include in configuration</Button>
         </div>
       </div>
     </div>
