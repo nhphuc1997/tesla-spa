@@ -32,6 +32,7 @@ export default function ExteriorColor({ exterior }: Props) {
                   width={120}
                   height={80}
                   src={`${S3_URL}/${item?.s3Key}`}
+                  alt=""
                 />
 
                 <Typography.Text className="font-bold">

@@ -32,6 +32,7 @@ export default function Alloy({ alloy }: Props) {
                   width={120}
                   height={120}
                   src={`${S3_URL}/${item?.s3Key}`}
+                  alt=""
                 />
                 <Typography.Text className="font-bold">
                   {formatCurrency(item?.price)}
