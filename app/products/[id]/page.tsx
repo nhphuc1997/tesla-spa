@@ -34,7 +34,7 @@ const DetailPage = () => {
   const [alloy, setAlloy] = useState<any>([]);
   const [segment, setSegment] = useState<string>("Technical");
 
-  const products = useQuery({
+  useQuery({
     queryKey: ["detail-product"],
     queryFn: async () => {
       const product = await doGet(`/products/${params?.id}`);
@@ -64,12 +64,10 @@ const DetailPage = () => {
               <Carousel arrows className="">
                 {images?.length > 0 &&
                   images?.map((item: any) => (
-                    <div className={`h-[25rem]`} key={item.id}>
+                    <div className={`h-[25rem]`} key={item?.id}>
                       <div
                         className="bg-center bg-cover bg-no-repeat h-full bg-gray-100"
-                        style={{
-                          backgroundImage: `url("${S3_URL}/${item.s3Key}")`,
-                        }}
+                        style={{ backgroundImage: `url("${S3_URL}/${item?.s3Key}")` }}
                       />
                     </div>
                   ))}
@@ -80,14 +78,14 @@ const DetailPage = () => {
               <div
                 className="bg-center bg-cover bg-no-repeat h-[12rem] bg-gray-200"
                 style={{
-                  backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")`,
+                  backgroundImage: `url("${S3_URL}/${interior[0]?.s3Key}")`,
                 }}
               />
               <Divider className="!my-[0.5rem]" />
               <div
                 className="bg-center bg-cover bg-no-repeat h-[12rem] bg-gray-200"
                 style={{
-                  backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")`,
+                  backgroundImage: `url("${S3_URL}/${material[0]?.s3Key}")`,
                 }}
               />
             </Col>
