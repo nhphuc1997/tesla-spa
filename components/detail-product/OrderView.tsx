@@ -1,5 +1,14 @@
 import { formatCurrency } from "@/utils/format-currency";
-import { Button, Descriptions, Divider, Drawer, QRCode, Result, Steps, Typography } from "antd";
+import {
+  Button,
+  Descriptions,
+  Divider,
+  Drawer,
+  QRCode,
+  Result,
+  Steps,
+  Typography,
+} from "antd";
 import BookATestDrive from "./BookATestDrive";
 import { useState } from "react";
 import FormOrder from "./forms/FormOrder";
@@ -8,15 +17,16 @@ import { CarOutlined } from "@ant-design/icons";
 import Slicker from "../Slicker";
 
 export default function OrderView() {
-  const [openDrawOrder, setOpenDrawOrder] = useState(false)
-  const [personalInfor, setOpersonalInfor] = useState(false)
-  const [currentStepOrder, setCurrentStepOrder] = useState<number>(0)
-
+  const [openDrawOrder, setOpenDrawOrder] = useState(false);
+  const [personalInfor, setOpersonalInfor] = useState(false);
+  const [currentStepOrder, setCurrentStepOrder] = useState<number>(0);
 
   return (
     <div>
       <div className="p-3 border">
-        <Typography.Title level={5} className="!mt-3 text-center">Mescedes benz</Typography.Title>
+        <Typography.Title level={5} className="!mt-3 text-center">
+          Mescedes benz
+        </Typography.Title>
         <Divider className="" />
         <div>
           <Descriptions title="" column={1}>
@@ -24,7 +34,9 @@ export default function OrderView() {
             <Descriptions.Item label="Exterior">Exterior</Descriptions.Item>
             <Descriptions.Item label="Interior">Exterior</Descriptions.Item>
             <Descriptions.Item label="Alloys">Alloys</Descriptions.Item>
-            <Descriptions.Item label="Description">Description</Descriptions.Item>
+            <Descriptions.Item label="Description">
+              Description
+            </Descriptions.Item>
           </Descriptions>
         </div>
         <Divider className="" />
@@ -35,26 +47,46 @@ export default function OrderView() {
         </div>
 
         <div>
-          <Button className="!bg-black !text-white" block onClick={() => setOpenDrawOrder(true)}>Order</Button>
+          <Button
+            className="!bg-black !text-white"
+            block
+            onClick={() => setOpenDrawOrder(true)}
+          >
+            Order
+          </Button>
         </div>
 
-        <Drawer className="" closable={false} onClose={() => setOpenDrawOrder(false)} open={openDrawOrder} size="large">
+        <Drawer
+          className=""
+          closable={false}
+          onClose={() => setOpenDrawOrder(false)}
+          open={openDrawOrder}
+          size="large"
+        >
           <div className="w-full">
-            <Typography.Title level={5} className="!mt-3 text-center">Mescedes benz</Typography.Title>
+            <Typography.Title level={5} className="!mt-3 text-center">
+              Mescedes benz
+            </Typography.Title>
             <div>
               <Descriptions title="" column={1}>
                 <Descriptions.Item label="Material">Material</Descriptions.Item>
                 <Descriptions.Item label="Exterior">Exterior</Descriptions.Item>
                 <Descriptions.Item label="Interior">Exterior</Descriptions.Item>
                 <Descriptions.Item label="Alloys">Alloys</Descriptions.Item>
-                <Descriptions.Item label="Description">Description</Descriptions.Item>
+                <Descriptions.Item label="Description">
+                  Description
+                </Descriptions.Item>
               </Descriptions>
             </div>
 
             <Divider />
 
             <div className="!pb-3">
-              <Steps className="!py-3" current={currentStepOrder} items={STEPS} />
+              <Steps
+                className="!py-3"
+                current={currentStepOrder}
+                items={STEPS}
+              />
               {currentStepOrder === 0 && (
                 <div className="w-3/4 mx-auto">
                   <FormOrder
@@ -105,13 +137,15 @@ export default function OrderView() {
         </Drawer>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-3">
         <div className="p-3 border">
-          <Typography.Title level={5} className="!mt-3 text-center">Book a test Drive</Typography.Title>
+          <Typography.Title level={5} className="!mt-3 text-center">
+            Book a test Drive
+          </Typography.Title>
           <Divider className="" />
           <BookATestDrive />
         </div>
       </div>
     </div>
-  )
+  );
 }

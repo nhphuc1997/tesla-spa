@@ -8,7 +8,15 @@ import TechnicalData from "@/components/detail-product/TechnicalData";
 import { S3_URL } from "@/utils";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
-import { Carousel, Col, Divider, notification, Row, Segmented, Typography } from "antd";
+import {
+  Carousel,
+  Col,
+  Divider,
+  notification,
+  Row,
+  Segmented,
+  Typography,
+} from "antd";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -21,64 +29,81 @@ const DetailPage = () => {
   const [segment, setSegment] = useState<string>("Technical");
 
   const products = useQuery({
-    queryKey: ['detail-product'], queryFn: async () => {
+    queryKey: ["detail-product"],
+    queryFn: async () => {
       const response = await doGet(`/products/${params?.id}`);
 
       if (response?.statusCode === 200) {
-        setImages(response?.data?.images)
-        setBasicParams(response?.data?.productBasicParam)
+        setImages(response?.data?.images);
+        setBasicParams(response?.data?.productBasicParam);
       }
-    }
-  })
+    },
+  });
 
   return (
     <div className="py-3 w-full">
       <Row gutter={8}>
-        <Col xs={24} md={18} >
+        <Col xs={24} md={18}>
           <Row gutter={8}>
             <Col xs={24} md={16} className="pb-3">
               <Carousel arrows className="">
-                {images?.length > 0 && images?.map((item: any) => (
-                  <div className={`h-[25rem]`} key={item.id}>
-                    <div
-                      className="bg-center bg-cover bg-no-repeat h-full bg-gray-100"
-                      style={{ backgroundImage: `url("${S3_URL}/${item.s3Key}")` }}
-                    />
-                  </div>
-                ))}
+                {images?.length > 0 &&
+                  images?.map((item: any) => (
+                    <div className={`h-[25rem]`} key={item.id}>
+                      <div
+                        className="bg-center bg-cover bg-no-repeat h-full bg-gray-100"
+                        style={{
+                          backgroundImage: `url("${S3_URL}/${item.s3Key}")`,
+                        }}
+                      />
+                    </div>
+                  ))}
               </Carousel>
             </Col>
 
             <Col xs={24} md={8} className="!hidden md:!block  pb-3">
               <div
                 className="bg-center bg-cover bg-no-repeat h-[12rem] bg-gray-200"
-                style={{ backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")` }}
+                style={{
+                  backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")`,
+                }}
               />
               <Divider className="!my-[0.5rem]" />
               <div
                 className="bg-center bg-cover bg-no-repeat h-[12rem] bg-gray-200"
-                style={{ backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")` }}
+                style={{
+                  backgroundImage: `url("${S3_URL}/${images[0]?.s3Key}")`,
+                }}
               />
             </Col>
           </Row>
 
           <div className="py-3">
-            <Typography.Title level={5}>Configuration Overview</Typography.Title>
+            <Typography.Title level={5}>
+              Configuration Overview
+            </Typography.Title>
             <Segmented
               onChange={(value) => setSegment(value)}
               className="!hidden lg:!block"
-              options={["Technical", 'Material', "Exterior", 'Alloys', 'Description']}
+              options={[
+                "Technical",
+                "Material",
+                "Exterior",
+                "Alloys",
+                "Description",
+              ]}
               block
             />
           </div>
 
           <div className="min-h-24">
             {(() => {
-              if (segment === 'Technical') return <TechnicalData basicParams={basicParams} />
-              if (segment === 'Material') return <MaterialCombination />
-              if (segment === 'Exterior') return <ExteriorColor />
-              if (segment === 'Alloys') return <Alloys />
-              if (segment === 'Description') return <Description />
+              if (segment === "Technical")
+                return <TechnicalData basicParams={basicParams} />;
+              if (segment === "Material") return <MaterialCombination />;
+              if (segment === "Exterior") return <ExteriorColor />;
+              if (segment === "Alloys") return <Alloys />;
+              if (segment === "Description") return <Description />;
             })()}
           </div>
         </Col>
