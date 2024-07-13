@@ -1,5 +1,7 @@
 "use client";
 import NewCar from "@/components/cars/NewCar";
+import MaterialCombination from "@/components/detail-product/MaterialCombine";
+import TechnicalData from "@/components/detail-product/TechnicalData";
 import { S3_URL } from "@/utils";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
@@ -55,59 +57,19 @@ const DetailPage = () => {
               />
             </Col>
           </Row>
-        </Col>
-        <Col xs={24} md={6} >1</Col>
-      </Row>
 
-      <Row>
-        <Col xs={24} md={18} >
           <div className="py-3">
             <Typography.Title level={5}>Configuration Overview</Typography.Title>
-            <Segmented options={["Technical data", "Exterior Color", 'Material combination', 'Exterior paint finishes', 'Alloys', 'Description']} block />
+            <Segmented className="!hidden lg:!block" options={["Technical data", 'Material combination', "Exterior Color", 'Exterior paint finishes', 'Alloys', 'Description']} block />
+          </div>
+
+          <div className="min-h-24">
+            {/* <TechnicalData basicParams={basicParams} /> */}
+            {/* <MaterialCombination /> */}
           </div>
         </Col>
-      </Row>
 
-      <Row>
-        <Col xs={24} md={18} >
-          <div className="p-10 border">
-            <div className="pb-3">
-              <Descriptions title="Performance" column={{ xs: 1, md: 3 }}>
-                <Descriptions.Item label="Max. output">{basicParams.total_capacity}</Descriptions.Item>
-                <Descriptions.Item label="Top speed">{basicParams.moment}</Descriptions.Item>
-                <Descriptions.Item label="Acceleration ">{basicParams.acceleration}</Descriptions.Item>
-              </Descriptions>
-            </div>
-
-            <div className="pb-3">
-              <Descriptions title="Weights" column={{ xs: 1, md: 2 }}>
-                <Descriptions.Item label="Unladen weight">{basicParams.total_capacity}</Descriptions.Item>
-                <Descriptions.Item label="Gross weight limit">{basicParams.total_capacity}</Descriptions.Item>
-                <Descriptions.Item label="Roof load limit/nose weight limit">{basicParams.total_capacity}</Descriptions.Item>
-              </Descriptions>
-            </div>
-
-            <div className="pb-3">
-              <Descriptions title="Trailer Weight Limit" column={{ xs: 1, md: 3 }}>
-                <Descriptions.Item label="Unbraked">{basicParams.total_capacity}</Descriptions.Item>
-                <Descriptions.Item label="At 12% gradient">{basicParams.total_capacity}</Descriptions.Item>
-                <Descriptions.Item label="At 8% gradient">{basicParams.total_capacity}</Descriptions.Item>
-              </Descriptions>
-            </div>
-
-            <div className="pb-3">
-              <Descriptions title="Volumes" column={{ xs: 1, md: 3 }}>
-                <Descriptions.Item label="Luggage compartment">{basicParams.total_capacity}</Descriptions.Item>
-              </Descriptions>
-            </div>
-
-            <div className="">
-              <Descriptions title="Driveline" column={{ xs: 1, md: 3 }}>
-                <Descriptions.Item label="Transmission">{basicParams.total_capacity}</Descriptions.Item>
-              </Descriptions>
-            </div>
-          </div>
-        </Col>
+        <Col xs={24} md={6} >1</Col>
       </Row>
     </div>
   );
