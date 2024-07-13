@@ -1,5 +1,6 @@
 'use client'
 import { S3_URL } from "@/utils";
+import { formatCurrency } from "@/utils/format-currency";
 import { Radio, Image, Typography, Empty } from "antd";
 import { useState } from "react";
 
@@ -22,15 +23,17 @@ export default function InteriorColor({ interior }: Props) {
         <div className="flex flex-col xl:flex-row">
           {interior?.map((item: any) => (
             <Radio value={item.id}>
-              <Image
-                preview={false}
-                width={120}
-                height={80}
-                src={`${S3_URL}/${item?.s3Key}`}
-              />
+              <div className="flex-col flex justify-start items-center">
+                <Image
+                  preview={false}
+                  width={120}
+                  height={80}
+                  src={`${S3_URL}/${item?.s3Key}`}
+                />
+                <Typography.Text className="font-bold">{formatCurrency(item?.price)}</Typography.Text>
+              </div>
             </Radio>
           ))}
-
         </div>
       </Radio.Group>
     </div>

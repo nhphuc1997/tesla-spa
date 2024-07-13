@@ -1,5 +1,5 @@
 "use client";
-import Alloys from "@/components/detail-product/Alloys";
+import Alloy from "@/components/detail-product/Alloy";
 import Description from "@/components/detail-product/DescriptionPane";
 import ExteriorColor from "@/components/detail-product/ExteriorColor";
 import InteriorColor from "@/components/detail-product/InteriorColor";
@@ -31,6 +31,7 @@ const DetailPage = () => {
   const [material, setMaterial] = useState<any>([]);
   const [exterior, setExterior] = useState<any>([]);
   const [interior, setInterior] = useState<any>([]);
+  const [alloy, setAlloy] = useState<any>([]);
   const [segment, setSegment] = useState<string>("Technical");
 
   const products = useQuery({
@@ -48,6 +49,7 @@ const DetailPage = () => {
           setMaterial(category?.data?.material)
           setExterior(category?.data?.exterior)
           setInterior(category?.data?.interior)
+          setAlloy(category?.data?.alloy)
         }
       }
     },
@@ -124,7 +126,9 @@ const DetailPage = () => {
               if (segment === "Interior") {
                 return <InteriorColor interior={interior} />;
               }
-              if (segment === "Alloys") return <Alloys />;
+              if (segment === "Alloys") {
+                return <Alloy alloy={alloy} />;
+              }
               if (segment === "Description") return <Description description={description} />;
             })()}
           </div>
