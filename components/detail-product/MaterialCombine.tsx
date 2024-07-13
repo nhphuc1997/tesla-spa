@@ -1,4 +1,5 @@
 import { S3_URL } from "@/utils";
+import { formatCurrency } from "@/utils/format-currency";
 import { Button, Empty, Image, Typography } from "antd";
 
 interface Props {
@@ -26,8 +27,11 @@ export default function MaterialCombination({ material }: Props) {
           <div className="mx-3" />
           <div className="flex  flex-col">
             <Typography.Paragraph ellipsis={{ rows: 4, expandable: true, symbol: 'more' }}>
-              {item.name}
+              {item?.name}
             </Typography.Paragraph>
+            <Typography.Text className="py-3">
+              {formatCurrency(item?.price)}
+            </Typography.Text>
             <Button disabled className="w-1/2" ghost>Included in configuration</Button>
           </div>
         </div>
