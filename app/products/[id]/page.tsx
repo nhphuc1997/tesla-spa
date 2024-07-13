@@ -1,6 +1,7 @@
 "use client";
 import NewCar from "@/components/cars/NewCar";
 import Alloys from "@/components/detail-product/Alloys";
+import Description from "@/components/detail-product/Description";
 import ExteriorColor from "@/components/detail-product/ExteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
 import TechnicalData from "@/components/detail-product/TechnicalData";
@@ -68,8 +69,9 @@ const DetailPage = () => {
           <div className="min-h-24">
             {/* <TechnicalData basicParams={basicParams} /> */}
             {/* <MaterialCombination /> */}
-            <ExteriorColor />
+            {/* <ExteriorColor /> */}
             {/* <Alloys /> */}
+            <Description />
           </div>
         </Col>
 
