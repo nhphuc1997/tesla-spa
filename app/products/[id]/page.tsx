@@ -2,6 +2,7 @@
 import Alloys from "@/components/detail-product/Alloys";
 import Description from "@/components/detail-product/DescriptionPane";
 import ExteriorColor from "@/components/detail-product/ExteriorColor";
+import InteriorColor from "@/components/detail-product/InteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
 import OrderView from "@/components/detail-product/OrderView";
 import TechnicalData from "@/components/detail-product/TechnicalData";
@@ -26,6 +27,7 @@ const DetailPage = () => {
 
   const [images, setImages] = useState<any>([]);
   const [technical, setTechnical] = useState<any>({});
+  const [description, setDescription] = useState<any>("");
   const [material, setMaterial] = useState<any>([]);
   const [exterior, setExterior] = useState<any>([]);
   const [interior, setInterior] = useState<any>([]);
@@ -39,6 +41,7 @@ const DetailPage = () => {
       if (product?.statusCode === 200) {
         setImages(product?.data?.images);
         setTechnical(product?.data?.technical);
+        setDescription(product?.data?.description)
 
         const category = await doGet(`/categories/${product?.data.categoryId}`)
         if (category?.statusCode === 200) {
@@ -99,6 +102,7 @@ const DetailPage = () => {
                 "Technical",
                 "Material",
                 "Exterior",
+                "Interior",
                 "Alloys",
                 "Description",
               ]}
@@ -114,9 +118,14 @@ const DetailPage = () => {
               if (segment === "Material") {
                 return <MaterialCombination material={material} />;
               }
-              if (segment === "Exterior") return <ExteriorColor />;
+              if (segment === "Exterior") {
+                return <ExteriorColor exterior={exterior} />;
+              }
+              if (segment === "Interior") {
+                return <InteriorColor interior={interior} />;
+              }
               if (segment === "Alloys") return <Alloys />;
-              if (segment === "Description") return <Description />;
+              if (segment === "Description") return <Description description={description} />;
             })()}
           </div>
         </Col>
