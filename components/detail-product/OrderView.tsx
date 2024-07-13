@@ -53,14 +53,13 @@ export default function OrderView() {
             <Divider />
 
             <div className="">
-              <Steps className="!p-5" current={currentStepOrder} items={STEPS} />
+              <Steps className="!py-5" current={currentStepOrder} items={STEPS} />
               {currentStepOrder === 0 && (
                 <div>
                   <FormOrder
                     setOpersonalInfor={setOpersonalInfor}
                     setCurrentStepOrder={setCurrentStepOrder}
                   />
-                  <Divider />
                 </div>
               )}
 

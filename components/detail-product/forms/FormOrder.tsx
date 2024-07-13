@@ -1,6 +1,6 @@
 'use client'
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, FormProps, Input } from "antd";
+import { Button, Divider, Form, FormProps, Input } from "antd";
 import { useState } from "react";
 
 type FieldType = {
@@ -52,6 +52,8 @@ export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Pr
           />
         </Form.Item>
       </div>
+
+      <Divider />
 
       <div className="flex justify-end items-center">
         <Button className="!bg-black !text-white" htmlType="submit">

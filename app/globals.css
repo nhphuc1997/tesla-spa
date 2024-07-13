@@ -53,7 +53,8 @@ body {
 .ant-picker,
 .ant-segmented,
 .ant-segmented-item,
-.ant-input-affix-wrapper {
+.ant-input-affix-wrapper,
+.ant-qrcode {
   border-radius: unset !important;
 }
 
