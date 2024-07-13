@@ -1,5 +1,7 @@
 "use client";
 import NewCar from "@/components/cars/NewCar";
+import Alloys from "@/components/detail-product/Alloys";
+import ExteriorColor from "@/components/detail-product/ExteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
 import TechnicalData from "@/components/detail-product/TechnicalData";
 import { S3_URL } from "@/utils";
@@ -60,12 +62,14 @@ const DetailPage = () => {
 
           <div className="py-3">
             <Typography.Title level={5}>Configuration Overview</Typography.Title>
-            <Segmented className="!hidden lg:!block" options={["Technical data", 'Material combination', "Exterior Color", 'Exterior paint finishes', 'Alloys', 'Description']} block />
+            <Segmented className="!hidden lg:!block" options={["Technical data", 'Material combination', "Exterior Color", 'Alloys', 'Description']} block />
           </div>
 
           <div className="min-h-24">
             {/* <TechnicalData basicParams={basicParams} /> */}
             {/* <MaterialCombination /> */}
+            <ExteriorColor />
+            {/* <Alloys /> */}
           </div>
         </Col>
 

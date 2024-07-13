@@ -1,4 +1,4 @@
-import { Descriptions } from "antd";
+import { Descriptions, Typography } from "antd";
 
 interface Props {
   name?: string,
@@ -8,6 +8,7 @@ interface Props {
 export default function TechnicalData({ basicParams }: Props) {
   return (
     <div className="p-10 border">
+      <Typography.Title level={5}>Technical Data</Typography.Title>
       <div className="pb-3">
         <Descriptions title="Performance" column={{ xs: 1, md: 3 }}>
           <Descriptions.Item label="Max. output">{basicParams.total_capacity}</Descriptions.Item>
