@@ -25,17 +25,27 @@ const DetailPage = () => {
   const [api, contextHolder] = notification.useNotification();
 
   const [images, setImages] = useState<any>([]);
-  const [basicParams, setBasicParams] = useState<any>({});
+  const [technical, setTechnical] = useState<any>({});
+  const [material, setMaterial] = useState<any>([]);
+  const [exterior, setExterior] = useState<any>([]);
+  const [interior, setInterior] = useState<any>([]);
   const [segment, setSegment] = useState<string>("Technical");
 
   const products = useQuery({
     queryKey: ["detail-product"],
     queryFn: async () => {
-      const response = await doGet(`/products/${params?.id}`);
+      const product = await doGet(`/products/${params?.id}`);
 
-      if (response?.statusCode === 200) {
-        setImages(response?.data?.images);
-        setBasicParams(response?.data?.productBasicParam);
+      if (product?.statusCode === 200) {
+        setImages(product?.data?.images);
+        setTechnical(product?.data?.technical);
+
+        const category = await doGet(`/categories/${product?.data.categoryId}`)
+        if (category?.statusCode === 200) {
+          setMaterial(category?.data?.material)
+          setExterior(category?.data?.exterior)
+          setInterior(category?.data?.interior)
+        }
       }
     },
   });
@@ -98,9 +108,12 @@ const DetailPage = () => {
 
           <div className="min-h-24">
             {(() => {
-              if (segment === "Technical")
-                return <TechnicalData basicParams={basicParams} />;
-              if (segment === "Material") return <MaterialCombination />;
+              if (segment === "Technical") {
+                return <TechnicalData technical={technical} />;
+              }
+              if (segment === "Material") {
+                return <MaterialCombination material={material} />;
+              }
               if (segment === "Exterior") return <ExteriorColor />;
               if (segment === "Alloys") return <Alloys />;
               if (segment === "Description") return <Description />;
