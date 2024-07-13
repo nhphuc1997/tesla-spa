@@ -54,7 +54,8 @@ body {
 .ant-segmented,
 .ant-segmented-item,
 .ant-input-affix-wrapper,
-.ant-qrcode {
+.ant-qrcode,
+.ant-modal-content {
   border-radius: unset !important;
 }
 

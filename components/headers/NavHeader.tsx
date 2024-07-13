@@ -121,6 +121,7 @@ const NavHeader = () => {
                 icon={<LoginOutlined />}
                 iconPosition={"start"}
                 onClick={() => openSignIn()}
+                className="!bg-black !text-white"
               >
                 Sign In
               </Button>
