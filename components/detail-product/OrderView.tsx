@@ -63,6 +63,7 @@ export default function OrderView() {
                   <Divider />
                 </div>
               )}
+
               {currentStepOrder === 1 && (
                 <div>
                   <div className="flex justify-center items-center">
@@ -83,7 +84,7 @@ export default function OrderView() {
               {currentStepOrder === 2 && (
                 <Result
                   icon={<CarOutlined />}
-                  title="Great, we have done all the operations!"
+                  title="Great, you have done all the operations!"
                 />
               )}
             </div>
