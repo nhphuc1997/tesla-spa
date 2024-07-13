@@ -11,3 +11,9 @@ export const DISTANCE_RADIUS = [
   { value: '90mi', label: '90mi' },
   { value: '100mi', label: '100mi' },
 ]
+
+export const STEPS = [
+  { title: 'Provider Informatin' },
+  { title: 'Pay' },
+  { title: 'Done' },
+];

@@ -52,7 +52,8 @@ body {
 .ant-btn,
 .ant-picker,
 .ant-segmented,
-.ant-segmented-item {
+.ant-segmented-item,
+.ant-input-affix-wrapper {
   border-radius: unset !important;
 }
 
