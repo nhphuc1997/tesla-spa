@@ -24,7 +24,7 @@ export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Pr
   }
 
   return (
-    <Form name="basic" autoComplete="off" onFinish={onFinish} className="!px-10">
+    <Form name="basic" autoComplete="off" onFinish={onFinish} className="">
       <div className="pb-2">
         <Form.Item<FieldType> name="firstName" rules={[{ required: true }]}>
           <Input
@@ -52,8 +52,6 @@ export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Pr
           />
         </Form.Item>
       </div>
-
-      <Divider />
 
       <div className="flex justify-end items-center">
         <Button className="!bg-black !text-white" htmlType="submit">

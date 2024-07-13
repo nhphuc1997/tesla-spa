@@ -5,6 +5,7 @@ import { useState } from "react";
 import FormOrder from "./forms/FormOrder";
 import { STEPS } from "@/utils";
 import { CarOutlined } from "@ant-design/icons";
+import Slicker from "../Slicker";
 
 export default function OrderView() {
   const [openDrawOrder, setOpenDrawOrder] = useState(false)
@@ -52,16 +53,18 @@ export default function OrderView() {
 
             <Divider />
 
-            <div className="">
-              <Steps className="!py-5" current={currentStepOrder} items={STEPS} />
+            <div className="!pb-3">
+              <Steps className="!py-3" current={currentStepOrder} items={STEPS} />
               {currentStepOrder === 0 && (
-                <div>
+                <div className="w-3/4 mx-auto">
                   <FormOrder
                     setOpersonalInfor={setOpersonalInfor}
                     setCurrentStepOrder={setCurrentStepOrder}
                   />
                 </div>
               )}
+
+              <Divider />
 
               {currentStepOrder === 1 && (
                 <div>
@@ -86,6 +89,17 @@ export default function OrderView() {
                   title="Great, you have done all the operations!"
                 />
               )}
+            </div>
+
+            <div className="min-h-60 bg-slate-200">
+              <Slicker
+                desktopSlidesToScroll={1}
+                desktopSlidesToShow={1}
+                alowMaxHeight={true}
+                autoPlay={false}
+                data={[]}
+                centerMode={false}
+              />
             </div>
           </div>
         </Drawer>
