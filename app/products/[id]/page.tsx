@@ -3,6 +3,7 @@ import Alloys from "@/components/detail-product/Alloys";
 import Description from "@/components/detail-product/DescriptionPane";
 import ExteriorColor from "@/components/detail-product/ExteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
+import OrderView from "@/components/detail-product/OrderView";
 import TechnicalData from "@/components/detail-product/TechnicalData";
 import { S3_URL } from "@/utils";
 import { doGet } from "@/utils/doMethod";
@@ -82,7 +83,9 @@ const DetailPage = () => {
           </div>
         </Col>
 
-        <Col xs={24} md={6} >1</Col>
+        <Col xs={24} md={6}>
+          <OrderView />
+        </Col>
       </Row>
     </div>
   );

@@ -17,20 +17,7 @@ export default function Alloys() {
               src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
             />
           </Radio>
-          <Radio value={2}>
-            <Image
-              preview={false}
-              width={80}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
-          </Radio>
-          <Radio value={3}>
-            <Image
-              preview={false}
-              width={80}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
-          </Radio>
+
           <Radio value={4}>
             <Image
               preview={false}
