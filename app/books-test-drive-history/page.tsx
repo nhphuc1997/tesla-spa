@@ -44,28 +44,6 @@ const COLUMNS: TableProps<DataType>["columns"] = [
     ),
   },
   {
-    key: "product",
-    dataIndex: "product",
-    title: "Product",
-    render: (element: any, record, index) => (
-      <Descriptions key={index} column={1} className="!p-0 !m-0">
-        <Descriptions.Item label="Name" className="!p-0 truncate">
-          <Tooltip placement="topLeft" title={element?.name}>
-            {element?.name}
-          </Tooltip>
-        </Descriptions.Item>
-        <Descriptions.Item label="Seat" className="!p-0">
-          {element?.seat}
-        </Descriptions.Item>
-        <Descriptions.Item label="manufactureYear">
-          <Tag className="!bg-black !text-white">
-            {element?.manufactureYear}
-          </Tag>
-        </Descriptions.Item>
-      </Descriptions>
-    ),
-  },
-  {
     key: "contactNumber",
     dataIndex: "contactNumber",
     title: "Contact number",
@@ -98,10 +76,32 @@ const COLUMNS: TableProps<DataType>["columns"] = [
     width: 200,
     render: (text: string, record, index) => (
       <Tooltip title={text} key={index}>
-        <Typography.Text ellipsis={true} className="w w-24">
-          {text}
+        <Typography.Text ellipsis={true} className="">
+          {formatDate(text)}
         </Typography.Text>
       </Tooltip>
+    ),
+  },
+  {
+    key: "product",
+    dataIndex: "product",
+    title: "Product",
+    render: (element: any, record, index) => (
+      <Descriptions key={index} column={1} className="!p-0 !m-0">
+        <Descriptions.Item label="Name" className="!p-0 truncate">
+          <Tooltip placement="topLeft" title={element?.name}>
+            {element?.name}
+          </Tooltip>
+        </Descriptions.Item>
+        <Descriptions.Item label="Seat" className="!p-0">
+          {element?.seat}
+        </Descriptions.Item>
+        <Descriptions.Item label="manufactureYear">
+          <Tag className="!bg-black !text-white">
+            {element?.manufactureYear}
+          </Tag>
+        </Descriptions.Item>
+      </Descriptions>
     ),
   },
 ];
