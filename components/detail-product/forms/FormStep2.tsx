@@ -34,7 +34,7 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
     mutationFn: async (payload: any) => {
       setLoading(true);
       setSubmitOK(null);
-      return await doPost('/orders', payload)
+      return await doPost('/book-test-drive', payload)
     },
     onSuccess(data) {
       setLoading(false)
@@ -61,9 +61,10 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
       pickedDate: new Date(valueFormStep1?.pickedDate),
       contactNumber: String(valueFormStep2?.contactNumber),
       email: String(user?.primaryEmailAddress?.emailAddress),
+      userId: String(user?.id),
       firstName: String(valueFormStep2?.firstName),
       lastName: String(valueFormStep2?.lastName),
-      productId: Number(params?.id)
+      productId: Number(params?.id),
     }
     bookATestDrivemutation.mutate(payload)
   }
