@@ -197,7 +197,7 @@ export default function OrderHistory() {
     <Spin spinning={false}>
       <div className="py-1">
         <Row gutter={16} className="py-3">
-          <Col xs={24} md={5}>
+          <Col xs={12} md={5}>
             <div className="py-1">
               <Input
                 placeholder="order ID, car's name"
