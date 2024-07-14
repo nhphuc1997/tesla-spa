@@ -186,7 +186,7 @@ export default function OrderView() {
           <div className="w-full">
             <div className="pb-3">
               <Typography.Title level={5} className="text-center">
-                Order
+                Order Process
               </Typography.Title>
             </div>
             <div className="!pb-3">

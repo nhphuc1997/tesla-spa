@@ -1,7 +1,8 @@
 'use client'
-import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Divider, Form, FormProps, Input } from "antd";
-import { useState } from "react";
+import { doPost } from "@/utils/doMethod";
+import { UserOutlined } from "@ant-design/icons";
+import { useMutation } from "@tanstack/react-query";
+import { Button, Form, FormProps, Input } from "antd";
 
 type FieldType = {
   firstName?: string;
@@ -16,10 +17,36 @@ interface Props {
 }
 
 export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Props) {
-  const [] = useState()
+
+  const orderMutation = useMutation({
+    mutationKey: ['order-process'],
+    mutationFn: async (payload: any) => {
+      return await doPost('/orders', payload)
+    },
+    onSuccess(data) {
+      if (data?.statusCode === 200) {
+        console.log('okaayyy');
+
+      }
+    },
+    onError() {
+      console.log('not okaayyy');
+    }
+  })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     setOpersonalInfor(values)
+    console.log(values);
+    const payload = {
+      email: String(),
+      userId: String(),
+      contactNumber: String(),
+      interiorId: String(),
+      exteriorId: String(),
+      alloyId: String(),
+      productId: String(),
+    }
+
     setCurrentStepOrder(1)
   }
 
