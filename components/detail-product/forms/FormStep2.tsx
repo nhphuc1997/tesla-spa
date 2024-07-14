@@ -105,7 +105,10 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
           loading={loading}
           iconPosition={"start"}
           icon={<DoubleLeftOutlined />}
-          onClick={() => setCurrentStep(0)}
+          onClick={() => {
+            setSubmitOK(null)
+            setCurrentStep(0)
+          }}
         >
           Back
         </Button>
