@@ -207,7 +207,7 @@ export default function OrderHistory() {
           <Col span={24}>
             <Table
               loading={loading}
-              bordered={true}
+              bordered={false}
               dataSource={dataSource}
               columns={ORDER_HISTORY_COLUMNS}
               pagination={false}

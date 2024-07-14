@@ -56,7 +56,11 @@ body {
 .ant-input-affix-wrapper,
 .ant-qrcode,
 .ant-modal-content,
-.ant-notification-notice-wrapper {
+.ant-notification-notice-wrapper,
+.ant-pagination-item,
+.ant-table-header,
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child,
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
   border-radius: unset !important;
 }
 
@@ -75,3 +79,17 @@ body {
 .ant-descriptions-header {
   margin-bottom: 8px !important;
 }
+
+.ant-pagination-item-active {
+  border-color: black !important;
+}
+
+.ant-pagination-item-active a {
+  color: black !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th {
+  background-color: white !important;
+  color:  black !important;
+}
+
