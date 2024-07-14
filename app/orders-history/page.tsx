@@ -35,7 +35,7 @@ interface DataType {
 
 const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
   {
-    key: 1,
+    key: "orderId",
     dataIndex: "orderId",
     title: "order ID",
     width: 100,
