@@ -21,7 +21,6 @@ interface Props {
 }
 
 export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
-  const [api, contextHolder] = notification.useNotification();
   const { user } = useUser()
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -35,13 +34,12 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
     onSuccess(data) {
       setLoading(false)
       if (data?.statusCode === 200) {
-        return api.open({ message: null, description: "Registry driven successfully" });
+      setCurrentStep(2)
       }
-      return api.open({ message: null, description: "Registry driven failed" });
     },
-    onError(data) {
+    onError() {
       setLoading(false)
-      api.open({ message: null, description: data.message });
+      setCurrentStep(1)
     }
   })
 
@@ -60,8 +58,6 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
 
   return (
     <Form name="basic" autoComplete="off" onFinish={onFinishStep2}>
-      {contextHolder}
-
       <div className="pb-2">
         <Form.Item<FieldType> name="firstName" rules={[{ required: true }]}>
           <Input

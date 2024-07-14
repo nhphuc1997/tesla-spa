@@ -1,16 +1,24 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormStep1 from "./forms/FormStep1";
 import FormStep2 from "./forms/FormStep2";
-import { Result, Typography } from "antd";
+import { message, notification, Result, Typography } from "antd";
 
 export default function BookATestDrive() {
+  const [api, contextHolder] = notification.useNotification();
+
   const [currentStep, setCurrentStep] = useState(0)
   const [valueFormStep1, setValueFormStep1] = useState(null)
 
+  useEffect(() => {
+    if (currentStep === 2) {
+      api.open({ message: null, description: 'Book a test driver successfully' })
+    }
+  }, [currentStep])
 
   return (
     <div className="">
+      {contextHolder}
       {currentStep === 0 && (
         <FormStep1
           setCurrentStep={setCurrentStep}
