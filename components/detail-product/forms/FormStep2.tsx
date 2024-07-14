@@ -1,9 +1,11 @@
 'use client'
-import { DISTANCE_RADIUS } from "@/utils";
+import { doPost } from "@/utils/doMethod";
 import { SendOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Form, FormProps, Input, Select } from "antd";
+import { useUser } from "@clerk/nextjs";
+import { useMutation } from "@tanstack/react-query";
+import { Button, Form, FormProps, Input, notification } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useState } from "react"
+import { useState } from "react";
 
 type FieldType = {
   firstName?: string;
@@ -20,19 +22,51 @@ interface Props {
 }
 
 export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
-  const onFinishStep2: FormProps<FieldType>['onFinish'] = (valueFormStep2) => {
-    console.log(valueFormStep1);
-    console.log(valueFormStep2);
+  const [api, contextHolder] = notification.useNotification();
+  const { user } = useUser()
 
-    setCurrentStep(2)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const bookATestDrivemutation = useMutation({
+    mutationKey: ['book-a-test-drive'],
+    mutationFn: async (payload: any) => {
+      setLoading(true);
+      return await doPost('/orders', payload)
+    },
+    onSuccess(data) {
+      setLoading(false)
+      if (data?.statusCode === 200) {
+        api.open({ message: null, description: "Registry driven successfully" });
+        return
+      }
+      api.open({ message: null, description: "Registry driven failed" });
+    },
+    onError(data) {
+      setLoading(false)
+      api.open({ message: null, description: data.message });
+    }
+  })
+
+  const onFinishStep2: FormProps<FieldType>['onFinish'] = (valueFormStep2) => {
+    const payload = {
+      distanceRadius: valueFormStep1?.distanceRadius,
+      postCode: valueFormStep1?.postCode,
+      pickedDate: new Date(valueFormStep1?.pickedDate),
+      contactNumber: valueFormStep2?.contactNumber,
+      email: user?.primaryEmailAddress?.emailAddress,
+      firstName: valueFormStep2?.firstName,
+      lastName: valueFormStep2?.lastName,
+    }
+    bookATestDrivemutation.mutate(payload)
   }
 
   return (
     <Form name="basic" autoComplete="off" onFinish={onFinishStep2}>
+      {contextHolder}
+
       <div className="pb-2">
         <Form.Item<FieldType> name="firstName" rules={[{ required: true }]}>
           <Input
-            onChange={e => console.log(e)}
             placeholder="Enter your first name"
             prefix={<UserOutlined />}
           />
@@ -73,7 +107,15 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
       </div>
 
       <div className="flex justify-end items-center">
-        <Button iconPosition={"end"} icon={<SendOutlined />} htmlType="submit">Next</Button>
+        <Button
+          loading={loading}
+          iconPosition={"end"}
+          icon={<SendOutlined />}
+          htmlType="submit"
+          className="!bg-black !text-white"
+        >
+          Submit
+        </Button>
       </div>
     </Form>
   )

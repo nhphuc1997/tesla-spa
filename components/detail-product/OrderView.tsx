@@ -34,7 +34,7 @@ export default function OrderView() {
   const [currentStepOrder, setCurrentStepOrder] = useState<number>(0);
 
   return (
-    <Affix offsetTop={76}>
+    <>
       <div className="">
         <div className="p-3 border">
           <Typography.Title level={5} className="!mt-3 text-center">
@@ -244,6 +244,6 @@ export default function OrderView() {
           </div>
         </Drawer>
       </div >
-    </Affix >
+    </ >
   );
 }

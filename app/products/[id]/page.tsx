@@ -60,7 +60,11 @@ const DetailPage = () => {
           productStore.setCurrentInterior(category?.data?.interior[0])
           productStore.setCurrentAlloy(category?.data?.alloy[0])
         }
+
+        return true
       }
+
+      return false
     },
   });
 

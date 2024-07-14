@@ -6,10 +6,6 @@ interface Props {
 }
 
 export default function TechnicalData({ technical }: Props) {
-
-  console.log(technical, 'technical');
-
-
   return (
     <div className="p-10 border">
       <Typography.Title level={5}>Technical Data</Typography.Title>
