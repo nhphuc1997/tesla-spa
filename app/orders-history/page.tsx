@@ -152,19 +152,24 @@ export default function OrderHistory() {
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
-  const [searchValue] = useDebounce(searchTerm, 1000);
+  const [typeFilter, setTypeFilter] = useState<string | null>(null);
+  const [searchFilter] = useDebounce(searchTerm, 1000);
 
   useQuery({
-    queryKey: ["order-history", [user, page, searchValue]],
+    queryKey: ["order-history", [user, page, searchFilter, typeFilter]],
     queryFn: async () => {
       setLoading(true);
       const $filter: any = { userId: String(user?.id) };
 
-      if (searchValue && searchValue !== "") {
+      if (searchFilter && searchFilter !== "") {
         $filter["$or"] = [
-          { orderId: { $cont: searchValue } },
-          { "product.name": { $cont: searchValue } },
+          { orderId: { $cont: searchFilter } },
+          { "product.name": { $cont: searchFilter } },
         ];
+      }
+
+      if (typeFilter && typeFilter !== "") {
+        $filter["product.kind"] = typeFilter;
       }
 
       const response = await doGet("/orders", {
@@ -201,9 +206,10 @@ export default function OrderHistory() {
           <Col xs={12} md={3}>
             <div className="py-1">
               <Select
+                value={typeFilter}
                 style={{ width: "100%" }}
                 placeholder="car's type"
-                onChange={(e) => console.log("runn 2")}
+                onChange={(e) => setTypeFilter(e)}
                 options={[
                   { label: "OLD CAR", value: "OLD" },
                   { label: "NEW CAR", value: "NEW" },
