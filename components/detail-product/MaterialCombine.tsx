@@ -10,15 +10,9 @@ interface Props {
 }
 
 export default function MaterialCombination({ material }: Props) {
-  const productStore = useStore((state: any) => state)
-
   if (material?.length <= 0) {
     return <Empty />
   }
-
-  useEffect(() => {
-    productStore.setCurrentMaterial(material)
-  }, [material])
 
   return (
     <div className="p-3 border">

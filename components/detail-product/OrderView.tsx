@@ -81,7 +81,7 @@ export default function OrderView() {
     productStore.currentProductPrice,
     productStore.currentExterior?.price,
     productStore.currentInterior?.price,
-    productStore.currentAlloy?.price,
+    productStore.currentAlloy?.price
   ])
 
   return (
