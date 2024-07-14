@@ -8,6 +8,7 @@ import {
   Col,
   Descriptions,
   Input,
+  Pagination,
   Row,
   Select,
   Spin,
@@ -17,7 +18,6 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { useParams } from "next/navigation";
 import { useState } from "react";
 
 interface DataType {
@@ -148,17 +148,25 @@ export default function OrderHistory() {
 
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(1);
 
   useQuery({
-    queryKey: ["order-history", [user]],
+    queryKey: ["order-history", [user, page]],
     queryFn: async () => {
       setLoading(true);
-      const query = { userId: String(user?.id) };
-      const response = await doGet("/orders", { s: JSON.stringify(query) });
+      const response = await doGet("/orders", {
+        s: JSON.stringify({
+          userId: String(user?.id),
+        }),
+        limit: 10,
+        page: page,
+      });
 
       if (response?.statusCode === 200) {
-        setDataSource(response?.data);
+        setDataSource(response?.data?.data);
         setLoading(false);
+        setTotalPage(response?.data?.total);
         return true;
       }
 
@@ -195,15 +203,28 @@ export default function OrderHistory() {
           </Col>
         </Row>
 
-        <Row className="">
+        <Row className="p-3">
           <Col span={24}>
             <Table
               loading={loading}
               bordered={true}
-              pagination={false}
               dataSource={dataSource}
               columns={ORDER_HISTORY_COLUMNS}
+              pagination={false}
+              scroll={{ y: 600 }}
             />
+          </Col>
+        </Row>
+
+        <Row className="py-3">
+          <Col span={24}>
+            <div className="flex justify-center items-center">
+              <Pagination
+                onChange={(page) => setPage(page)}
+                defaultCurrent={page}
+                total={totalPage}
+              />
+            </div>
           </Col>
         </Row>
       </div>
