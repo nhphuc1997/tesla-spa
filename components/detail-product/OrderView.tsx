@@ -269,7 +269,22 @@ export default function OrderView() {
               {currentStepOrder === 2 && (
                 <Result
                   icon={<CarOutlined />}
-                  title="Great, you have done all the operations!"
+                  title={(
+                    <div>
+                      <Typography.Title level={5}>
+                        Great, you have done all the operations!
+                      </Typography.Title>
+                      <Button
+                        className="!bg-black !text-white"
+                        onClick={() => {
+                          setCurrentStepOrder(0)
+                          setOpenDrawOrder(false)
+                        }}
+                      >
+                        Done
+                      </Button>
+                    </div>
+                  )}
                 />
               )}
             </div>
