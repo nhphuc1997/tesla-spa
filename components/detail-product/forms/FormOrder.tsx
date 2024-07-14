@@ -1,8 +1,11 @@
 'use client'
+import { useStore } from "@/stores/products.store";
 import { doPost } from "@/utils/doMethod";
 import { UserOutlined } from "@ant-design/icons";
+import { useUser } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, FormProps, Input } from "antd";
+import { useParams } from "next/navigation";
 
 type FieldType = {
   firstName?: string;
@@ -17,6 +20,9 @@ interface Props {
 }
 
 export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Props) {
+  const productStore = useStore((state: any) => state)
+  const params = useParams()
+  const { user } = useUser()
 
   const orderMutation = useMutation({
     mutationKey: ['order-process'],
@@ -34,19 +40,19 @@ export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Pr
     }
   })
 
-  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    setOpersonalInfor(values)
-    console.log(values);
+  const onFinish: FormProps<FieldType>['onFinish'] = (infor) => {
+    setOpersonalInfor(infor)
+    debugger
     const payload = {
-      email: String(),
-      userId: String(),
-      contactNumber: String(),
-      interiorId: String(),
-      exteriorId: String(),
-      alloyId: String(),
-      productId: String(),
+      email: String(user?.primaryEmailAddress?.emailAddress),
+      userId: String(user?.id),
+      contactNumber: String(infor?.contactNumber),
+      interiorId: Number(productStore?.currentInterior?.id),
+      exteriorId: Number(productStore?.currentExterior?.id),
+      alloyId: Number(productStore?.currentAlloy?.id),
+      productId: Number(params?.id),
     }
-
+    console.log(payload);
     setCurrentStepOrder(1)
   }
 
