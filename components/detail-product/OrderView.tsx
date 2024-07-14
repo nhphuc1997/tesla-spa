@@ -66,18 +66,20 @@ export default function OrderView() {
   };
 
   useEffect(() => {
-    productStore.setCurrentProductPriceTotal(
-      Number(productStore.currentProductPrice) +
-        Number(productStore.currentExterior?.price) +
-        Number(productStore.currentInterior?.price) +
-        Number(productStore.currentAlloy?.price) +
-        Number(
-          productStore.currentMaterial.reduce(
-            (total: number, element: any) => total + element?.price,
-            0
+    if (productStore) {
+      productStore.setCurrentProductPriceTotal(
+        Number(productStore.currentProductPrice) +
+          Number(productStore.currentExterior?.price) +
+          Number(productStore.currentInterior?.price) +
+          Number(productStore.currentAlloy?.price) +
+          Number(
+            productStore.currentMaterial.reduce(
+              (total: number, element: any) => total + element?.price,
+              0
+            )
           )
-        )
-    );
+      );
+    }
   }, [
     productStore.currentProductPrice,
     productStore.currentExterior?.price,
