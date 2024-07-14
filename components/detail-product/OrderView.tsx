@@ -80,6 +80,8 @@ export default function OrderView() {
           )
       );
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     productStore.currentProductPrice,
     productStore.currentExterior?.price,

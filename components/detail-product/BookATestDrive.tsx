@@ -47,6 +47,8 @@ export default function BookATestDrive() {
       api.open({ message: null, description: "Book a test driver failed" });
       return;
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitOK, currentStep]);
 
   return (
