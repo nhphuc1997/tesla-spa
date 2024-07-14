@@ -1,6 +1,7 @@
 "use client";
 import {
   ApartmentOutlined,
+  BlockOutlined,
   LeftSquareOutlined,
   LoginOutlined,
   MenuFoldOutlined,
@@ -42,7 +43,7 @@ const NavHeader = () => {
   const items: MenuProps["items"] = [
     {
       label: (
-        <div className="w-ful flex justify-center items-center">
+        <div className="w-ful flex justify-start items-center">
           <SignedIn>
             <Typography.Text onClick={() => signOut()}>
               <LoginOutlined className="mr-2" />
@@ -56,16 +57,30 @@ const NavHeader = () => {
     {
       label: (
         <div
-          className="w-ful flex justify-center items-center"
+          className="w-ful flex justify-start items-center"
           onClick={() => router.push("/orders-history")}
         >
           <Typography.Text>
-            <MenuFoldOutlined className="mr-2" />
-            Lịch sử đặt cọc
+            <BlockOutlined className="mr-2" />
+            Orders history
           </Typography.Text>
         </div>
       ),
       key: "2",
+    },
+    {
+      label: (
+        <div
+          className="w-ful flex justify-start items-center"
+          onClick={() => router.push("/books-test-drive-history")}
+        >
+          <Typography.Text>
+            <BlockOutlined className="mr-2" />
+            Books test drive history
+          </Typography.Text>
+        </div>
+      ),
+      key: "3",
     },
   ];
 
