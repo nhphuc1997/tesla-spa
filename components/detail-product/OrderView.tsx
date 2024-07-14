@@ -118,30 +118,30 @@ export default function OrderView() {
                 Number(productStore.currentProductPrice) +
                 Number(productStore.currentExterior?.price) +
                 Number(productStore.currentInterior?.price) +
-                Number(productStore.currentAlloy?.price)
-              )}
+                Number(productStore.currentAlloy?.price) +
+                Number(productStore.currentMaterial.reduce((total: number, element: any) => total + element?.price, 0)))}
             </Typography.Title>
           </div>
 
           <div>
+
+          </div>
+
+          <div className="flex justify-end items-center">
             <Button
               className="!bg-black !text-white"
-              block
+              onClick={() => setOpenModalBookATestDrive(true)}
+            >
+              Book A Test Drive
+            </Button>
+
+            <Button
+              className="!bg-black !text-white"
               onClick={() => setOpenDrawOrder(true)}
             >
               Order
             </Button>
           </div>
-
-          {/* <div>
-            <Button
-              className="!bg-black !text-white"
-              block
-              onClick={() => setOpenModalBookATestDrive(true)}
-            >
-              Book A Test Drive
-            </Button>
-          </div> */}
         </div >
 
         <Modal
