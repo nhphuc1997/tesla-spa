@@ -2,6 +2,7 @@ import { formatCurrency } from "@/utils/format-currency";
 import {
   Affix,
   Button,
+  Checkbox,
   Descriptions,
   Divider,
   Drawer,
@@ -10,15 +11,19 @@ import {
   Result,
   Steps,
   Typography,
+  Image
 } from "antd";
 import BookATestDrive from "./BookATestDrive";
 import { useState } from "react";
 import FormOrder from "./forms/FormOrder";
-import { STEPS } from "@/utils";
+import { S3_URL, STEPS } from "@/utils";
 import { CarOutlined } from "@ant-design/icons";
 import Slicker from "../Slicker";
+import { useStore } from "@/stores/products.store";
 
 export default function OrderView() {
+  const productStore = useStore((state: any) => state)
+
   const [openDrawOrder, setOpenDrawOrder] = useState(false);
   const [openModalBookATestDrive, setOpenModalBookATestDrive] = useState(false);
   const [personalInfor, setOpersonalInfor] = useState(false);
@@ -29,24 +34,93 @@ export default function OrderView() {
       <div className="">
         <div className="p-3 border">
           <Typography.Title level={5} className="!mt-3 text-center">
-            Mescedes benz
+            {productStore.currentProductName}
           </Typography.Title>
           <Divider className="" />
           <div>
-            <Descriptions title="" column={1}>
-              <Descriptions.Item label="Material">Material</Descriptions.Item>
-              <Descriptions.Item label="Exterior">Exterior</Descriptions.Item>
-              <Descriptions.Item label="Interior">Exterior</Descriptions.Item>
-              <Descriptions.Item label="Alloys">Alloys</Descriptions.Item>
-              <Descriptions.Item label="Description">
-                Description
+            <Descriptions title="" column={1} layout="vertical">
+              <Descriptions.Item label="Price">
+
+                <Typography.Text className="!font-bold">
+                  Cost: {formatCurrency(productStore.currentProductPrice)} *
+                </Typography.Text>
               </Descriptions.Item>
+
+              <Descriptions.Item label="Material">
+                <div>
+                  {productStore.currentMaterial.map((item: any) => (
+                    <div key={item.id}>
+                      <Typography.Text className="!font-bold">
+                        Cost: {formatCurrency(item?.price)}
+                      </Typography.Text>
+                      <Checkbox indeterminate defaultChecked={true} disabled >
+                        <Typography.Text className="!font-semibold">
+                          {item?.name}
+                        </Typography.Text>
+                      </Checkbox>
+                    </div>
+                  ))}
+                </div>
+              </Descriptions.Item>
+            </Descriptions>
+
+            <Descriptions title="" column={{ xs: 1, md: 1, lg: 1, xl: 3 }} layout="vertical">
+              <Descriptions.Item label="Exterior">
+                <div className="flex flex-col justify-start items-start">
+                  <Typography.Text className="!font-bold">
+                    Cost: {formatCurrency(productStore.currentExterior?.price)}
+                  </Typography.Text>
+                  <Image
+                    preview={false}
+                    width={80}
+                    height={80}
+                    src={`${S3_URL}/${productStore.currentExterior?.s3Key}`}
+                    alt=""
+                  />
+                </div>
+              </Descriptions.Item>
+
+              <Descriptions.Item label="Interior">
+                <div className="flex flex-col justify-start items-start">
+                  <Typography.Text className="!font-bold">
+                    Cost: {formatCurrency(productStore.currentInterior?.price)}
+                  </Typography.Text>
+                  <Image
+                    preview={false}
+                    width={80}
+                    height={80}
+                    src={`${S3_URL}/${productStore.currentInterior?.s3Key}`}
+                    alt=""
+                  />
+                </div>
+              </Descriptions.Item>
+
+              <Descriptions.Item label="Alloys">
+                <div className="flex flex-col justify-start items-start">
+                  <Typography.Text className="!font-bold">
+                    Cost: {formatCurrency(productStore.currentAlloy?.price)}
+                  </Typography.Text>
+                  <Image
+                    preview={false}
+                    width={80}
+                    height={80}
+                    src={`${S3_URL}/${productStore.currentAlloy?.s3Key}`}
+                    alt=""
+                  />
+                </div>
+              </Descriptions.Item>
+
             </Descriptions>
           </div>
           <Divider className="" />
           <div>
             <Typography.Title level={5} className="text-right">
-              TOTAL: {formatCurrency(100000)}
+              TOTAL: {formatCurrency(
+                Number(productStore.currentProductPrice) +
+                Number(productStore.currentExterior?.price) +
+                Number(productStore.currentInterior?.price) +
+                Number(productStore.currentAlloy?.price)
+              )}
             </Typography.Title>
           </div>
 
@@ -69,7 +143,7 @@ export default function OrderView() {
               Book A Test Drive
             </Button>
           </div>
-        </div>
+        </div >
 
         <Modal
           title="Book A Test Drive"
@@ -159,7 +233,7 @@ export default function OrderView() {
             </div>
           </div>
         </Drawer>
-      </div>
-    </Affix>
+      </div >
+    </Affix >
   );
 }

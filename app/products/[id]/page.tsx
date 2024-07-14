@@ -6,6 +6,7 @@ import InteriorColor from "@/components/detail-product/InteriorColor";
 import MaterialCombination from "@/components/detail-product/MaterialCombine";
 import OrderView from "@/components/detail-product/OrderView";
 import TechnicalData from "@/components/detail-product/TechnicalData";
+import { useStore } from "@/stores/products.store";
 import { S3_URL } from "@/utils";
 import { doGet } from "@/utils/doMethod";
 import { useQuery } from "@tanstack/react-query";
@@ -22,6 +23,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 
 const DetailPage = () => {
+  const productStore = useStore((state: any) => state)
   const params = useParams();
   const [api, contextHolder] = notification.useNotification();
 
@@ -42,7 +44,9 @@ const DetailPage = () => {
       if (product?.statusCode === 200) {
         setImages(product?.data?.images);
         setTechnical(product?.data?.technical);
-        setDescription(product?.data?.description)
+        setDescription(product?.data?.description);
+        productStore.setCurrentProductName(product?.data?.name)
+        productStore.setCurrentProductPrice(product?.data?.price)
 
         const category = await doGet(`/categories/${product?.data.categoryId}`)
         if (category?.statusCode === 200) {
@@ -50,6 +54,10 @@ const DetailPage = () => {
           setExterior(category?.data?.exterior)
           setInterior(category?.data?.interior)
           setAlloy(category?.data?.alloy)
+          productStore.setCurrentMaterial(category?.data?.material)
+          productStore.setCurrentExterior(category?.data?.exterior[0])
+          productStore.setCurrentInterior(category?.data?.interior[0])
+          productStore.setCurrentAlloy(category?.data?.alloy[0])
         }
       }
     },

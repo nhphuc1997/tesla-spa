@@ -1,6 +1,8 @@
+import { useStore } from "@/stores/products.store";
 import { S3_URL } from "@/utils";
 import { formatCurrency } from "@/utils/format-currency";
 import { Button, Empty, Image, Typography } from "antd";
+import { useEffect } from "react";
 
 interface Props {
   name?: string,
@@ -8,17 +10,19 @@ interface Props {
 }
 
 export default function MaterialCombination({ material }: Props) {
-  console.log(material, 'material');
-
+  const productStore = useStore((state: any) => state)
 
   if (material?.length <= 0) {
     return <Empty />
   }
 
+  useEffect(() => {
+    productStore.setCurrentMaterial(material)
+  }, [material])
+
   return (
     <div className="p-3 border">
       <Typography.Title level={5}>Material Combination</Typography.Title>
-
       {material?.map((item: any) => (
         <div key={item.id} className="flex-col lg:flex-row flex justify-start items-start">
           <div>
