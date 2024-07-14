@@ -64,6 +64,8 @@ export default function OrderView() {
               </Descriptions.Item>
             </Descriptions>
 
+            <Divider />
+
             <Descriptions title="" column={{ xs: 1, md: 1, lg: 1, xl: 3 }} layout="vertical">
               <Descriptions.Item label="Exterior">
                 <div className="flex flex-col justify-start items-start">
