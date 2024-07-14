@@ -61,6 +61,20 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     ),
   },
   {
+    key: "createAt",
+    dataIndex: "createAt",
+    title: "Create At",
+    width: 100,
+    fixed: true,
+    render: (text: string, record, index) => (
+      <Tooltip title={text} key={index}>
+        <Typography.Text ellipsis={true} className="w w-24">
+          {formatDate(text)}
+        </Typography.Text>
+      </Tooltip>
+    ),
+  },
+  {
     key: "interior",
     dataIndex: "interior",
     title: "Interior",
@@ -129,19 +143,6 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
           <Tag className="!bg-black !text-white">{element?.kind}</Tag>
         </Descriptions.Item>
       </Descriptions>
-    ),
-  },
-  {
-    key: "createAt",
-    dataIndex: "createAt",
-    title: "Create At",
-    width: 100,
-    render: (text: string, record, index) => (
-      <Tooltip title={text} key={index}>
-        <Typography.Text ellipsis={true} className="w w-24">
-          {formatDate(text)}
-        </Typography.Text>
-      </Tooltip>
     ),
   },
 ];
