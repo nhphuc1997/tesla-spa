@@ -10,7 +10,6 @@ import { useState } from "react";
 type FieldType = {
   firstName?: string;
   lastName?: string;
-  email?: string;
   contactNumber?: string;
   additionalInfor?: string;
 };
@@ -36,10 +35,9 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
     onSuccess(data) {
       setLoading(false)
       if (data?.statusCode === 200) {
-        api.open({ message: null, description: "Registry driven successfully" });
-        return
+        return api.open({ message: null, description: "Registry driven successfully" });
       }
-      api.open({ message: null, description: "Registry driven failed" });
+      return api.open({ message: null, description: "Registry driven failed" });
     },
     onError(data) {
       setLoading(false)
@@ -77,15 +75,6 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
         <Form.Item<FieldType> name="lastName" rules={[{ required: true }]}>
           <Input
             placeholder="Enter your last name"
-            prefix={<UserOutlined />}
-          />
-        </Form.Item>
-      </div>
-
-      <div className="pb-2">
-        <Form.Item<FieldType> name="email" rules={[{ required: true }]}>
-          <Input
-            placeholder="Enter your email"
             prefix={<UserOutlined />}
           />
         </Form.Item>
