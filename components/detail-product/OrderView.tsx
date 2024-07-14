@@ -81,7 +81,6 @@ export default function OrderView() {
                   />
                 </div>
               </Descriptions.Item>
-
               <Descriptions.Item label="Interior">
                 <div className="flex flex-col justify-start items-start">
                   <Typography.Text className="!font-bold">
@@ -96,7 +95,6 @@ export default function OrderView() {
                   />
                 </div>
               </Descriptions.Item>
-
               <Descriptions.Item label="Alloys">
                 <div className="flex flex-col justify-start items-start">
                   <Typography.Text className="!font-bold">
@@ -111,7 +109,6 @@ export default function OrderView() {
                   />
                 </div>
               </Descriptions.Item>
-
             </Descriptions>
           </div>
           <Divider className="" />
@@ -136,7 +133,7 @@ export default function OrderView() {
             </Button>
           </div>
 
-          <div>
+          {/* <div>
             <Button
               className="!bg-black !text-white"
               block
@@ -144,7 +141,7 @@ export default function OrderView() {
             >
               Book A Test Drive
             </Button>
-          </div>
+          </div> */}
         </div >
 
         <Modal
@@ -164,23 +161,11 @@ export default function OrderView() {
           size="large"
         >
           <div className="w-full">
-            <Typography.Title level={5} className="!mt-3 text-center">
-              Mescedes benz
-            </Typography.Title>
-            <div>
-              <Descriptions title="" column={1}>
-                <Descriptions.Item label="Material">Material</Descriptions.Item>
-                <Descriptions.Item label="Exterior">Exterior</Descriptions.Item>
-                <Descriptions.Item label="Interior">Exterior</Descriptions.Item>
-                <Descriptions.Item label="Alloys">Alloys</Descriptions.Item>
-                <Descriptions.Item label="Description">
-                  Description
-                </Descriptions.Item>
-              </Descriptions>
+            <div className="pb-3">
+              <Typography.Title level={5} className="text-center">
+                Order
+              </Typography.Title>
             </div>
-
-            <Divider />
-
             <div className="!pb-3">
               <Steps
                 className="!py-3"
