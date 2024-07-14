@@ -179,6 +179,7 @@ export default function OrderHistory() {
         s: JSON.stringify($filter),
         limit: 10,
         page: page,
+        sort: 'createAt,DESC'
       });
 
       if (response?.statusCode === 200) {
