@@ -2,19 +2,26 @@
 import { useEffect, useState } from "react";
 import FormStep1 from "./forms/FormStep1";
 import FormStep2 from "./forms/FormStep2";
-import { message, notification, Result, Typography } from "antd";
+import { notification, Result, Typography } from "antd";
 
 export default function BookATestDrive() {
   const [api, contextHolder] = notification.useNotification();
 
   const [currentStep, setCurrentStep] = useState(0)
   const [valueFormStep1, setValueFormStep1] = useState(null)
+  const [submitOK, setSubmitOK] = useState(null)
 
   useEffect(() => {
-    if (currentStep === 2) {
+    if (submitOK && currentStep === 2) {
       api.open({ message: null, description: 'Book a test driver successfully' })
+      return
     }
-  }, [currentStep])
+
+    if (submitOK === false && currentStep === 1) {
+      api.open({ message: null, description: 'Book a test driver failed' })
+      return
+    }
+  }, [submitOK, currentStep])
 
   return (
     <div className="">
@@ -30,6 +37,7 @@ export default function BookATestDrive() {
         <FormStep2
           setCurrentStep={setCurrentStep}
           valueFormStep1={valueFormStep1}
+          setSubmitOK={setSubmitOK}
         />
       )}
 

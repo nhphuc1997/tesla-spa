@@ -17,10 +17,11 @@ type FieldType = {
 interface Props {
   name?: string,
   setCurrentStep: any,
+  setSubmitOK: any,
   valueFormStep1: any,
 }
 
-export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
+export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK }: Props) {
   const { user } = useUser()
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -29,13 +30,19 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
     mutationKey: ['book-a-test-drive'],
     mutationFn: async (payload: any) => {
       setLoading(true);
+      setSubmitOK(null);
       return await doPost('/orders', payload)
     },
     onSuccess(data) {
       setLoading(false)
       if (data?.statusCode === 200) {
         setCurrentStep(2)
+        setSubmitOK(true)
+        return
       }
+
+      setSubmitOK(false)
+      return
     },
     onError() {
       setLoading(false)
