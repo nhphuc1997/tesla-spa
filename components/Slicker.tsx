@@ -17,12 +17,13 @@ const Slicker = ({
   alowMaxHeight,
   data = [],
   showChild = false,
+  autoPlay = false
 }: SlickerProps) => {
   const _height = alowMaxHeight ? "h-96" : "h-32";
 
   return (
     <div className="slider-container py-1 cursor-pointer">
-      <Carousel arrows>
+      <Carousel arrows autoplay={autoPlay}>
         {data?.map((item) => (
           <div className={`${_height}`} key={item.id}>
             <div

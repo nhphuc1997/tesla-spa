@@ -11,7 +11,8 @@ import {
   Result,
   Steps,
   Typography,
-  Image
+  Image,
+  Empty
 } from "antd";
 import BookATestDrive from "./BookATestDrive";
 import { useState } from "react";
@@ -20,9 +21,12 @@ import { S3_URL, STEPS } from "@/utils";
 import { CarOutlined } from "@ant-design/icons";
 import Slicker from "../Slicker";
 import { useStore } from "@/stores/products.store";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 export default function OrderView() {
   const productStore = useStore((state: any) => state)
+  const { isSignedIn } = useUser()
+  const { openSignIn } = useClerk();
 
   const [openDrawOrder, setOpenDrawOrder] = useState(false);
   const [openModalBookATestDrive, setOpenModalBookATestDrive] = useState(false);
@@ -127,21 +131,40 @@ export default function OrderView() {
 
           </div>
 
-          <div className="flex justify-end items-center">
-            <Button
-              className="!bg-black !text-white"
-              onClick={() => setOpenModalBookATestDrive(true)}
-            >
-              Book A Test Drive
-            </Button>
+          {(() => {
+            if (isSignedIn) {
+              return (
+                <div className="flex justify-end items-center">
+                  <Button
+                    className="!bg-black !text-white"
+                    onClick={() => setOpenModalBookATestDrive(true)}
+                  >
+                    Book A Test Drive
+                  </Button>
 
-            <Button
-              className="!bg-black !text-white"
-              onClick={() => setOpenDrawOrder(true)}
-            >
-              Order
-            </Button>
-          </div>
+                  <Button
+                    className="!bg-black !text-white"
+                    onClick={() => setOpenDrawOrder(true)}
+                  >
+                    Order
+                  </Button>
+                </div>
+              )
+            }
+
+            return (
+              <Empty description={(
+                <div className="flex justify-center items-center flex-col">
+                  <Typography.Text>
+                    You have to login to perform this action
+                  </Typography.Text>
+                  <Button className="!bg-black !text-white" onClick={() => openSignIn()}>
+                    Sign In
+                  </Button>
+                </div>
+              )} />
+            )
+          })()}
         </div >
 
         <Modal
@@ -213,8 +236,8 @@ export default function OrderView() {
                 desktopSlidesToScroll={1}
                 desktopSlidesToShow={1}
                 alowMaxHeight={true}
-                autoPlay={false}
-                data={[]}
+                autoPlay={true}
+                data={productStore.currentProductImages}
                 centerMode={false}
               />
             </div>

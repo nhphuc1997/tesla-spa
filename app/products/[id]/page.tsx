@@ -47,6 +47,7 @@ const DetailPage = () => {
         setDescription(product?.data?.description);
         productStore.setCurrentProductName(product?.data?.name)
         productStore.setCurrentProductPrice(product?.data?.price)
+        productStore.setCurrentProductImages(product?.data?.images)
 
         const category = await doGet(`/categories/${product?.data.categoryId}`)
         if (category?.statusCode === 200) {
