@@ -8,41 +8,21 @@ import { Button, Form, FormProps, Input } from "antd";
 import { useParams } from "next/navigation";
 
 type FieldType = {
-  firstName?: string;
-  lastName?: string;
   contactNumber?: string;
 };
 
 interface Props {
   name?: string,
-  setOpersonalInfor: any,
+  setPayloadProcessOrder: any,
   setCurrentStepOrder: any
 }
 
-export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Props) {
+export default function FormOrder({ setPayloadProcessOrder, setCurrentStepOrder }: Props) {
   const productStore = useStore((state: any) => state)
   const params = useParams()
   const { user } = useUser()
 
-  const orderMutation = useMutation({
-    mutationKey: ['order-process'],
-    mutationFn: async (payload: any) => {
-      return await doPost('/orders', payload)
-    },
-    onSuccess(data) {
-      if (data?.statusCode === 200) {
-        console.log('okaayyy');
-
-      }
-    },
-    onError() {
-      console.log('not okaayyy');
-    }
-  })
-
   const onFinish: FormProps<FieldType>['onFinish'] = (infor) => {
-    setOpersonalInfor(infor)
-    debugger
     const payload = {
       email: String(user?.primaryEmailAddress?.emailAddress),
       userId: String(user?.id),
@@ -52,31 +32,12 @@ export default function FormOrder({ setOpersonalInfor, setCurrentStepOrder }: Pr
       alloyId: Number(productStore?.currentAlloy?.id),
       productId: Number(params?.id),
     }
-    console.log(payload);
+    setPayloadProcessOrder(payload);
     setCurrentStepOrder(1)
   }
 
   return (
     <Form name="basic" autoComplete="off" onFinish={onFinish} className="">
-      <div className="pb-2">
-        <Form.Item<FieldType> name="firstName" rules={[{ required: true }]}>
-          <Input
-            onChange={e => console.log(e)}
-            placeholder="Enter your first name"
-            prefix={<UserOutlined />}
-          />
-        </Form.Item>
-      </div>
-
-      <div className="pb-2">
-        <Form.Item<FieldType> name="lastName" rules={[{ required: true }]}>
-          <Input
-            placeholder="Enter your last name"
-            prefix={<UserOutlined />}
-          />
-        </Form.Item>
-      </div>
-
       <div className="pb-2">
         <Form.Item<FieldType> name="contactNumber" rules={[{ required: true }]}>
           <Input

@@ -36,7 +36,7 @@ const NavHeader = () => {
 
   useEffect(() => {
     if (isSignedIn === true) {
-      api.success({ message: null, description: "Đăng nhập thành công" });
+      api.open({ message: null, description: "Login successfully" });
     }
   }, [isSignedIn, api]);
 

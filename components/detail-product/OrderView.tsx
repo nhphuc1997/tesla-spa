@@ -12,7 +12,8 @@ import {
   Steps,
   Typography,
   Image,
-  Empty
+  Empty,
+  notification
 } from "antd";
 import BookATestDrive from "./BookATestDrive";
 import { useState } from "react";
@@ -22,19 +23,52 @@ import { CarOutlined } from "@ant-design/icons";
 import Slicker from "../Slicker";
 import { useStore } from "@/stores/products.store";
 import { useClerk, useUser } from "@clerk/nextjs";
+import { useMutation } from "@tanstack/react-query";
+import { doPost } from "@/utils/doMethod";
 
 export default function OrderView() {
   const productStore = useStore((state: any) => state)
   const { isSignedIn } = useUser()
   const { openSignIn } = useClerk();
+  const [api, contextHolder] = notification.useNotification()
+
+  const orderMutation = useMutation({
+    mutationKey: ['order-process'],
+    mutationFn: async (payload: any) => {
+      return await doPost('/orders', payload)
+    },
+    onSuccess(data) {
+      if (data?.statusCode === 200) {
+        api.open({
+          message: "",
+          description: `Order ${productStore.currentProductName} successfully`,
+        });
+        setCurrentStepOrder(2)
+      }
+    },
+    onError() {
+      api.open({
+        message: "",
+        description: `Order ${productStore.currentProductName} failed`,
+      });
+      setCurrentStepOrder(1)
+    }
+  })
 
   const [openDrawOrder, setOpenDrawOrder] = useState(false);
   const [openModalBookATestDrive, setOpenModalBookATestDrive] = useState(false);
-  const [personalInfor, setOpersonalInfor] = useState(false);
+  const [payloadProcessOrder, setPayloadProcessOrder] = useState(null);
   const [currentStepOrder, setCurrentStepOrder] = useState<number>(0);
+
+  const finishOrder = () => {
+    if (payloadProcessOrder) {
+      orderMutation.mutate(payloadProcessOrder)
+    }
+  }
 
   return (
     <>
+      {contextHolder}
       <div className="">
         <div className="p-3 border">
           <Typography.Title level={5} className="!mt-3 text-center">
@@ -198,7 +232,7 @@ export default function OrderView() {
               {currentStepOrder === 0 && (
                 <div className="w-3/4 mx-auto">
                   <FormOrder
-                    setOpersonalInfor={setOpersonalInfor}
+                    setPayloadProcessOrder={setPayloadProcessOrder}
                     setCurrentStepOrder={setCurrentStepOrder}
                   />
                 </div>
@@ -215,7 +249,7 @@ export default function OrderView() {
                   <div className="flex justify-center items-center">
                     <Button
                       className="!bg-black !text-white"
-                      onClick={() => setCurrentStepOrder(2)}
+                      onClick={() => finishOrder()}
                     >
                       Finished
                     </Button>

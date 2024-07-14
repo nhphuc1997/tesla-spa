@@ -55,8 +55,21 @@ body {
 .ant-segmented-item,
 .ant-input-affix-wrapper,
 .ant-qrcode,
-.ant-modal-content {
+.ant-modal-content,
+.ant-notification-notice-wrapper {
   border-radius: unset !important;
+}
+
+.ant-notification-notice-wrapper {
+  background-color: black !important;
+}
+
+.ant-notification-notice-description {
+  color: white !important;
+}
+
+.ant-result-icon>.anticon {
+  color: black !important;
 }
 
 .ant-descriptions-header {
