@@ -19,6 +19,7 @@ import {
   Typography,
 } from "antd";
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 interface DataType {
   key: string;
@@ -150,15 +151,24 @@ export default function OrderHistory() {
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const [searchValue] = useDebounce(searchTerm, 1000);
 
   useQuery({
-    queryKey: ["order-history", [user, page]],
+    queryKey: ["order-history", [user, page, searchValue]],
     queryFn: async () => {
       setLoading(true);
+      const $filter: any = { userId: String(user?.id) };
+
+      if (searchValue && searchValue !== "") {
+        $filter["$or"] = [
+          { orderId: { $cont: searchValue } },
+          { "product.name": { $cont: searchValue } },
+        ];
+      }
+
       const response = await doGet("/orders", {
-        s: JSON.stringify({
-          userId: String(user?.id),
-        }),
+        s: JSON.stringify($filter),
         limit: 10,
         page: page,
       });
@@ -183,7 +193,7 @@ export default function OrderHistory() {
             <div className="py-1">
               <Input
                 placeholder="order ID, car's name"
-                onChange={(e) => console.log("runn 1")}
+                onChange={(e) => setSearchTerm(e?.target?.value)}
               />
             </div>
           </Col>
@@ -203,7 +213,7 @@ export default function OrderHistory() {
           </Col>
         </Row>
 
-        <Row className="p-3">
+        <Row className="">
           <Col span={24}>
             <Table
               loading={loading}
