@@ -16,7 +16,7 @@ import {
   notification
 } from "antd";
 import BookATestDrive from "./BookATestDrive";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormOrder from "./forms/FormOrder";
 import { S3_URL, STEPS } from "@/utils";
 import { CarOutlined } from "@ant-design/icons";
@@ -65,6 +65,24 @@ export default function OrderView() {
       orderMutation.mutate(payloadProcessOrder)
     }
   }
+
+  useEffect(() => {
+    productStore.setCurrentProductPriceTotal(
+      Number(productStore.currentProductPrice) +
+      Number(productStore.currentExterior?.price) +
+      Number(productStore.currentInterior?.price) +
+      Number(productStore.currentAlloy?.price) +
+      Number(productStore.currentMaterial.reduce(
+        (total: number, element: any) => total + element?.price,
+        0
+      ))
+    )
+  }, [
+    productStore.currentProductPrice,
+    productStore.currentExterior?.price,
+    productStore.currentInterior?.price,
+    productStore.currentAlloy?.price,
+  ])
 
   return (
     <>
@@ -152,17 +170,8 @@ export default function OrderView() {
           <Divider className="" />
           <div>
             <Typography.Title level={5} className="text-right">
-              TOTAL: {formatCurrency(
-                Number(productStore.currentProductPrice) +
-                Number(productStore.currentExterior?.price) +
-                Number(productStore.currentInterior?.price) +
-                Number(productStore.currentAlloy?.price) +
-                Number(productStore.currentMaterial.reduce((total: number, element: any) => total + element?.price, 0)))}
+              TOTAL: {formatCurrency(productStore.currentProductPriceTotal)}
             </Typography.Title>
-          </div>
-
-          <div>
-
           </div>
 
           {(() => {

@@ -1,9 +1,7 @@
 'use client'
 import { useStore } from "@/stores/products.store";
-import { doPost } from "@/utils/doMethod";
 import { UserOutlined } from "@ant-design/icons";
 import { useUser } from "@clerk/nextjs";
-import { useMutation } from "@tanstack/react-query";
 import { Button, Form, FormProps, Input } from "antd";
 import { useParams } from "next/navigation";
 
@@ -31,6 +29,7 @@ export default function FormOrder({ setPayloadProcessOrder, setCurrentStepOrder 
       exteriorId: Number(productStore?.currentExterior?.id),
       alloyId: Number(productStore?.currentAlloy?.id),
       productId: Number(params?.id),
+      amount: Number(productStore?.currentProductPriceTotal)
     }
     setPayloadProcessOrder(payload);
     setCurrentStepOrder(1)

@@ -8,6 +8,7 @@ export const useStore = create((set) => ({
   currentAlloy: {},
   currentProductName: '--',
   currentProductPrice: 0,
+  currentProductPriceTotal: 0,
   setCurrentMaterial: (material: any) => set(() => ({ currentMaterial: material })),
   setCurrentExterior: (exterior: any) => set(() => ({ currentExterior: exterior })),
   setCurrentInterior: (interior: any) => set(() => ({ currentInterior: interior })),
@@ -15,4 +16,5 @@ export const useStore = create((set) => ({
   setCurrentProductName: (name: string) => set(() => ({ currentProductName: name })),
   setCurrentProductPrice: (price: number) => set(() => ({ currentProductPrice: price })),
   setCurrentProductImages: (images: any) => set(() => ({ currentProductImages: images })),
+  setCurrentProductPriceTotal: (total: any) => set(() => ({ currentProductPriceTotal: total })),
 }))
