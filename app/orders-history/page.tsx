@@ -39,6 +39,7 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     dataIndex: "orderId",
     title: "order ID",
     width: 100,
+    fixed: true,
     render: (text: string, record, index) => (
       <Tooltip title={text} key={index}>
         <Typography.Text ellipsis={true} className="w w-24">
@@ -52,6 +53,7 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     dataIndex: "amount",
     title: "Amount",
     width: 100,
+    fixed: true,
     render: (amount: number, record, index) => (
       <Typography.Text className="truncate" key={index}>
         {formatCurrency(amount)}
@@ -220,14 +222,14 @@ export default function OrderHistory() {
         </Row>
 
         <Row className="">
-          <Col span={24}>
+          <Col span={24} className="px-6 border">
             <Table
               loading={loading}
               bordered={false}
               dataSource={dataSource}
               columns={ORDER_HISTORY_COLUMNS}
               pagination={false}
-              scroll={{ y: 600 }}
+              scroll={{ y: 600, x: 1500 }}
             />
           </Col>
         </Row>
