@@ -3,9 +3,30 @@ import { useEffect, useState } from "react";
 import FormStep1 from "./forms/FormStep1";
 import FormStep2 from "./forms/FormStep2";
 import { notification, Result, Typography } from "antd";
+import { useQuery } from "@tanstack/react-query";
+import { useUser } from "@clerk/nextjs";
+import { useParams } from "next/navigation";
+import { doGet } from "@/utils/doMethod";
 
 export default function BookATestDrive() {
   const [api, contextHolder] = notification.useNotification();
+  const { user } = useUser()
+  const params = useParams()
+
+  useQuery({
+    queryKey: ['check-already-booked-before'],
+    queryFn: async () => {
+      const query = { userId: String(user?.id), productId: Number(params?.id) }
+      const response = await doGet('/book-test-drive', { s: JSON.stringify(query) })
+      if (response?.statusCode === 200) {
+        if (response?.data?.length > 0) {
+          setCurrentStep(2)
+          return true
+        }
+      }
+      return false
+    }
+  })
 
   const [currentStep, setCurrentStep] = useState(0)
   const [valueFormStep1, setValueFormStep1] = useState(null)
