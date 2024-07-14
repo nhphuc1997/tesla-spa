@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, FormProps, Input, notification } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import { useParams } from "next/navigation";
 import { useRef, useState } from "react";
 
 type FieldType = {
@@ -23,6 +24,7 @@ interface Props {
 
 export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK }: Props) {
   const { user } = useUser()
+  const params = useParams()
 
   const resetButton = useRef<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -54,13 +56,14 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
 
   const onFinishStep2: FormProps<FieldType>['onFinish'] = (valueFormStep2) => {
     const payload = {
-      distanceRadius: valueFormStep1?.distanceRadius,
-      postCode: valueFormStep1?.postCode,
+      distanceRadius: String(valueFormStep1?.distanceRadius),
+      postCode: String(valueFormStep1?.postCode),
       pickedDate: new Date(valueFormStep1?.pickedDate),
-      contactNumber: valueFormStep2?.contactNumber,
-      email: user?.primaryEmailAddress?.emailAddress,
-      firstName: valueFormStep2?.firstName,
-      lastName: valueFormStep2?.lastName,
+      contactNumber: String(valueFormStep2?.contactNumber),
+      email: String(user?.primaryEmailAddress?.emailAddress),
+      firstName: String(valueFormStep2?.firstName),
+      lastName: String(valueFormStep2?.lastName),
+      productId: Number(params?.id)
     }
     bookATestDrivemutation.mutate(payload)
   }
