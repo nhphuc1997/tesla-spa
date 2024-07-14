@@ -35,12 +35,12 @@ interface DataType {
 
 const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
   {
-    key: "orderId",
+    key: 1,
     dataIndex: "orderId",
     title: "order ID",
     width: 100,
-    render: (text: string) => (
-      <Tooltip title={text}>
+    render: (text: string, record, index) => (
+      <Tooltip title={text} key={index}>
         <Typography.Text ellipsis={true} className="w w-24">
           {text}
         </Typography.Text>
@@ -52,8 +52,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     dataIndex: "amount",
     title: "Amount",
     width: 100,
-    render: (amount: number) => (
-      <Typography.Text className="truncate">
+    render: (amount: number, record, index) => (
+      <Typography.Text className="truncate" key={index}>
         {formatCurrency(amount)}
       </Typography.Text>
     ),
@@ -62,8 +62,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     key: "interior",
     dataIndex: "interior",
     title: "Interior",
-    render: (element: any) => (
-      <Descriptions column={1} className="!p-0 !m-0">
+    render: (element: any, record, index) => (
+      <Descriptions key={index} column={1} className="!p-0 !m-0">
         <Descriptions.Item label="Name" className="!p-0 truncate">
           <Tooltip placement="topLeft" title={element?.name}>
             {element?.name}
@@ -79,8 +79,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     key: "exterior",
     dataIndex: "exterior",
     title: "Exterior",
-    render: (element: any) => (
-      <Descriptions column={1} className="!p-0 !m-0">
+    render: (element: any, record, index) => (
+      <Descriptions key={index} column={1} className="!p-0 !m-0">
         <Descriptions.Item label="Name" className="!p-0 truncate">
           <Tooltip placement="topLeft" title={element?.name}>
             {element?.name}
@@ -96,8 +96,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     key: "alloy",
     dataIndex: "alloy",
     title: "Alloy",
-    render: (element: any) => (
-      <Descriptions column={1} className="!p-0 !m-0">
+    render: (element: any, record, index) => (
+      <Descriptions key={index} column={1} className="!p-0 !m-0">
         <Descriptions.Item label="Name" className="!p-0 truncate">
           <Tooltip placement="topLeft" title={element?.name}>
             {element?.name}
@@ -113,8 +113,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     key: "product",
     dataIndex: "product",
     title: "Product",
-    render: (element: any) => (
-      <Descriptions column={1} className="!p-0 !m-0">
+    render: (element: any, record, index) => (
+      <Descriptions key={index} column={1} className="!p-0 !m-0">
         <Descriptions.Item label="Name" className="!p-0 truncate">
           <Tooltip placement="topLeft" title={element?.name}>
             {element?.name}
@@ -134,8 +134,8 @@ const ORDER_HISTORY_COLUMNS: TableProps<DataType>["columns"] = [
     dataIndex: "createAt",
     title: "Create At",
     width: 100,
-    render: (text: string) => (
-      <Tooltip title={text}>
+    render: (text: string, record, index) => (
+      <Tooltip title={text} key={index}>
         <Typography.Text ellipsis={true} className="w w-24">
           {formatDate(text)}
         </Typography.Text>

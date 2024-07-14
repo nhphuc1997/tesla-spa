@@ -1,6 +1,5 @@
 import { formatCurrency } from "@/utils/format-currency";
 import {
-  Affix,
   Button,
   Checkbox,
   Descriptions,
@@ -13,7 +12,7 @@ import {
   Typography,
   Image,
   Empty,
-  notification
+  notification,
 } from "antd";
 import BookATestDrive from "./BookATestDrive";
 import { useEffect, useState } from "react";
@@ -27,15 +26,15 @@ import { useMutation } from "@tanstack/react-query";
 import { doPost } from "@/utils/doMethod";
 
 export default function OrderView() {
-  const productStore = useStore((state: any) => state)
-  const { isSignedIn } = useUser()
+  const productStore = useStore((state: any) => state);
+  const { isSignedIn } = useUser();
   const { openSignIn } = useClerk();
-  const [api, contextHolder] = notification.useNotification()
+  const [api, contextHolder] = notification.useNotification();
 
   const orderMutation = useMutation({
-    mutationKey: ['order-process'],
+    mutationKey: ["order-process"],
     mutationFn: async (payload: any) => {
-      return await doPost('/orders', payload)
+      return await doPost("/orders", payload);
     },
     onSuccess(data) {
       if (data?.statusCode === 200) {
@@ -43,7 +42,7 @@ export default function OrderView() {
           message: "",
           description: `Order ${productStore.currentProductName} successfully`,
         });
-        setCurrentStepOrder(2)
+        setCurrentStepOrder(2);
       }
     },
     onError() {
@@ -51,9 +50,9 @@ export default function OrderView() {
         message: "",
         description: `Order ${productStore.currentProductName} failed`,
       });
-      setCurrentStepOrder(1)
-    }
-  })
+      setCurrentStepOrder(1);
+    },
+  });
 
   const [openDrawOrder, setOpenDrawOrder] = useState(false);
   const [openModalBookATestDrive, setOpenModalBookATestDrive] = useState(false);
@@ -62,27 +61,29 @@ export default function OrderView() {
 
   const finishOrder = () => {
     if (payloadProcessOrder) {
-      orderMutation.mutate(payloadProcessOrder)
+      orderMutation.mutate(payloadProcessOrder);
     }
-  }
+  };
 
   useEffect(() => {
     productStore.setCurrentProductPriceTotal(
       Number(productStore.currentProductPrice) +
-      Number(productStore.currentExterior?.price) +
-      Number(productStore.currentInterior?.price) +
-      Number(productStore.currentAlloy?.price) +
-      Number(productStore.currentMaterial.reduce(
-        (total: number, element: any) => total + element?.price,
-        0
-      ))
-    )
+        Number(productStore.currentExterior?.price) +
+        Number(productStore.currentInterior?.price) +
+        Number(productStore.currentAlloy?.price) +
+        Number(
+          productStore.currentMaterial.reduce(
+            (total: number, element: any) => total + element?.price,
+            0
+          )
+        )
+    );
   }, [
     productStore.currentProductPrice,
     productStore.currentExterior?.price,
     productStore.currentInterior?.price,
-    productStore.currentAlloy?.price
-  ])
+    productStore.currentAlloy?.price,
+  ]);
 
   return (
     <>
@@ -96,7 +97,6 @@ export default function OrderView() {
           <div>
             <Descriptions title="" column={1} layout="vertical">
               <Descriptions.Item label="Price">
-
                 <Typography.Text className="!font-bold">
                   Cost: {formatCurrency(productStore.currentProductPrice)} *
                 </Typography.Text>
@@ -109,7 +109,7 @@ export default function OrderView() {
                       <Typography.Text className="!font-bold">
                         Cost: {formatCurrency(item?.price)}
                       </Typography.Text>
-                      <Checkbox indeterminate defaultChecked={true} disabled >
+                      <Checkbox indeterminate defaultChecked={true} disabled>
                         <Typography.Text className="!font-semibold">
                           {item?.name}
                         </Typography.Text>
@@ -122,7 +122,11 @@ export default function OrderView() {
 
             <Divider />
 
-            <Descriptions title="" column={{ xs: 1, md: 1, lg: 1, xl: 3 }} layout="vertical">
+            <Descriptions
+              title=""
+              column={{ xs: 1, md: 1, lg: 1, xl: 3 }}
+              layout="vertical"
+            >
               <Descriptions.Item label="Exterior">
                 <div className="flex flex-col justify-start items-start">
                   <Typography.Text className="!font-bold">
@@ -192,23 +196,28 @@ export default function OrderView() {
                     Order
                   </Button>
                 </div>
-              )
+              );
             }
 
             return (
-              <Empty description={(
-                <div className="flex justify-center items-center flex-col">
-                  <Typography.Text>
-                    You have to login to perform this action
-                  </Typography.Text>
-                  <Button className="!bg-black !text-white" onClick={() => openSignIn()}>
-                    Sign In
-                  </Button>
-                </div>
-              )} />
-            )
+              <Empty
+                description={
+                  <div className="flex justify-center items-center flex-col">
+                    <Typography.Text>
+                      You have to login to perform this action
+                    </Typography.Text>
+                    <Button
+                      className="!bg-black !text-white"
+                      onClick={() => openSignIn()}
+                    >
+                      Sign In
+                    </Button>
+                  </div>
+                }
+              />
+            );
           })()}
-        </div >
+        </div>
 
         <Modal
           title="Book A Test Drive"
@@ -269,7 +278,7 @@ export default function OrderView() {
               {currentStepOrder === 2 && (
                 <Result
                   icon={<CarOutlined />}
-                  title={(
+                  title={
                     <div>
                       <Typography.Title level={5}>
                         Great, you have done all the operations!
@@ -277,14 +286,14 @@ export default function OrderView() {
                       <Button
                         className="!bg-black !text-white"
                         onClick={() => {
-                          setCurrentStepOrder(0)
-                          setOpenDrawOrder(false)
+                          setCurrentStepOrder(0);
+                          setOpenDrawOrder(false);
                         }}
                       >
                         Done
                       </Button>
                     </div>
-                  )}
+                  }
                 />
               )}
             </div>
@@ -301,7 +310,7 @@ export default function OrderView() {
             </div>
           </div>
         </Drawer>
-      </div >
-    </ >
+      </div>
+    </>
   );
 }
