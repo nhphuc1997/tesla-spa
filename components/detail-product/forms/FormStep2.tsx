@@ -1,11 +1,11 @@
 'use client'
 import { doPost } from "@/utils/doMethod";
-import { SendOutlined, UserOutlined } from "@ant-design/icons";
+import { BackwardOutlined, DoubleLeftOutlined, DoubleRightOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
 import { useUser } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, FormProps, Input, notification } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type FieldType = {
   firstName?: string;
@@ -24,6 +24,7 @@ interface Props {
 export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK }: Props) {
   const { user } = useUser()
 
+  const resetButton = useRef<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   const bookATestDrivemutation = useMutation({
@@ -38,6 +39,7 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
       if (data?.statusCode === 200) {
         setCurrentStep(2)
         setSubmitOK(true)
+        resetButton?.current?.click()
         return
       }
 
@@ -101,13 +103,30 @@ export default function FormStep2({ setCurrentStep, valueFormStep1, setSubmitOK 
       <div className="flex justify-end items-center">
         <Button
           loading={loading}
+          iconPosition={"start"}
+          icon={<DoubleLeftOutlined />}
+          onClick={() => setCurrentStep(0)}
+        >
+          Back
+        </Button>
+
+        <div className="px-3" />
+
+        <Button
+          loading={loading}
           iconPosition={"end"}
-          icon={<SendOutlined />}
+          icon={<DoubleRightOutlined />}
           htmlType="submit"
           className="!bg-black !text-white"
         >
           Submit
         </Button>
+
+        <Button
+          htmlType="reset"
+          ref={resetButton}
+          className="!hidden"
+        />
       </div>
     </Form>
   )
