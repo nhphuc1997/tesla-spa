@@ -34,7 +34,7 @@ export default function FormStep2({ setCurrentStep, valueFormStep1 }: Props) {
     onSuccess(data) {
       setLoading(false)
       if (data?.statusCode === 200) {
-      setCurrentStep(2)
+        setCurrentStep(2)
       }
     },
     onError() {
