@@ -1,6 +1,7 @@
 "use client";
 import { doGet } from "@/utils/doMethod";
 import { formatDate } from "@/utils/format-date";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -149,7 +150,10 @@ export default function BookTestDriveHistory() {
   });
 
   return (
-    <Spin spinning={false}>
+    <Spin
+      spinning={loading}
+      indicator={<Loading3QuartersOutlined spin style={{ color: "black" }} />}
+    >
       <div className="py-1">
         <Row gutter={16} className="py-3">
           <Col xs={12} md={5}>

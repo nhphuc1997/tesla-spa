@@ -1,7 +1,7 @@
 "use client";
 import ProductsCard from "@/components/cars/ProductsCard";
 import { doGet } from "@/utils/doMethod";
-import { DeleteFilled } from "@ant-design/icons";
+import { DeleteFilled, Loading3QuartersOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Col, DatePicker, Empty, Input, Row, Select, Spin } from "antd";
 import { useSearchParams } from "next/navigation";
@@ -71,10 +71,11 @@ const ListPage = () => {
 
   useEffect(() => setCategory(query), [query]);
 
-  console.log(yearFilter);
-
   return (
-    <Spin spinning={loading}>
+    <Spin
+      spinning={loading}
+      indicator={<Loading3QuartersOutlined spin style={{ color: "black" }} />}
+    >
       <div className="py-1">
         <Row gutter={16} className="py-3">
           <Col xs={24} md={5}>

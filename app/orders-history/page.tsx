@@ -2,6 +2,7 @@
 import { doGet } from "@/utils/doMethod";
 import { formatCurrency } from "@/utils/format-currency";
 import { formatDate } from "@/utils/format-date";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -179,7 +180,7 @@ export default function OrderHistory() {
         s: JSON.stringify($filter),
         limit: 10,
         page: page,
-        sort: 'createAt,DESC'
+        sort: "createAt,DESC",
       });
 
       if (response?.statusCode === 200) {
@@ -195,7 +196,10 @@ export default function OrderHistory() {
   });
 
   return (
-    <Spin spinning={false}>
+    <Spin
+      spinning={loading}
+      indicator={<Loading3QuartersOutlined spin style={{ color: "black" }} />}
+    >
       <div className="py-1">
         <Row gutter={16} className="py-3">
           <Col xs={12} md={5}>
