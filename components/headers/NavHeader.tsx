@@ -1,12 +1,5 @@
 "use client";
-import {
-  ApartmentOutlined,
-  BlockOutlined,
-  LeftSquareOutlined,
-  LoginOutlined,
-  MenuFoldOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { BlockOutlined, LoginOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import {
   Col,
@@ -25,6 +18,8 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { doGet } from "@/utils/doMethod";
 import Link from "next/link";
+import Logo from "@/assets/images/logo_2.jpg";
+import Image from "next/image";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -117,7 +112,7 @@ const NavHeader = () => {
           className="cursor-pointer"
         >
           <div className="flex justify-start items-center h-16">
-            <ApartmentOutlined />
+            <Image src={Logo} alt="" className="h-12 w-40" />
           </div>
         </Col>
 
