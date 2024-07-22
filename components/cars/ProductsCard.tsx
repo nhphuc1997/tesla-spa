@@ -30,21 +30,21 @@ const ProductsCard = ({
 
   return (
     <>
-      <Row className="w-full" gutter={16}>
+      <Row className="w-full border-[0.5px]">
         {data?.data?.map((item: any, index: number) => (
           <Col
             xs={24}
             sm={12}
             md={itemPerRow}
             key={item.id}
-            className="cursor-pointer"
+            className="cursor-pointer border-[0.5px]"
             onClick={() => router.push(`/products/${item.id}`)}
           >
-            <div className={`p-3 border`}>
+            <div className={`p-3`}>
               <div className="hover:drop-shadow-lg">
                 <Tooltip title={item?.shortDescription}>
                   <div
-                    className="h-32 md:h-[35rem] bg-center bg-cover bg-no-repeat w-full"
+                    className="h-32 md:h-[40rem] bg-center bg-cover bg-no-repeat w-full"
                     style={{
                       backgroundImage: `url("${S3_URL}/${item?.s3Key}")`,
                     }}

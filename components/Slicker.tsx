@@ -11,15 +11,18 @@ interface SlickerProps {
   type?: "image" | "block";
   showChild?: boolean;
   centerMode?: boolean;
+  height?: string;
 }
 
 const Slicker = ({
   alowMaxHeight,
   data = [],
   showChild = false,
-  autoPlay = false
+  autoPlay = false,
+  height,
 }: SlickerProps) => {
-  const _height = alowMaxHeight ? "h-96" : "h-32";
+  let _height = alowMaxHeight ? "h-96" : "h-32";
+  _height = height ? height : _height;
 
   return (
     <div className="slider-container py-1 cursor-pointer">

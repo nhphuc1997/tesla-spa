@@ -32,10 +32,10 @@ const HomePage = () => {
       <Slicker
         desktopSlidesToScroll={1}
         desktopSlidesToShow={1}
-        alowMaxHeight={true}
         autoPlay={false}
         data={banner?.data?.data}
         centerMode={false}
+        height="h-[600px]"
       />
       <TextIntro />
       <ProductsCard itemPerRow={8} data={products?.data?.data} />
