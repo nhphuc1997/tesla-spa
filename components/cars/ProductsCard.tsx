@@ -79,6 +79,15 @@ const ProductsCard = ({
                     </Typography.Title>
                   </div>
                 </div>
+
+                <div className="flex justify-center items-center pt-3">
+                  <Typography.Paragraph className="!my-0 font-thin px-3">
+                    Price:
+                  </Typography.Paragraph>
+                  <Typography.Paragraph className="!my-0 font-semibold text-sm lg:!text-lg">
+                    {formatCurrency(item.price)}
+                  </Typography.Paragraph>
+                </div>
               </div>
             </div>
           </Col>
